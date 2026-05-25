@@ -1,0 +1,445 @@
+/* =============================================
+   SEQUOIA CAPITAL — Faithful reproduction v2
+   Based on actual screenshot analysis
+   ============================================= */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --seq-green: #00a071;
+  --seq-black: #1b1916;
+  --seq-white: #ffffff;
+  --seq-offwhite: #f3f3f2;
+  --seq-gray: #888;
+  --grid-gap: 1rem;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--seq-black);
+  background: var(--seq-white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* =============================================
+   NAVBAR — white bg, uppercase small links, spaced
+   ============================================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--seq-white);
+}
+
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--seq-black);
+  letter-spacing: 0.05em;
+  margin-right: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--seq-black);
+  letter-spacing: 0.02em;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  margin-left: 2.5rem;
+  gap: 12px;
+}
+
+.nav-search {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--seq-black);
+  opacity: 0.6;
+  padding: 4px;
+  transition: opacity 0.2s;
+}
+
+.nav-search:hover {
+  opacity: 1;
+}
+
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--seq-black);
+}
+
+/* =============================================
+   HERO — white bg, serif italic, circled word
+   ============================================= */
+.hero {
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 3rem 100px;
+  background: var(--seq-white);
+}
+
+.hero-title {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-size: clamp(36px, 4.5vw, 64px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--seq-black);
+  text-align: center;
+  max-width: 780px;
+}
+
+.hero-highlight {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-highlight::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -10px;
+  right: -10px;
+  bottom: -6px;
+  border: 1.5px solid var(--seq-green);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* =============================================
+   GRID — tight gap, Sequoia editorial layout
+   ============================================= */
+.products {
+  padding: 0 3rem 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gap);
+}
+
+/* =============================================
+   CARDS — full-bleed image, overlay text at bottom
+   ============================================= */
+.card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+}
+
+.card-large {
+  grid-column: span 2;
+  aspect-ratio: 2 / 1;
+}
+
+.card-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-bg {
+  transform: scale(1.04);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0) 60%);
+}
+
+.card-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--seq-green);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-tag::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--seq-green);
+  border-radius: 50%;
+}
+
+.card-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--seq-white);
+}
+
+.card-large .card-title {
+  font-size: 20px;
+}
+
+/* =============================================
+   MAILING LIST — minimal, centered
+   ============================================= */
+.mailing {
+  padding: 70px 3rem;
+  background: var(--seq-white);
+}
+
+.mailing-inner {
+  max-width: 440px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mailing-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--seq-black);
+  margin-bottom: 20px;
+}
+
+.mailing-form {
+  display: flex;
+}
+
+.mailing-form input {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid #d0d0d0;
+  border-right: none;
+  background: var(--seq-white);
+  color: var(--seq-black);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.mailing-form input::placeholder {
+  color: #aaa;
+}
+
+.mailing-form input:focus {
+  border-color: var(--seq-black);
+}
+
+.mailing-form button {
+  padding: 10px 20px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  background: #32373c;
+  color: var(--seq-white);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.mailing-form button:hover {
+  background: var(--seq-black);
+}
+
+/* =============================================
+   FOOTER — dark, minimal
+   ============================================= */
+.footer {
+  background: var(--seq-black);
+  padding: 50px 3rem 28px;
+}
+
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.footer-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--seq-white);
+}
+
+.footer-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-col a {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.2s;
+}
+
+.footer-col a:hover {
+  color: var(--seq-white);
+}
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 36px auto 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-bottom p {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-large {
+    grid-column: span 2;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .nav-inner,
+  .hero,
+  .products,
+  .mailing,
+  .footer {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .card-large {
+    grid-column: span 1;
+    aspect-ratio: 16 / 9;
+  }
+
+  .card {
+    aspect-ratio: 16 / 9;
+  }
+
+  .mailing-form {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mailing-form input {
+    border-right: 1px solid #d0d0d0;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

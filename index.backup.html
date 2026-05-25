@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plume de fond</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">PLUME DE FOND</a>
+      <ul class="nav-links">
+        <li><a href="#produits">NOS PRODUITS</a></li>
+        <li><a href="#clients">NOS CLIENTS</a></li>
+        <li><a href="#equipe">NOTRE EQUIPE</a></li>
+        <li><a href="#stories">STORIES</a></li>
+        <li><a href="#apropos">A PROPOS</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="nav-search" aria-label="Rechercher">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+        <button class="nav-hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1 class="hero-title">We help the <span class="hero-highlight">daring</span> build legendary companies.</h1>
+  </section>
+
+  <!-- GRID DE PRODUITS -->
+  <section class="products" id="produits">
+    <div class="grid">
+
+      <!-- Row 1 : 1 large + 1 standard -->
+      <article class="card card-large">
+        <div class="card-bg" style="background: linear-gradient(135deg, #1a1a2e, #16213e)"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Newsletter</span>
+          <h2 class="card-title">Analyses macroeconomiques hebdomadaires</h2>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-bg" style="background: linear-gradient(135deg, #2d1b00, #5c3a1e)"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Perspective</span>
+          <h2 class="card-title">Contenus courts et percutants pour LinkedIn</h2>
+        </div>
+      </article>
+
+      <!-- Row 2 : 3 standard -->
+      <article class="card">
+        <div class="card-bg" style="background: linear-gradient(135deg, #16213e, #0a0a0a)"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Scripts Video</span>
+          <h2 class="card-title">Narrations pour contenus video</h2>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-bg" style="background: linear-gradient(135deg, #1a1a2e, #0f3460)"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Rapports</span>
+          <h2 class="card-title">White papers et etudes sectorielles</h2>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-bg" style="background: linear-gradient(135deg, #0a0a0a, #16213e)"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Ghostwriting</span>
+          <h2 class="card-title">Tribunes et editoriaux pour dirigeants</h2>
+        </div>
+      </article>
+
+      <!-- Row 3 : 1 standard + 1 large -->
+      <article class="card">
+        <div class="card-bg" style="background: linear-gradient(135deg, #0f3460, #0a0a0a)"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Threads</span>
+          <h2 class="card-title">Threads d'analyse economique sur X</h2>
+        </div>
+      </article>
+
+      <article class="card card-large">
+        <div class="card-bg" style="background: linear-gradient(135deg, #1a1a2e, #0a0a0a, #0f3460)"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Presentations</span>
+          <h2 class="card-title">Decks et supports de conference</h2>
+        </div>
+      </article>
+
+      <!-- Row 4 : 3 standard -->
+      <article class="card">
+        <div class="card-bg" style="background: linear-gradient(135deg, #0a0a0a, #1a1a2e)"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Strategie</span>
+          <h2 class="card-title">Conseil en strategie de contenu</h2>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-bg" style="background: linear-gradient(135deg, #16213e, #1a1a2e)"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Podcast</span>
+          <h2 class="card-title">Production de podcasts economiques</h2>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-bg" style="background: linear-gradient(135deg, #2d1b00, #1a1a2e)"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Personal branding</span>
+          <h2 class="card-title">Construire votre voix d'expert</h2>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- MAILING LIST -->
+  <section class="mailing">
+    <div class="mailing-inner">
+      <h2 class="mailing-title">JOIN OUR MAILING LIST</h2>
+      <form class="mailing-form">
+        <input type="email" placeholder="Email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="/" class="footer-logo">PLUME DE FOND</a>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li><a href="#apropos">A propos</a></li>
+          <li><a href="#">Notre ethique</a></li>
+          <li><a href="#">Notre histoire</a></li>
+          <li><a href="#">Carrieres</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li><a href="#produits">Nos Produits</a></li>
+          <li><a href="#clients">Nos Clients</a></li>
+          <li><a href="#equipe">Notre Equipe</a></li>
+          <li><a href="#stories">Stories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <ul>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Twitter / X</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Plume de fond. Tous droits reserves.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

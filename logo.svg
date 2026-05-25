@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 95" role="img" aria-label="Plume de fond">
+  <title>Plume de fond</title>
+  <!-- Mark : 5 lignes, edge droite verticale, convergence en (76, 86) -->
+  <g stroke="#111111" stroke-width="1.8" stroke-linecap="round" fill="none">
+    <line x1="4"  y1="5" x2="76" y2="86"/>
+    <line x1="22" y1="5" x2="76" y2="86"/>
+    <line x1="40" y1="5" x2="76" y2="86"/>
+    <line x1="58" y1="5" x2="76" y2="86"/>
+    <line x1="76" y1="5" x2="76" y2="86"/>
+  </g>
+  <!-- Wordmark : Playfair Display, 2 lignes alignées -->
+  <g fill="#111111" font-family="'Playfair Display', serif" font-weight="500" font-size="48" letter-spacing="0.5">
+    <text x="100" y="38">Plume</text>
+    <text x="100" y="86">de fond</text>
+  </g>
+</svg>
