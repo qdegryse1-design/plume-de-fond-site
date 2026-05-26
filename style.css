@@ -407,10 +407,9 @@ ul {
   opacity: 0.3;
 }
 
-.vision-leverage-svg {
+.vision-image img {
   width: 100%;
-  height: auto;
-  max-height: 420px;
+  height: 400px;
   object-fit: contain;
   border-radius: 0;
 }
