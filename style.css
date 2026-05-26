@@ -353,7 +353,7 @@ ul {
 }
 
 .vision-block-inner {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -405,6 +405,12 @@ ul {
   font-size: 13px;
   color: var(--seq-black);
   opacity: 0.3;
+}
+
+.vision-leverage-svg {
+  width: 100%;
+  height: auto;
+  border-radius: 0;
 }
 
 /* Vision — Fermeture */
