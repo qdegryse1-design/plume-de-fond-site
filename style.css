@@ -410,6 +410,8 @@ ul {
 .vision-leverage-svg {
   width: 100%;
   height: auto;
+  max-height: 420px;
+  object-fit: contain;
   border-radius: 0;
 }
 
