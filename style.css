@@ -791,7 +791,7 @@ ul {
   background: #000;
   color: #fff;
   padding: 4rem 3.5rem;
-  margin-top: 1.4rem;
+  margin-top: 0;
   display: flex;
   justify-content: center;
 }
