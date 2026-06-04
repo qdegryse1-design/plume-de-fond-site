@@ -785,6 +785,61 @@ ul {
 }
 
 /* =============================================
+   MANIFESTE — bloc pleine largeur, fond noir
+   ============================================= */
+.manifeste {
+  background: #000;
+  color: #fff;
+  padding: 5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.manifeste-line {
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  font-size: 1.65rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 0.3rem;
+}
+
+.manifeste-punchline {
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  font-size: 1.65rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-top: 2rem;
+}
+
+.manifeste-circled {
+  position: relative;
+  display: inline-block;
+}
+
+.manifeste-circle-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  height: 280%;
+  pointer-events: none;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: manifeste-draw 1s ease forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes manifeste-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* =============================================
    MAILING LIST — minimal, centered
    ============================================= */
 .mailing {
