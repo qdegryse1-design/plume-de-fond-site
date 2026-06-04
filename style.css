@@ -828,7 +828,7 @@ ul {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -42%);
+  transform: translate(-50%, -35%);
   width: 150%;
   height: 300%;
   pointer-events: none;
