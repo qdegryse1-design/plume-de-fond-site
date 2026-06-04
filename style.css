@@ -837,7 +837,7 @@ ul {
 }
 
 .manifeste-circle-svg.manifeste-draw {
-  animation: manifeste-trace 0.8s ease forwards;
+  animation: manifeste-trace 1.2s ease forwards;
 }
 
 @keyframes manifeste-trace {
