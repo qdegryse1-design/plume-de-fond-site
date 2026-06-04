@@ -381,20 +381,10 @@
             dot.style.opacity = '1';
             setTimeout(function() {
               circleSvg.classList.add('manifeste-draw');
-              setTimeout(resetAll, pauseEnd);
             }, 400);
           }
         }
         tick();
-      }
-
-      function resetAll() {
-        lines.forEach(function(line) { line.textContent = ''; });
-        punchSpan.textContent = '';
-        circled.style.opacity = '0';
-        dot.style.opacity = '0';
-        circleSvg.classList.remove('manifeste-draw');
-        setTimeout(function() { typeAllLines(0); }, 600);
       }
 
       circled.style.opacity = '0';
