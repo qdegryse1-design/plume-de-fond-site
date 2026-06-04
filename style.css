@@ -792,10 +792,13 @@ ul {
   color: #fff;
   padding: 4rem 3.5rem;
   margin-top: 1.4rem;
+  display: flex;
+  justify-content: center;
 }
 
 .manifeste-inner {
   max-width: 600px;
+  text-align: center;
 }
 
 .manifeste-line {
