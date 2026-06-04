@@ -788,11 +788,10 @@ ul {
    MANIFESTE — pleine largeur dans la grille 2x2
    ============================================= */
 .manifeste {
-  grid-column: 1 / -1;
   background: #000;
   color: #fff;
   padding: 4rem 3.5rem;
-  min-height: 340px;
+  margin-top: 1.4rem;
 }
 
 .manifeste-inner {
