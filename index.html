@@ -334,10 +334,13 @@
       var circled = manifeste.querySelector('.manifeste-circled');
       var dot = manifeste.querySelector('.manifeste-dot');
       var circleSvg = manifeste.querySelector('.manifeste-circle-svg');
+      var punchSpan = document.createElement('span');
+      punchline.insertBefore(punchSpan, circled);
       var started = false;
 
       var charSpeed = 35;
       var lineDelay = 300;
+      var pauseEnd = 3000;
 
       function typeLine(el, text, callback) {
         var i = 0;
@@ -367,12 +370,10 @@
 
       function typePunchline() {
         var text = punchline.getAttribute('data-text');
-        var span = document.createElement('span');
-        punchline.insertBefore(span, circled);
         var i = 0;
         function tick() {
           i++;
-          span.textContent = text.substring(0, i);
+          punchSpan.textContent = text.substring(0, i);
           if (i < text.length) {
             setTimeout(tick, charSpeed);
           } else {
@@ -380,10 +381,20 @@
             dot.style.opacity = '1';
             setTimeout(function() {
               circleSvg.classList.add('manifeste-draw');
+              setTimeout(resetAll, pauseEnd);
             }, 400);
           }
         }
         tick();
+      }
+
+      function resetAll() {
+        lines.forEach(function(line) { line.textContent = ''; });
+        punchSpan.textContent = '';
+        circled.style.opacity = '0';
+        dot.style.opacity = '0';
+        circleSvg.classList.remove('manifeste-draw');
+        setTimeout(function() { typeAllLines(0); }, 600);
       }
 
       circled.style.opacity = '0';
