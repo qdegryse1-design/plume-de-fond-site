@@ -832,12 +832,12 @@ ul {
   width: 150%;
   height: 300%;
   pointer-events: none;
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
 }
 
 .manifeste-circle-svg.manifeste-draw {
-  animation: manifeste-trace 1.2s ease forwards;
+  animation: manifeste-trace 1.6s ease forwards;
 }
 
 @keyframes manifeste-trace {
