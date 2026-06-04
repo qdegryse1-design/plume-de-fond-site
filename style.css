@@ -829,8 +829,8 @@ ul {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -45%);
-  width: 150%;
-  height: 300%;
+  width: 170%;
+  height: 340%;
   pointer-events: none;
   stroke-dasharray: 1600;
   stroke-dashoffset: 1600;
