@@ -788,11 +788,11 @@ ul {
    CARD VISIBILITÉ — quadrillage vert + post-it
    ============================================= */
 .card-bg-grid {
-  background-color: #1f4d33;
+  background-color: #0f4d2b;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px);
-  background-size: 38px 38px;
+    linear-gradient(rgba(0, 0, 0, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.16) 1px, transparent 1px);
+  background-size: 34px 34px;
 }
 
 /* Post-it papier déchiré */
