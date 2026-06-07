@@ -824,18 +824,18 @@ ul {
 /* Icônes réseaux (noir sur le papier) */
 .card-postit-icons {
   position: absolute;
-  top: 24%;
+  top: 39%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.9rem;
+  gap: 1.05rem;
   color: #2a2723;
 }
 
 .card-postit-icons .card-icon {
-  width: 28px;
+  width: 35px;
   height: auto;
 }
 
