@@ -554,6 +554,9 @@ ul {
   grid-auto-rows: auto;
   gap: 1.4rem;
   position: relative;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
   padding-top: 0.7rem;
   padding-bottom: 0.7rem;
 }
@@ -852,7 +855,8 @@ ul {
   background: #000;
   color: #fff;
   padding: 4rem 3.5rem;
-  margin-top: 0.7rem;
+  margin: 0.7rem auto 0;
+  max-width: 900px;
   display: flex;
   justify-content: center;
 }
