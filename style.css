@@ -551,7 +551,7 @@ ul {
    ============================================= */
 .grid-2x2 {
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 1fr;
+  grid-auto-rows: auto;
   gap: 1.4rem;
   position: relative;
   padding-top: 0.7rem;
@@ -652,7 +652,8 @@ ul {
 }
 
 .card-family {
-  min-height: 460px;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
 }
 
 .card-family .card-overlay {
