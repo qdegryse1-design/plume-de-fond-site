@@ -777,6 +777,11 @@ ul {
 /* =============================================
    CARD STUDIO — égaliseur audio animé
    ============================================= */
+/* pas de dégradé sombre sur la carte Studio — aplat uni */
+.card-medias .card-overlay {
+  background: none;
+}
+
 .card-eq {
   position: absolute;
   top: 50%;
