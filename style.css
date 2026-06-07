@@ -837,8 +837,9 @@ ul {
 /* =============================================
    CARD VISIBILITÉ — quadrillage vert + post-it
    ============================================= */
-/* pas de dégradé sombre sur la carte Visibilité — aplat uni */
-.card-social .card-overlay {
+/* pas de dégradé sombre sur les cartes Visibilité et Recherche — aplat uni */
+.card-social .card-overlay,
+.card-recherche .card-overlay {
   background: none;
 }
 
