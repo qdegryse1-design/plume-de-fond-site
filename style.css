@@ -839,22 +839,6 @@ ul {
   height: auto;
 }
 
-/* Petites icônes manuscrites en bas à gauche, au-dessus de la déchirure */
-.card-postit-react {
-  position: absolute;
-  bottom: 26%;
-  left: 12%;
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  color: #3a352f;
-}
-
-.card-postit-react svg {
-  width: 21px;
-  height: 21px;
-}
-
 /* =============================================
    MANIFESTE — pleine largeur dans la grille 2x2
    ============================================= */
