@@ -843,6 +843,13 @@ ul {
   background: none;
 }
 
+.card-bg-edition {
+  background-image: url(edition-bg.jpg);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
 .card-bg-grid {
   background-color: #203029;
   background-image:
