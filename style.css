@@ -785,6 +785,88 @@ ul {
 }
 
 /* =============================================
+   CARD VISIBILITÉ — quadrillage vert + post-it
+   ============================================= */
+.card-bg-grid {
+  background-color: #1f4d33;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px);
+  background-size: 38px 38px;
+}
+
+/* Post-it papier déchiré */
+.card-postit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -54%) rotate(-1.5deg);
+  width: 74%;
+  max-width: 230px;
+  aspect-ratio: 5 / 4;
+  background: #e9e1d3;
+  background-image:
+    linear-gradient(150deg, rgba(255,255,255,0.5), rgba(0,0,0,0.04));
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+  padding: 1.1rem 1.1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* bord du bas déchiré — tracé irrégulier */
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    100% 88%, 95% 91%, 91% 87%, 87% 92%, 84% 89%, 79% 93%,
+    75% 90%, 71% 94%, 66% 89%, 62% 92%, 57% 88%, 53% 93%,
+    49% 90%, 44% 95%, 40% 91%, 35% 93%, 31% 89%, 27% 92%,
+    22% 88%, 18% 93%, 13% 90%, 9% 94%, 5% 90%, 0% 92%
+  );
+  transition: transform 0.5s ease;
+}
+
+.card-social:hover .card-postit {
+  transform: translate(-50%, -54%) rotate(-1.5deg) scale(1.03);
+}
+
+/* Trombone dans le coin haut-droit */
+.card-postit-clip {
+  position: absolute;
+  top: -16px;
+  right: 26px;
+  width: 26px;
+  height: auto;
+  transform: rotate(8deg);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.25));
+}
+
+/* Icônes réseaux (noir sur le papier) */
+.card-postit-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: #2a2723;
+  padding-top: 0.4rem;
+}
+
+.card-postit-icons .card-icon {
+  width: 30px;
+  height: auto;
+}
+
+/* Petites icônes manuscrites en bas à gauche */
+.card-postit-react {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #3a352f;
+}
+
+.card-postit-react svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* =============================================
    MANIFESTE — pleine largeur dans la grille 2x2
    ============================================= */
 .manifeste {

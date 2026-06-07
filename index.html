@@ -87,30 +87,57 @@
 
       <!-- Famille 1 : Réseaux sociaux & visibilité -->
       <article class="card card-family card-social">
-        <div class="card-bg" style="background: linear-gradient(135deg, var(--card-visibilite-1), var(--card-visibilite-2))"></div>
+        <div class="card-bg card-bg-grid"></div>
         <div class="card-overlay">
           <span class="card-tag">Visibilité</span>
-          <div class="card-icons-grid">
-            <!-- LinkedIn -->
-            <svg class="card-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 18 17 C 17 17, 17 83, 18 83 L 82 83 C 83 83, 83 17, 82 17 Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-              <line x1="32" y1="42" x2="32" y2="72" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="32" cy="32" r="4" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.3"/>
-              <path d="M 48 72 L 48 55 C 48 47, 54 43, 60 44 C 66 45, 68 50, 68 55 L 68 72" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- Post-it papier déchiré + trombone -->
+          <div class="card-postit">
+            <svg class="card-postit-clip" viewBox="0 0 40 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 20 80 L 20 26 C 20 15 35 15 35 26 L 35 66 C 35 80 11 80 11 66 L 11 20 C 11 9 28 9 28 20 L 28 62" stroke="#4a4540" stroke-width="3" stroke-linecap="round"/>
             </svg>
-            <!-- Instagram -->
-            <svg class="card-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 28 18 C 22 18, 17 23, 18 29 L 18 71 C 17 77, 23 83, 29 82 L 71 83 C 77 83, 83 77, 82 71 L 83 29 C 83 23, 77 17, 71 18 Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-              <circle cx="50" cy="52" r="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="72" cy="28" r="4.5" stroke="currentColor" stroke-width="1.8" fill="currentColor" fill-opacity="0.3"/>
-            </svg>
-            <!-- X / Twitter -->
-            <svg class="card-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 22 20 L 45 52 L 20 82" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M 78 18 L 55 50 L 80 80" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              <line x1="20" y1="18" x2="80" y2="82" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-            </svg>
+
+            <!-- Icônes réseaux (noir, sur le papier) -->
+            <div class="card-postit-icons">
+              <!-- LinkedIn -->
+              <svg class="card-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 18 17 C 17 17, 17 83, 18 83 L 82 83 C 83 83, 83 17, 82 17 Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <line x1="32" y1="42" x2="32" y2="72" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="32" cy="32" r="4" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.3"/>
+                <path d="M 48 72 L 48 55 C 48 47, 54 43, 60 44 C 66 45, 68 50, 68 55 L 68 72" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <!-- Instagram -->
+              <svg class="card-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 28 18 C 22 18, 17 23, 18 29 L 18 71 C 17 77, 23 83, 29 82 L 71 83 C 77 83, 83 77, 82 71 L 83 29 C 83 23, 77 17, 71 18 Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <circle cx="50" cy="52" r="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="72" cy="28" r="4.5" stroke="currentColor" stroke-width="1.8" fill="currentColor" fill-opacity="0.3"/>
+              </svg>
+              <!-- X / Twitter -->
+              <svg class="card-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 22 20 L 45 52 L 20 82" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 78 18 L 55 50 L 80 80" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="20" y1="18" x2="80" y2="82" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <!-- Petites icônes manuscrites : cœur / commentaire / envoyer -->
+            <div class="card-postit-react">
+              <!-- Cœur -->
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 20 33 C 7 23, 6 11, 14 11 C 18 11, 20 15, 20 15 C 20 15, 22 11, 26 11 C 34 11, 33 23, 20 33 Z" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <!-- Commentaire -->
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 12 9 L 28 9 C 32 9 34 12 34 16 C 34 20 32 23 28 23 L 17 23 L 10 29 L 12 23 C 9 22 8 19 8 16 C 8 12 9 9 12 9 Z" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <!-- Envoyer (avion papier) -->
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 33 9 L 8 19 L 18 22 L 22 32 Z" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 33 9 L 18 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
           </div>
+
           <div class="card-bottom">
             <h2 class="card-title">Portez votre voix là où elle compte</h2>
             <ul class="card-services">
