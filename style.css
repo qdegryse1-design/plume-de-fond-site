@@ -774,6 +774,50 @@ ul {
   height: auto;
 }
 
+/* =============================================
+   CARD STUDIO — égaliseur audio animé
+   ============================================= */
+.card-eq {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 100px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 0.4s;
+}
+
+.card-medias:hover .card-eq {
+  color: #ffffff;
+}
+
+.card-eq-bar {
+  width: 6px;
+  border-radius: 3px;
+  background: currentColor;
+  height: var(--h);
+  transform-origin: center;
+  animation: eq-bounce var(--dur, 1s) ease-in-out var(--d, 0s) infinite;
+}
+
+@keyframes eq-bounce {
+  0%, 100% { transform: scaleY(0.3); }
+  50%      { transform: scaleY(1); }
+}
+
+/* accélère légèrement au survol */
+.card-medias:hover .card-eq-bar {
+  animation-duration: calc(var(--dur, 1s) * 0.6);
+}
+
+/* respecte la préférence d'animation réduite */
+@media (prefers-reduced-motion: reduce) {
+  .card-eq-bar { animation: none; transform: scaleY(0.8); }
+}
+
 .card-icon {
   width: 100%;
   height: auto;

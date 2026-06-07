@@ -220,23 +220,24 @@
 
       <!-- Famille 4 : Supports & médias -->
       <article class="card card-family card-medias">
-        <div class="card-bg" style="background: linear-gradient(135deg, var(--card-studio-1), var(--card-studio-2))"></div>
+        <div class="card-bg" style="background: #5a0016"></div>
         <div class="card-overlay">
           <span class="card-tag">Studio</span>
-          <div class="card-medias-icon">
-            <svg viewBox="0 0 170 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <!-- Masque : zone à l'extérieur du carré uniquement -->
-                <mask id="outside-camera-body">
-                  <rect x="0" y="0" width="170" height="120" fill="white"/>
-                  <rect x="15" y="12" width="96" height="96" rx="10" ry="10" fill="black"/>
-                </mask>
-              </defs>
-              <!-- Lens — triangle rétréci, base (60px) plus grande que les côtés (54px), pénétration 11px -->
-              <path d="M 145 30 L 100 60 L 145 90 Z" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" fill="currentColor" fill-opacity="0.3" mask="url(#outside-camera-body)"/>
-              <!-- Corps de la caméra — carré agrandi, dessiné après pour que son contour reste net -->
-              <rect x="15" y="12" width="96" height="96" rx="10" ry="10" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-            </svg>
+          <!-- Égaliseur audio animé -->
+          <div class="card-eq" aria-hidden="true">
+            <span class="card-eq-bar" style="--h:30px; --dur:1.10s; --d:-0.20s"></span>
+            <span class="card-eq-bar" style="--h:54px; --dur:0.90s; --d:-0.55s"></span>
+            <span class="card-eq-bar" style="--h:42px; --dur:1.30s; --d:-0.10s"></span>
+            <span class="card-eq-bar" style="--h:80px; --dur:1.00s; --d:-0.70s"></span>
+            <span class="card-eq-bar" style="--h:36px; --dur:1.20s; --d:-0.30s"></span>
+            <span class="card-eq-bar" style="--h:94px; --dur:0.85s; --d:-0.60s"></span>
+            <span class="card-eq-bar" style="--h:48px; --dur:1.15s; --d:-0.15s"></span>
+            <span class="card-eq-bar" style="--h:84px; --dur:0.95s; --d:-0.80s"></span>
+            <span class="card-eq-bar" style="--h:32px; --dur:1.25s; --d:-0.40s"></span>
+            <span class="card-eq-bar" style="--h:66px; --dur:1.05s; --d:-0.55s"></span>
+            <span class="card-eq-bar" style="--h:44px; --dur:1.35s; --d:-0.25s"></span>
+            <span class="card-eq-bar" style="--h:58px; --dur:0.90s; --d:-0.65s"></span>
+            <span class="card-eq-bar" style="--h:28px; --dur:1.10s; --d:-0.35s"></span>
           </div>
           <div class="card-bottom">
             <h2 class="card-title">Vos idées de fond, à l'écran</h2>
