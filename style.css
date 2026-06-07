@@ -807,8 +807,8 @@ ul {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -52%) rotate(-1.5deg);
-  width: 84%;
-  max-width: 272px;
+  width: 88%;
+  max-width: 288px;
   aspect-ratio: 500 / 365;
   transition: transform 0.5s ease;
 }
@@ -836,12 +836,12 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.26rem;
+  gap: 1.33rem;
   color: #2a2723;
 }
 
 .card-postit-icons .card-icon {
-  width: 44px;
+  width: 47px;
   height: auto;
 }
 
