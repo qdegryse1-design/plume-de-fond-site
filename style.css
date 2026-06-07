@@ -552,10 +552,10 @@ ul {
 .grid-2x2 {
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: auto;
-  gap: 2.2rem;
+  gap: 1.9rem;
   position: relative;
-  padding-top: 1.1rem;
-  padding-bottom: 1.1rem;
+  padding-top: 0.95rem;
+  padding-bottom: 0.95rem;
 }
 
 /* Ligne horizontale en haut */
@@ -568,7 +568,7 @@ ul {
   border-top: thin solid #aeada9;
   pointer-events: none;
   z-index: 1;
-  clip-path: polygon(0 0, calc(50% - 1.1rem) 0, calc(50% - 1.1rem) 100%, calc(50% + 1.1rem) 100%, calc(50% + 1.1rem) 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, calc(50% - 0.95rem) 0, calc(50% - 0.95rem) 100%, calc(50% + 0.95rem) 100%, calc(50% + 0.95rem) 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .grid-2x2 .line-top {
@@ -582,28 +582,28 @@ ul {
 .grid-2x2 .line-left,
 .grid-2x2 .line-right {
   position: absolute;
-  top: 1.1rem;
-  bottom: 1.1rem;
+  top: 0.95rem;
+  bottom: 0.95rem;
   width: 1px;
   pointer-events: none;
   z-index: 1;
   background: linear-gradient(
     to bottom,
     #aeada9 0%,
-    #aeada9 calc(50% - 1.1rem),
-    transparent calc(50% - 1.1rem),
-    transparent calc(50% + 1.1rem),
-    #aeada9 calc(50% + 1.1rem),
+    #aeada9 calc(50% - 0.95rem),
+    transparent calc(50% - 0.95rem),
+    transparent calc(50% + 0.95rem),
+    #aeada9 calc(50% + 0.95rem),
     #aeada9 100%
   );
 }
 
 .grid-2x2 .line-left {
-  left: -1.1rem;
+  left: -0.95rem;
 }
 
 .grid-2x2 .line-right {
-  right: -1.1rem;
+  right: -0.95rem;
 }
 
 .grid-2x2::before,
@@ -617,18 +617,18 @@ ul {
 
 /* Ligne verticale — interrompue au centre */
 .grid-2x2::before {
-  top: 1.1rem;
-  bottom: 1.1rem;
+  top: 0.95rem;
+  bottom: 0.95rem;
   left: 50%;
   width: 1px;
   transform: translateX(-50%);
   background: linear-gradient(
     to bottom,
     #aeada9 0%,
-    #aeada9 calc(50% - 1.1rem),
-    transparent calc(50% - 1.1rem),
-    transparent calc(50% + 1.1rem),
-    #aeada9 calc(50% + 1.1rem),
+    #aeada9 calc(50% - 0.95rem),
+    transparent calc(50% - 0.95rem),
+    transparent calc(50% + 0.95rem),
+    #aeada9 calc(50% + 0.95rem),
     #aeada9 100%
   );
 }
@@ -643,10 +643,10 @@ ul {
   background: linear-gradient(
     to right,
     #aeada9 0%,
-    #aeada9 calc(50% - 1.1rem),
-    transparent calc(50% - 1.1rem),
-    transparent calc(50% + 1.1rem),
-    #aeada9 calc(50% + 1.1rem),
+    #aeada9 calc(50% - 0.95rem),
+    transparent calc(50% - 0.95rem),
+    transparent calc(50% + 0.95rem),
+    #aeada9 calc(50% + 0.95rem),
     #aeada9 100%
   );
 }
