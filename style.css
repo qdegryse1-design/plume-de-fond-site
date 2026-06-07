@@ -1102,6 +1102,16 @@ ul {
     grid-template-columns: 1fr;
   }
 
+  /* En colonne unique, le cadre/croix 2x2 n'a plus de sens */
+  .grid-2x2 .line-top,
+  .grid-2x2 .line-bottom,
+  .grid-2x2 .line-left,
+  .grid-2x2 .line-right,
+  .grid-2x2::before,
+  .grid-2x2::after {
+    display: none;
+  }
+
   .card-large {
     grid-column: span 1;
     aspect-ratio: 16 / 9;
