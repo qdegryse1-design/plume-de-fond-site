@@ -801,7 +801,7 @@ ul {
 
 .card-eq-bar {
   width: 6px;
-  border-radius: 3px;
+  border-radius: 0;
   background: currentColor;
   height: var(--h);
   transform-origin: center;
