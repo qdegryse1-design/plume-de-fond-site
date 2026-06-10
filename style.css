@@ -890,10 +890,10 @@ ul {
 /* — Coupure du haut : graphique « Oil Supply » , bord inférieur déchiré — */
 .edition-clip-top {
   top: -3%;
-  left: -4%;
-  width: 64%;
-  height: 30%;
-  transform: rotate(-3.5deg);
+  right: -4%;
+  width: 56%;
+  height: 26%;
+  transform: rotate(3deg);
 }
 
 .edition-clip-top .edition-paper {
@@ -910,8 +910,8 @@ ul {
 .edition-clip-bottom {
   bottom: -4%;
   right: -5%;
-  width: 62%;
-  height: 34%;
+  width: 55%;
+  height: 30%;
   transform: rotate(2.5deg);
 }
 
