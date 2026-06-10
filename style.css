@@ -848,7 +848,7 @@ ul {
    ============================================= */
 /* dégradé renforcé : le titre passe sur la coupure de journal claire */
 .card-edition .card-overlay {
-  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.45) 30%, rgba(0,0,0,0) 58%);
+  background: linear-gradient(to top, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.32) 30%, rgba(0,0,0,0) 58%);
 }
 
 .card-edition .card-title,
