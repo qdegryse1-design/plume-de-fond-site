@@ -843,11 +843,85 @@ ul {
   background: none;
 }
 
+/* =============================================
+   CARD ÉDITION — tableau noir + coupures de journaux déchirées
+   ============================================= */
+/* dégradé renforcé : le titre passe sur la coupure de journal claire */
+.card-edition .card-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.45) 30%, rgba(0,0,0,0) 58%);
+}
+
+.card-edition .card-title,
+.card-edition .card-services {
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
+}
+
 .card-bg-edition {
-  background-image: url(edition-bg.jpg);
+  /* photo 675×1200 : cover recadre le portrait en carré, sans zoomer au-delà du natif */
+  background-image: url(tableau-noir.jpg);
   background-size: cover;
-  background-position: center top;
+  background-position: center;
   background-repeat: no-repeat;
+}
+
+/* Coupure de journal déchirée (positionnée + inclinée, ombre portée) */
+.edition-clip {
+  position: absolute;
+  filter: drop-shadow(2px 6px 10px rgba(0, 0, 0, 0.55));
+}
+
+/* Feuille : fond blanc cassé visible dans la frange déchirée */
+.edition-paper {
+  width: 100%;
+  height: 100%;
+  background: #ece7da;
+}
+
+/* L'image remplit la feuille ; la fenêtre de crop se règle via object-position */
+.edition-paper img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* — Coupure du haut : graphique « Oil Supply » , bord inférieur déchiré — */
+.edition-clip-top {
+  top: -4%;
+  left: -6%;
+  width: 86%;
+  height: 48%;
+  transform: rotate(-4.5deg);
+}
+
+.edition-clip-top .edition-paper {
+  clip-path: polygon(0 0, 100% 0, 100% 79%, 96% 85%, 91% 78%, 86% 88%, 81% 82%, 75% 91%, 69% 83%, 63% 90%, 57% 82%, 51% 92%, 45% 85%, 39% 94%, 33% 86%, 27% 92%, 21% 84%, 15% 95%, 10% 87%, 5% 93%, 0 86%);
+}
+
+.edition-clip-top img {
+  /* fenêtre sur la colonne du graphique pétrole */
+  object-position: 52% 18%;
+  clip-path: polygon(0 0, 100% 0, 100% 74%, 96% 80%, 91% 73%, 86% 83%, 81% 77%, 75% 86%, 69% 78%, 63% 85%, 57% 77%, 51% 87%, 45% 80%, 39% 89%, 33% 81%, 27% 87%, 21% 79%, 15% 90%, 10% 82%, 5% 88%, 0 81%);
+}
+
+/* — Coupure du bas : une « Dow Industrials Top 10000 », bord supérieur déchiré — */
+.edition-clip-bottom {
+  bottom: -5%;
+  right: -7%;
+  width: 80%;
+  height: 52%;
+  transform: rotate(3deg);
+}
+
+.edition-clip-bottom .edition-paper {
+  clip-path: polygon(0 21%, 4% 15%, 9% 22%, 14% 12%, 19% 18%, 25% 9%, 31% 17%, 37% 10%, 43% 18%, 49% 8%, 55% 15%, 61% 7%, 67% 16%, 73% 9%, 79% 14%, 85% 6%, 90% 13%, 95% 5%, 100% 11%, 100% 100%, 0 100%);
+}
+
+.edition-clip-bottom img {
+  /* fenêtre sur le titre Dow Industrials + courbe DJIA */
+  object-position: 40% 26%;
+  clip-path: polygon(0 26%, 4% 20%, 9% 27%, 14% 17%, 19% 23%, 25% 14%, 31% 22%, 37% 15%, 43% 23%, 49% 13%, 55% 20%, 61% 12%, 67% 21%, 73% 14%, 79% 19%, 85% 11%, 90% 18%, 95% 10%, 100% 16%, 100% 100%, 0 100%);
 }
 
 .card-bg-grid {
