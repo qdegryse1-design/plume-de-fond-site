@@ -233,7 +233,7 @@ ul {
   position: relative;
   margin: 60px;
   background: var(--seq-cream);
-  border: 1.5px solid var(--seq-red-margin);
+  border: 1.5px solid var(--seq-black);
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.06);
 }
 
