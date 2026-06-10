@@ -909,10 +909,10 @@ ul {
 /* — Coupure du bas : une « Dow Industrials Top 10000 », bord supérieur déchiré — */
 .edition-clip-bottom {
   bottom: -4%;
-  right: -5%;
+  left: -5%;
   width: 55%;
   height: 30%;
-  transform: rotate(2.5deg);
+  transform: rotate(-2.5deg);
 }
 
 .edition-clip-bottom .edition-paper {
