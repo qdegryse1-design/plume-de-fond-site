@@ -891,9 +891,9 @@ ul {
 .edition-clip-top {
   top: -3%;
   right: -4%;
-  width: 56%;
-  height: 26%;
-  transform: rotate(5.5deg);
+  width: 50%;
+  height: 23%;
+  transform: rotate(7deg);
 }
 
 .edition-clip-top .edition-paper {
@@ -910,8 +910,8 @@ ul {
 .edition-clip-bottom {
   bottom: -4%;
   left: -5%;
-  width: 55%;
-  height: 30%;
+  width: 49%;
+  height: 27%;
   transform: rotate(-2.5deg);
 }
 
