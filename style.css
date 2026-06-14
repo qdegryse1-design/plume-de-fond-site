@@ -736,20 +736,20 @@ ul {
 
 .card-recherche-icon {
   position: absolute;
-  top: 50%;
+  top: 47%;
   left: 50%;
-  transform: translate(-50%, -55%);
-  width: 40%;
-  max-width: 160px;
-  color: rgba(255, 255, 255, 0.8);
-  transition: color 0.4s;
+  transform: translate(-50%, -50%);
+  width: 82%;
+  max-width: 340px;
+  transition: transform 0.5s ease;
 }
 
 .card-recherche:hover .card-recherche-icon {
-  color: rgba(255, 255, 255, 0.95);
+  transform: translate(-50%, -50%) scale(1.03);
 }
 
-.card-recherche-icon svg {
+.card-recherche-icon img {
+  display: block;
   width: 100%;
   height: auto;
 }
@@ -927,10 +927,11 @@ ul {
 
 .card-bg-grid {
   background-color: #203029;
+  /* essai sans quadrillage — lignes retirées
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 31px 31px;
+  background-size: 31px 31px; */
 }
 
 /* Post-it papier déchiré (image détourée) */
