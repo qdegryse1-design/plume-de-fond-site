@@ -734,9 +734,9 @@ ul {
   height: auto;
 }
 
-/* Fond grille bleu nuit #16243F (lifté depuis #17141d, trop proche du noir Édition) */
+/* Fond grille bleu nuit #13273F (lifté depuis #17141d, trop proche du noir Édition) */
 .card-bg-recherche {
-  background-color: #16243F;
+  background-color: #13273F;
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
