@@ -996,7 +996,11 @@ ul {
    MANIFESTE — pleine largeur dans la grille 2x2
    ============================================= */
 .manifeste {
-  background: #000;
+  background-color: #000;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
   color: #fff;
   padding: 4rem 3.5rem;
   margin-top: 0.7rem;
