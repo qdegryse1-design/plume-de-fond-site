@@ -996,7 +996,7 @@ ul {
    MANIFESTE — pleine largeur dans la grille 2x2
    ============================================= */
 .manifeste {
-  background: #000;
+  background: var(--seq-black);
   color: #fff;
   padding: 4rem 3.5rem;
   margin-top: 0.7rem;
