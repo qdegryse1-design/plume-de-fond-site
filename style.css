@@ -395,29 +395,35 @@ ul {
   pointer-events: none;
 }
 
-/* filets — façon « ouvre-sections » Sequoia (pas de cadre fermé) */
+/* filets du cadre */
 .vision-grid .frame-line {
   position: absolute;
   z-index: 1;
   pointer-events: none;
 }
-/* ligne qui ouvre le 1er bloc (les blocs 2 et 3 sont ouverts par leur séparateur) */
-.vision-grid .frame-top {
-  top: 0;
+.vision-grid .frame-top,
+.vision-grid .frame-bottom {
   left: 0;
   right: 0;
   height: 0;
   border-top: thin solid #aeada9;
   clip-path: polygon(0 0, calc(50% - 0.95rem) 0, calc(50% - 0.95rem) 100%, calc(50% + 0.95rem) 100%, calc(50% + 0.95rem) 0, 100% 0, 100% 100%, 0 100%);
 }
-/* verticale centrale entre texte et image, sur toute la hauteur */
+.vision-grid .frame-top { top: 0; }
+.vision-grid .frame-bottom { bottom: 0; }
+.vision-grid .frame-vleft,
+.vision-grid .frame-vright,
 .vision-grid .frame-vcenter {
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 1rem;
+  bottom: 1rem;
   width: 1px;
   background: #aeada9;
+}
+.vision-grid .frame-vleft { left: 0; }
+.vision-grid .frame-vright { right: 0; }
+.vision-grid .frame-vcenter {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .vision-block-reverse .vision-block-inner {
