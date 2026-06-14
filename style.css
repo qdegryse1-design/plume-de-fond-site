@@ -996,17 +996,39 @@ ul {
    MANIFESTE — pleine largeur dans la grille 2x2
    ============================================= */
 .manifeste {
-  background-color: #000;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background: #000;
   color: #fff;
   padding: 4rem 3.5rem;
   margin-top: 0.7rem;
   display: flex;
   justify-content: center;
+  position: relative;
 }
+
+/* Cadre de filets autour du bandeau — aligné sur la grille des cartes */
+.manifeste .frame-line {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+.manifeste .frame-top,
+.manifeste .frame-bottom {
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: thin solid #aeada9;
+}
+.manifeste .frame-top { top: 0; }
+.manifeste .frame-bottom { bottom: 0; }
+.manifeste .frame-vleft,
+.manifeste .frame-vright {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #aeada9;
+}
+.manifeste .frame-vleft { left: -0.95rem; }
+.manifeste .frame-vright { right: -0.95rem; }
 
 .manifeste-inner {
   max-width: 600px;
