@@ -1011,15 +1011,15 @@ ul {
   z-index: 1;
   pointer-events: none;
 }
-.manifeste .frame-top,
+/* Ligne du bas : continue (pas de trou central), à 0.95rem sous le bloc — comme le cadre des cartes */
 .manifeste .frame-bottom {
   left: 0;
   right: 0;
+  bottom: -0.95rem;
   height: 0;
   border-top: thin solid #aeada9;
 }
-.manifeste .frame-top { top: 0; }
-.manifeste .frame-bottom { bottom: 0; }
+/* Verticales : longueur du bloc, à -0.95rem (alignées sur la grille) */
 .manifeste .frame-vleft,
 .manifeste .frame-vright {
   top: 0;
