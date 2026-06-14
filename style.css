@@ -361,6 +361,71 @@ ul {
   align-items: start;
 }
 
+/* ============================================================
+   VISION — grille encadrée (filets façon page d'accueil)
+   ============================================================ */
+.vision-grid {
+  position: relative;
+  max-width: 1040px;
+  margin: 0.7rem auto 0;
+}
+
+/* chaque bloc = une rangée de la grille */
+.vision-grid .vision-block {
+  position: relative;
+  padding: 2.6rem 2rem;
+}
+.vision-grid .vision-block-inner {
+  max-width: none;
+  margin: 0;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* séparateurs horizontaux entre rangées — trou central comme la home */
+.vision-grid .vision-block + .vision-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: thin solid #aeada9;
+  clip-path: polygon(0 0, calc(50% - 0.95rem) 0, calc(50% - 0.95rem) 100%, calc(50% + 0.95rem) 100%, calc(50% + 0.95rem) 0, 100% 0, 100% 100%, 0 100%);
+  pointer-events: none;
+}
+
+/* filets du cadre */
+.vision-grid .frame-line {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+.vision-grid .frame-top,
+.vision-grid .frame-bottom {
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: thin solid #aeada9;
+  clip-path: polygon(0 0, calc(50% - 0.95rem) 0, calc(50% - 0.95rem) 100%, calc(50% + 0.95rem) 100%, calc(50% + 0.95rem) 0, 100% 0, 100% 100%, 0 100%);
+}
+.vision-grid .frame-top { top: 0; }
+.vision-grid .frame-bottom { bottom: 0; }
+.vision-grid .frame-vleft,
+.vision-grid .frame-vright,
+.vision-grid .frame-vcenter {
+  top: 1rem;
+  bottom: 1rem;
+  width: 1px;
+  background: #aeada9;
+}
+.vision-grid .frame-vleft { left: 0; }
+.vision-grid .frame-vright { right: 0; }
+.vision-grid .frame-vcenter {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .vision-block-reverse .vision-block-inner {
   direction: rtl;
 }
@@ -444,6 +509,11 @@ ul {
 
   .vision-block-reverse .vision-block-inner {
     direction: ltr;
+  }
+
+  /* colonnes empilées : on masque la verticale centrale */
+  .vision-grid .frame-vcenter {
+    display: none;
   }
 
   .vision-opening {
