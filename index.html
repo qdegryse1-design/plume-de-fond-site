@@ -161,12 +161,12 @@
       <article class="card card-family card-recherche">
         <div class="card-bg card-bg-recherche">
           <svg class="recherche-line" viewBox="0 0 200 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- partie gauche : remonte jusqu'à la loupe (bout glissé derrière) -->
-            <polyline points="0,84 12,76 20,58 30,72 40,66 50,70 60,60 72,50 84,42 96,40"
-              stroke="#cdd2dc" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="10"/>
-            <!-- partie droite : repart de la loupe vers le haut -->
-            <polyline points="108,42 120,34 132,40 144,28 156,34 170,22 184,30 200,20"
-              stroke="#cdd2dc" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="10"/>
+            <!-- partie gauche : remonte et s'arrête au bord de la loupe (bout sous le verre) -->
+            <polyline points="0,86 12,78 22,60 32,74 42,68 54,72 66,62 80,52 108,43"
+              stroke="#cdd2dc" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="10" vector-effect="non-scaling-stroke"/>
+            <!-- partie droite : repart du bord de la loupe vers le haut (bout sous le verre) -->
+            <polyline points="114,41 140,30 154,36 168,24 182,30 200,22"
+              stroke="#cdd2dc" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="10" vector-effect="non-scaling-stroke"/>
           </svg>
           <img class="recherche-loupe" src="recherche-loupe.png" alt="Loupe tenue à la main" />
         </div>
