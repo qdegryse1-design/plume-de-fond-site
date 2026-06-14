@@ -159,12 +159,22 @@
 
       <!-- Famille 3 : Recherche & rapports -->
       <article class="card card-family card-recherche">
-        <div class="card-bg" style="background: #13273F"></div>
+        <div class="card-bg card-bg-recherche">
+          <svg class="recherche-line" viewBox="0 0 200 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- partie gauche (blanc) -->
+            <polyline points="0,76 9,68 14,73 21,60 27,57 31,64 38,70 46,68 54,71 60,69"
+              stroke="#cdd2dc" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- segment de raccord (orange) -->
+            <polyline points="138,44 150,41"
+              stroke="#e0a23c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- partie droite (blanc) -->
+            <polyline points="150,41 160,36 168,33 176,40 184,34 192,38 200,33"
+              stroke="#cdd2dc" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <img class="recherche-loupe" src="recherche-loupe.png" alt="Loupe tenue à la main" />
+        </div>
         <div class="card-overlay">
           <span class="card-tag">Recherche</span>
-          <div class="card-recherche-icon">
-            <img src="recherche-collage.png" alt="Mains tenant un graphique en chandeliers" />
-          </div>
           <div class="card-bottom">
             <h2 class="card-title">La profondeur qui fait autorité</h2>
             <ul class="card-services">
