@@ -1367,7 +1367,25 @@ ul {
 
   .card-family {
     aspect-ratio: auto;
-    min-height: 280px;
+    min-height: 440px;
+  }
+
+  /* éléments décoratifs : réduits pour ne pas chevaucher tag + services */
+  .card-postit {
+    width: 60%;
+    max-width: 195px;
+  }
+  .recherche-loupe {
+    width: 46%;
+    max-width: 165px;
+  }
+  .edition-clip-top {
+    width: 62%;
+    height: 24%;
+  }
+  .edition-clip-bottom {
+    width: 60%;
+    height: 26%;
   }
 
   .mailing-form {
