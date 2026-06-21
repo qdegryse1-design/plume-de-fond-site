@@ -1468,11 +1468,11 @@ ul {
   }
   .grid-2x2 .line-left { left: 0; }
   .grid-2x2 .line-right { right: 0; left: auto; }
-  /* ligne du haut : alignée sur les cartes, écart avant les verticales, pas de trou central */
+  /* ligne du haut : petit écart avant les verticales (ne se rejoignent pas, façon Sequoia) */
   .grid-2x2 .line-top {
     display: block;
-    left: 0.5rem;
-    right: 0.5rem;
+    left: 0.3rem;
+    right: 0.3rem;
     clip-path: none;
   }
   /* ligne du bas masquée : le manifeste ferme le cadre plus bas */
@@ -1489,8 +1489,8 @@ ul {
     content: '';
     position: absolute;
     top: 50%;
-    left: 0;
-    right: 0;
+    left: -0.2rem;
+    right: -0.2rem;
     border-top: thin solid #aeada9;
   }
 
@@ -1511,17 +1511,17 @@ ul {
   .manifeste .frame-vleft { left: -0.5rem; }
   .manifeste .frame-vright { right: -0.5rem; }
   .manifeste .frame-bottom {
-    left: 0;
-    right: 0;
+    left: -0.2rem;
+    right: -0.2rem;
     bottom: 0;
   }
-  /* séparateur au-dessus du manifeste (dans la bande crème) */
+  /* séparateur au-dessus du manifeste (petit écart avant les verticales) */
   .manifeste::before {
     content: '';
     position: absolute;
     top: -0.85rem;
-    left: 0;
-    right: 0;
+    left: -0.2rem;
+    right: -0.2rem;
     border-top: thin solid #aeada9;
     pointer-events: none;
   }
