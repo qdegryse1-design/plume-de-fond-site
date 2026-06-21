@@ -675,8 +675,9 @@ ul {
   clip-path: polygon(0 0, calc(50% - 0.95rem) 0, calc(50% - 0.95rem) 100%, calc(50% + 0.95rem) 100%, calc(50% + 0.95rem) 0, 100% 0, 100% 100%, 0 100%);
 }
 
-/* séparateurs entre cartes — uniquement en mobile (colonne unique) */
-.card-sep {
+/* séparateurs entre cartes / avant le manifeste — uniquement en mobile (colonne unique) */
+.card-sep,
+.manifeste-sep {
   display: none;
 }
 
@@ -1448,49 +1449,73 @@ ul {
     min-width: 0;
   }
 
-  /* Cadre des cartes façon Sequoia : verticales continues + séparateurs, pas de croix */
+  /* Cadre des cartes façon DESKTOP : rien ne se touche (verticales ET horizontales coupées à chaque croisement) */
   .grid-2x2 {
     gap: 0;
-    padding: 0 0.5rem;
+    padding: 0;
   }
   .grid-2x2::before,
   .grid-2x2::after {
     display: none;
   }
-  /* verticales continues (gauche/droite), pleine hauteur */
+  /* cartes en retrait des verticales (bande crème de chaque côté) */
+  .grid-2x2 .card-family {
+    margin: 0 0.5rem;
+  }
+  /* verticales : aux bords, RENTRÉES en haut/bas (coins coupés). Coupées à chaque séparateur par les bandes crème (z-index) */
   .grid-2x2 .line-left,
   .grid-2x2 .line-right {
     display: block;
-    top: 0;
-    bottom: 0;
+    top: 0.4rem;
+    bottom: 0.4rem;
     width: 1px;
     background: #aeada9;
+    z-index: 1;
   }
   .grid-2x2 .line-left { left: 0; }
   .grid-2x2 .line-right { right: 0; left: auto; }
-  /* ligne du haut : petit écart avant les verticales (ne se rejoignent pas, façon Sequoia) */
+  /* ligne du haut : écart aux extrémités (ne touche pas les verticales) */
   .grid-2x2 .line-top {
     display: block;
-    left: 0.3rem;
-    right: 0.3rem;
+    top: 0;
+    left: 0.4rem;
+    right: 0.4rem;
     clip-path: none;
+    z-index: 1;
   }
   /* ligne du bas masquée : le manifeste ferme le cadre plus bas */
   .grid-2x2 .line-bottom {
     display: none;
   }
-  /* séparateurs entre cartes : fine bande crème avec ligne centrée (écarts aux extrémités) */
+  /* séparateurs : bande crème PLEINE LARGEUR qui coupe les verticales, ligne centrée à écarts */
   .card-sep {
     display: block;
     position: relative;
     height: 1.7rem;
+    background: var(--seq-cream);
+    z-index: 2;
   }
   .card-sep::before {
     content: '';
     position: absolute;
     top: 50%;
-    left: -0.2rem;
-    right: -0.2rem;
+    left: 0.4rem;
+    right: 0.4rem;
+    border-top: thin solid #aeada9;
+  }
+
+  /* séparateur au-dessus du manifeste (élément à part : non coupé par overflow:hidden) */
+  .manifeste-sep {
+    display: block;
+    position: relative;
+    height: 1.7rem;
+  }
+  .manifeste-sep::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0.4rem;
+    right: 0.4rem;
     border-top: thin solid #aeada9;
   }
 
@@ -1499,31 +1524,22 @@ ul {
     aspect-ratio: 1 / 1;
     min-height: 0;
     overflow: hidden;
-    margin: 1.7rem 0.5rem 0;
+    margin: 0 0.5rem;
     padding: 1.3rem;
     align-items: center;
   }
+  /* verticales : rentrées en haut/bas (coins coupés), écart avec la ligne du bas */
   .manifeste .frame-vleft,
   .manifeste .frame-vright {
-    top: 0;
-    bottom: 0;
+    top: 0.4rem;
+    bottom: 0.4rem;
   }
   .manifeste .frame-vleft { left: -0.5rem; }
   .manifeste .frame-vright { right: -0.5rem; }
   .manifeste .frame-bottom {
-    left: -0.2rem;
-    right: -0.2rem;
+    left: -0.1rem;
+    right: -0.1rem;
     bottom: 0;
-  }
-  /* séparateur au-dessus du manifeste (petit écart avant les verticales) */
-  .manifeste::before {
-    content: '';
-    position: absolute;
-    top: -0.85rem;
-    left: -0.2rem;
-    right: -0.2rem;
-    border-top: thin solid #aeada9;
-    pointer-events: none;
   }
   .manifeste-line {
     font-size: 1rem;
