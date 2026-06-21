@@ -1468,13 +1468,16 @@ ul {
   }
   .grid-2x2 .line-left { left: 0; }
   .grid-2x2 .line-right { right: 0; left: auto; }
-  /* lignes du haut et du bas : alignées sur les cartes, écart avant les verticales, pas de trou central */
-  .grid-2x2 .line-top,
-  .grid-2x2 .line-bottom {
+  /* ligne du haut : alignée sur les cartes, écart avant les verticales, pas de trou central */
+  .grid-2x2 .line-top {
     display: block;
     left: 0.95rem;
     right: 0.95rem;
     clip-path: none;
+  }
+  /* ligne du bas masquée : le manifeste ferme le cadre plus bas */
+  .grid-2x2 .line-bottom {
+    display: none;
   }
   /* séparateurs entre cartes : fine bande crème avec ligne centrée (écarts aux extrémités) */
   .card-sep {
@@ -1489,6 +1492,43 @@ ul {
     left: 0;
     right: 0;
     border-top: thin solid #aeada9;
+  }
+
+  /* Manifeste (dernière carte) : carré, cadre aligné sur les cartes, texte qui remplit */
+  .manifeste {
+    aspect-ratio: 1 / 1;
+    margin: 1.7rem 0.95rem 0;
+    padding: 1.5rem;
+    align-items: center;
+  }
+  .manifeste .frame-vleft,
+  .manifeste .frame-vright {
+    top: 0;
+    bottom: 0;
+  }
+  .manifeste .frame-vleft { left: -0.95rem; }
+  .manifeste .frame-vright { right: -0.95rem; }
+  .manifeste .frame-bottom {
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  /* séparateur au-dessus du manifeste (dans la bande crème) */
+  .manifeste::before {
+    content: '';
+    position: absolute;
+    top: -0.85rem;
+    left: 0;
+    right: 0;
+    border-top: thin solid #aeada9;
+    pointer-events: none;
+  }
+  .manifeste-line {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  .manifeste-punchline {
+    font-size: 1.3rem;
   }
 
   .card-large {
