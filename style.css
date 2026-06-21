@@ -500,6 +500,20 @@ ul {
   margin-top: 24px;
 }
 
+.vision-signature a {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10' preserveAspectRatio='none'%3E%3Cpath d='M 0 6 C 30 4, 60 7, 90 5 C 105 4, 115 6, 120 5' stroke='%231b1916' stroke-width='3.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% 10px;
+  padding-bottom: 10px;
+  background-size: 0% 10px;
+  transition: background-size 0.3s ease;
+}
+
+.vision-signature a:hover {
+  background-size: 100% 10px;
+}
+
 /* Vision — Responsive */
 @media (max-width: 768px) {
   .vision-block-inner {
@@ -1310,12 +1324,52 @@ ul {
 }
 
 @media (max-width: 768px) {
+  /* cadre central : marge réduite en mobile (60px gaspillait l'écran) */
+  .page-content {
+    margin: 12px;
+  }
+
   .nav-links {
     display: none;
   }
 
+  /* menu déroulant quand ouvert */
+  .nav-inner.open .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.3rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--seq-cream);
+    border-top: thin solid #aeada9;
+    border-bottom: thin solid #aeada9;
+    padding: 1.4rem 1.2rem 1.6rem;
+    z-index: 1000;
+  }
+
+  .nav-inner.open .nav-links a {
+    font-size: 14px;
+  }
+
   .nav-hamburger {
     display: flex;
+  }
+
+  /* croix quand le menu est ouvert */
+  .nav-inner.open .nav-hamburger span:nth-child(1) {
+    transform: translateY(5.5px) rotate(45deg);
+  }
+  .nav-inner.open .nav-hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-inner.open .nav-hamburger span:nth-child(3) {
+    transform: translateY(-5.5px) rotate(-45deg);
+  }
+  .nav-hamburger span {
+    transition: transform 0.25s, opacity 0.2s;
   }
 
   .nav-inner,
@@ -1344,6 +1398,12 @@ ul {
 
   .grid-2x2 {
     grid-template-columns: 1fr;
+  }
+
+  /* empêche les cartes de déborder la largeur de l'écran (min-width:auto par défaut) */
+  .grid > .card,
+  .grid-2x2 > .card {
+    min-width: 0;
   }
 
   /* En colonne unique, le cadre/croix 2x2 n'a plus de sens */
