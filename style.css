@@ -1451,7 +1451,7 @@ ul {
   /* Cadre des cartes façon Sequoia : verticales continues + séparateurs, pas de croix */
   .grid-2x2 {
     gap: 0;
-    padding: 0 0.95rem;
+    padding: 0 0.5rem;
   }
   .grid-2x2::before,
   .grid-2x2::after {
@@ -1471,8 +1471,8 @@ ul {
   /* ligne du haut : alignée sur les cartes, écart avant les verticales, pas de trou central */
   .grid-2x2 .line-top {
     display: block;
-    left: 0.95rem;
-    right: 0.95rem;
+    left: 0.5rem;
+    right: 0.5rem;
     clip-path: none;
   }
   /* ligne du bas masquée : le manifeste ferme le cadre plus bas */
@@ -1499,7 +1499,7 @@ ul {
     aspect-ratio: 1 / 1;
     min-height: 0;
     overflow: hidden;
-    margin: 1.7rem 0.95rem 0;
+    margin: 1.7rem 0.5rem 0;
     padding: 1.3rem;
     align-items: center;
   }
@@ -1508,8 +1508,8 @@ ul {
     top: 0;
     bottom: 0;
   }
-  .manifeste .frame-vleft { left: -0.95rem; }
-  .manifeste .frame-vright { right: -0.95rem; }
+  .manifeste .frame-vleft { left: -0.5rem; }
+  .manifeste .frame-vright { right: -0.5rem; }
   .manifeste .frame-bottom {
     left: 0;
     right: 0;
@@ -1527,12 +1527,12 @@ ul {
   }
   .manifeste-line {
     font-size: 1rem;
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.3rem;
     min-height: 1.4em;
   }
   .manifeste-punchline {
     font-size: 1rem;
-    margin-top: 0.3rem;
+    margin-top: 0.2rem;
   }
 
   .card-large {
@@ -1547,6 +1547,11 @@ ul {
   .card-family {
     aspect-ratio: 1 / 1;
     min-height: 0;
+  }
+
+  /* titres de cartes plus petits en mobile */
+  .card-title {
+    font-size: 14px;
   }
 
   /* éléments décoratifs : bien réduits pour aérer le carré (façon Sequoia) */
