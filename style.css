@@ -320,6 +320,18 @@ ul {
   background: none !important;
 }
 
+.vision-block-intro::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0.95rem;
+  right: 0.95rem;
+  height: 0;
+  border-top: thin solid #aeada9;
+  clip-path: polygon(0 0, calc(50% - 0.95rem) 0, calc(50% - 0.95rem) 100%, calc(50% + 0.95rem) 100%, calc(50% + 0.95rem) 0, 100% 0, 100% 100%, 0 100%);
+  z-index: 1;
+}
+
 .vision-opening {
   font-family: 'Source Serif 4', Georgia, serif;
   font-size: 28px;
@@ -408,8 +420,12 @@ ul {
   border-top: thin solid #aeada9;
   clip-path: polygon(0 0, calc(50% - 0.95rem) 0, calc(50% - 0.95rem) 100%, calc(50% + 0.95rem) 100%, calc(50% + 0.95rem) 0, 100% 0, 100% 100%, 0 100%);
 }
-.vision-grid .frame-top { top: 0; }
+.vision-grid .frame-top { top: 0; clip-path: none; }
 .vision-grid .frame-bottom { bottom: 0; }
+
+.vision-grid .vision-block-intro + .vision-block::before {
+  clip-path: none;
+}
 .vision-grid .frame-vleft,
 .vision-grid .frame-vright,
 .vision-grid .frame-vcenter {
@@ -657,6 +673,11 @@ ul {
   pointer-events: none;
   z-index: 1;
   clip-path: polygon(0 0, calc(50% - 0.95rem) 0, calc(50% - 0.95rem) 100%, calc(50% + 0.95rem) 100%, calc(50% + 0.95rem) 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* séparateurs entre cartes — uniquement en mobile (colonne unique) */
+.card-sep {
+  display: none;
 }
 
 .grid-2x2 .line-top {
@@ -1328,12 +1349,14 @@ ul {
 }
 
 @media (max-width: 768px) {
-  /* mobile épuré (façon Sequoia) : pas de quadrillage, cadre décoratif conservé, marge réduite pour plus de place */
+  /* mobile épuré (façon Sequoia) : pas de quadrillage, pas de cadre noir principal */
   body {
     background-image: none;
   }
   .page-content {
-    margin: 10px;
+    margin: 0;
+    border: none;
+    box-shadow: none;
   }
   .nav-inner::after {
     left: 1.2rem;
@@ -1425,14 +1448,47 @@ ul {
     min-width: 0;
   }
 
-  /* En colonne unique, le cadre/croix 2x2 n'a plus de sens */
-  .grid-2x2 .line-top,
-  .grid-2x2 .line-bottom,
-  .grid-2x2 .line-left,
-  .grid-2x2 .line-right,
+  /* Cadre des cartes façon Sequoia : verticales continues + séparateurs, pas de croix */
+  .grid-2x2 {
+    gap: 0;
+    padding: 0 0.95rem;
+  }
   .grid-2x2::before,
   .grid-2x2::after {
     display: none;
+  }
+  /* verticales continues (gauche/droite), pleine hauteur */
+  .grid-2x2 .line-left,
+  .grid-2x2 .line-right {
+    display: block;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #aeada9;
+  }
+  .grid-2x2 .line-left { left: 0; }
+  .grid-2x2 .line-right { right: 0; left: auto; }
+  /* lignes du haut et du bas : alignées sur les cartes, écart avant les verticales, pas de trou central */
+  .grid-2x2 .line-top,
+  .grid-2x2 .line-bottom {
+    display: block;
+    left: 0.95rem;
+    right: 0.95rem;
+    clip-path: none;
+  }
+  /* séparateurs entre cartes : fine bande crème avec ligne centrée (écarts aux extrémités) */
+  .card-sep {
+    display: block;
+    position: relative;
+    height: 1.7rem;
+  }
+  .card-sep::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: thin solid #aeada9;
   }
 
   .card-large {
@@ -1445,8 +1501,8 @@ ul {
   }
 
   .card-family {
-    aspect-ratio: auto;
-    min-height: 440px;
+    aspect-ratio: 1 / 1;
+    min-height: 0;
   }
 
   /* éléments décoratifs : réduits pour ne pas chevaucher tag + services */
