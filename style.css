@@ -1549,8 +1549,9 @@ ul {
     min-height: 0;
   }
 
-  /* titres de cartes plus petits en mobile */
-  .card-title {
+  /* titres de cartes plus petits en mobile — uniformes sur les 4 cartes */
+  .card-title,
+  .card-social .card-title {
     font-size: 14px;
   }
 
