@@ -1081,14 +1081,13 @@ ul {
   z-index: 1;
   pointer-events: none;
 }
-/* Ligne du bas : trou central identique aux cartes, à 0.95rem sous le bloc */
+/* Ligne du bas : continue (pas de trou central), à 0.95rem sous le bloc */
 .manifeste .frame-bottom {
   left: 0;
   right: 0;
   bottom: -0.95rem;
   height: 0;
   border-top: thin solid #aeada9;
-  clip-path: polygon(0 0, calc(50% - 0.95rem) 0, calc(50% - 0.95rem) 100%, calc(50% + 0.95rem) 100%, calc(50% + 0.95rem) 0, 100% 0, 100% 100%, 0 100%);
 }
 /* Verticales : longueur du bloc, à -0.95rem (alignées sur la grille) */
 .manifeste .frame-vleft,
