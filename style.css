@@ -1365,10 +1365,10 @@ ul {
 
   /* icônes du post-it : tiennent dans le post-it réduit */
   .card-postit-icons {
-    gap: 0.9rem;
+    gap: 0.7rem;
   }
   .card-postit-icons .card-icon {
-    width: 34px;
+    width: 26px;
   }
 
   .nav-links {
@@ -1494,11 +1494,13 @@ ul {
     border-top: thin solid #aeada9;
   }
 
-  /* Manifeste (dernière carte) : carré, cadre aligné sur les cartes, texte qui remplit */
+  /* Manifeste (dernière carte) : carré FIGÉ (ne grandit pas avec le typewriter) */
   .manifeste {
     aspect-ratio: 1 / 1;
+    min-height: 0;
+    overflow: hidden;
     margin: 1.7rem 0.95rem 0;
-    padding: 1.5rem;
+    padding: 1.3rem;
     align-items: center;
   }
   .manifeste .frame-vleft,
@@ -1524,11 +1526,13 @@ ul {
     pointer-events: none;
   }
   .manifeste-line {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 0.85rem;
+    min-height: 1.4em;
   }
   .manifeste-punchline {
-    font-size: 1.3rem;
+    font-size: 1rem;
+    margin-top: 0.3rem;
   }
 
   .card-large {
@@ -1545,22 +1549,22 @@ ul {
     min-height: 0;
   }
 
-  /* éléments décoratifs : réduits pour ne pas chevaucher tag + services */
+  /* éléments décoratifs : bien réduits pour aérer le carré (façon Sequoia) */
   .card-postit {
-    width: 60%;
-    max-width: 195px;
+    width: 44%;
+    max-width: 150px;
   }
   .recherche-loupe {
-    width: 46%;
-    max-width: 165px;
+    width: 34%;
+    max-width: 120px;
   }
   .edition-clip-top {
-    width: 62%;
-    height: 24%;
+    width: 48%;
+    height: 20%;
   }
   .edition-clip-bottom {
-    width: 60%;
-    height: 26%;
+    width: 46%;
+    height: 21%;
   }
 
   .mailing-form {
