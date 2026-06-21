@@ -311,15 +311,13 @@ ul {
   opacity: 0.85;
 }
 
-/* Vision — Intro */
-.vision-intro {
-  padding: 0 3rem 0;
+/* Vision — Intro (dans la grille) */
+.vision-block-intro {
+  text-align: center;
 }
 
-.vision-intro-inner {
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
+.vision-block-intro::after {
+  background: none !important;
 }
 
 .vision-opening {
@@ -328,7 +326,8 @@ ul {
   font-weight: 700;
   line-height: 1.4;
   color: var(--seq-black);
-  margin-bottom: 20px;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .vision-subtitle {
@@ -414,16 +413,21 @@ ul {
 .vision-grid .frame-vleft,
 .vision-grid .frame-vright,
 .vision-grid .frame-vcenter {
+  display: none;
+}
+
+.vision-grid .vision-block::after {
+  content: '';
+  position: absolute;
   top: 1rem;
   bottom: 1rem;
-  width: 1px;
-  background: #aeada9;
-}
-.vision-grid .frame-vleft { left: 0; }
-.vision-grid .frame-vright { right: 0; }
-.vision-grid .frame-vcenter {
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  border-left: thin solid #aeada9;
+  border-right: thin solid #aeada9;
+  background: linear-gradient(to right, transparent calc(50% - 0.5px), #aeada9 calc(50% - 0.5px), #aeada9 calc(50% + 0.5px), transparent calc(50% + 0.5px));
+  pointer-events: none;
+  z-index: 1;
 }
 
 .vision-block-reverse .vision-block-inner {
@@ -1324,9 +1328,24 @@ ul {
 }
 
 @media (max-width: 768px) {
-  /* cadre central : marge réduite en mobile (60px gaspillait l'écran) */
+  /* mobile épuré (façon Sequoia) : pas de quadrillage, cadre décoratif conservé, marge réduite pour plus de place */
+  body {
+    background-image: none;
+  }
   .page-content {
-    margin: 12px;
+    margin: 10px;
+  }
+  .nav-inner::after {
+    left: 1.2rem;
+    right: 1.2rem;
+  }
+
+  /* icônes du post-it : tiennent dans le post-it réduit */
+  .card-postit-icons {
+    gap: 0.9rem;
+  }
+  .card-postit-icons .card-icon {
+    width: 34px;
   }
 
   .nav-links {
