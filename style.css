@@ -1452,7 +1452,7 @@ ul {
   /* Cadre des cartes façon DESKTOP : rien ne se touche (verticales ET horizontales coupées à chaque croisement) */
   .grid-2x2 {
     gap: 0;
-    padding: 0;
+    padding: 0.5rem 0 0;
   }
   .grid-2x2::before,
   .grid-2x2::after {
@@ -1491,7 +1491,7 @@ ul {
   .card-sep {
     display: block;
     position: relative;
-    height: 1.7rem;
+    height: 1rem;
     background: var(--seq-cream);
     z-index: 2;
   }
@@ -1508,7 +1508,7 @@ ul {
   .manifeste-sep {
     display: block;
     position: relative;
-    height: 1.7rem;
+    height: 1rem;
   }
   .manifeste-sep::before {
     content: '';
@@ -1519,11 +1519,10 @@ ul {
     border-top: thin solid #aeada9;
   }
 
-  /* Manifeste (dernière carte) : carré FIGÉ (ne grandit pas avec le typewriter) */
+  /* Manifeste (dernière carte) : carré, cadre visible (pas d'overflow:hidden qui couperait les filets) */
   .manifeste {
     aspect-ratio: 1 / 1;
     min-height: 0;
-    overflow: hidden;
     margin: 0 0.5rem;
     padding: 1.3rem;
     align-items: center;
@@ -1539,7 +1538,7 @@ ul {
   .manifeste .frame-bottom {
     left: -0.1rem;
     right: -0.1rem;
-    bottom: 0;
+    bottom: -0.5rem;
   }
   .manifeste-line {
     font-size: 1rem;
