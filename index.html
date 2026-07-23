@@ -335,6 +335,15 @@
             toggle();
           }
         });
+        // la carte revient au recto quand le curseur (ou le focus clavier) la quitte
+        function unflip() {
+          if (card.classList.contains('flipped')) {
+            card.classList.remove('flipped');
+            card.setAttribute('aria-pressed', 'false');
+          }
+        }
+        card.addEventListener('mouseleave', unflip);
+        card.addEventListener('blur', unflip);
       });
     })();
   </script>
