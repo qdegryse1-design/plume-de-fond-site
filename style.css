@@ -857,38 +857,8 @@ ul {
   margin: auto 0;
 }
 
-/* Indicateur « + » (devient « × » une fois la carte retournée) */
-.card-flip-hint {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
-  z-index: 2;
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.35);
-  color: var(--seq-cream);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1;
-  pointer-events: none;
-  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1),
-              background 0.3s ease, color 0.3s ease;
-}
-
-.card-family.flipped .card-flip-hint {
-  transform: rotate(225deg);
-  background: rgba(27, 25, 22, 0.08);
-  color: var(--seq-black);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .card-flip-inner,
-  .card-flip-hint {
+  .card-flip-inner {
     transition: none;
   }
 }
