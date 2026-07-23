@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260621c">
+  <link rel="stylesheet" href="style.css?v=20260723a">
 </head>
 <body>
 
@@ -90,6 +90,8 @@
 
       <!-- Famille 1 : Réseaux sociaux & visibilité -->
       <article class="card card-family card-social">
+        <div class="card-flip-inner">
+        <div class="card-face card-face-front">
         <div class="card-bg card-bg-grid"></div>
         <div class="card-overlay">
           <span class="card-tag">Visibilité</span>
@@ -131,11 +133,20 @@
             </ul>
           </div>
         </div>
+        </div><!-- fin card-face-front -->
+        <div class="card-face card-face-back">
+          <span class="card-tag">Visibilité</span>
+          <p class="card-back-text">Une présence régulière sur les réseaux, sans y passer vos journées. Nous transformons votre expertise en posts et threads qui installent votre voix dans les conversations qui comptent — avec le fond d'un économiste et le ton qui vous ressemble.</p>
+        </div>
+        </div><!-- fin card-flip-inner -->
+        <span class="card-flip-hint" aria-hidden="true">+</span>
       </article>
 
       <div class="card-sep" aria-hidden="true"></div>
       <!-- Famille 2 : Publications éditoriales -->
       <article class="card card-family card-edition">
+        <div class="card-flip-inner">
+        <div class="card-face card-face-front">
         <div class="card-bg card-bg-edition">
           <div class="edition-clip edition-clip-top">
             <div class="edition-paper">
@@ -159,11 +170,20 @@
             </ul>
           </div>
         </div>
+        </div><!-- fin card-face-front -->
+        <div class="card-face card-face-back">
+          <span class="card-tag">Édition</span>
+          <p class="card-back-text">Une newsletter qu'on attend, des tribunes qui prennent position. Nous donnons à vos convictions le format éditorial qui fidélise une audience — et fait de vos idées un rendez-vous plutôt qu'un bruit de fond.</p>
+        </div>
+        </div><!-- fin card-flip-inner -->
+        <span class="card-flip-hint" aria-hidden="true">+</span>
       </article>
 
       <div class="card-sep" aria-hidden="true"></div>
       <!-- Famille 3 : Recherche & rapports -->
       <article class="card card-family card-recherche">
+        <div class="card-flip-inner">
+        <div class="card-face card-face-front">
         <div class="card-bg card-bg-recherche">
           <svg class="recherche-line" viewBox="0 0 200 200" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!-- partie gauche : remonte et s'arrête au bord de la loupe (bout sous le verre) -->
@@ -186,11 +206,20 @@
             </ul>
           </div>
         </div>
+        </div><!-- fin card-face-front -->
+        <div class="card-face card-face-back">
+          <span class="card-tag">Recherche</span>
+          <p class="card-back-text">White papers, études sectorielles, rapports : les formats longs qui font autorité. Nous menons la recherche, structurons l'argument et rédigeons des documents que vos clients citent en réunion.</p>
+        </div>
+        </div><!-- fin card-flip-inner -->
+        <span class="card-flip-hint" aria-hidden="true">+</span>
       </article>
 
       <div class="card-sep" aria-hidden="true"></div>
       <!-- Famille 4 : Supports & médias -->
       <article class="card card-family card-medias">
+        <div class="card-flip-inner">
+        <div class="card-face card-face-front">
         <div class="card-bg" style="background: #390E0C"></div>
         <div class="card-overlay">
           <span class="card-tag">Studio</span>
@@ -218,6 +247,13 @@
             </ul>
           </div>
         </div>
+        </div><!-- fin card-face-front -->
+        <div class="card-face card-face-back">
+          <span class="card-tag">Studio</span>
+          <p class="card-back-text">Le fond ne s'arrête pas à l'écrit. Nous scénarisons vos vidéos et vos podcasts : un script solide, pensé pour l'oral, qui garde la profondeur de vos analyses jusqu'à la dernière minute.</p>
+        </div>
+        </div><!-- fin card-flip-inner -->
+        <span class="card-flip-hint" aria-hidden="true">+</span>
       </article>
 
     </div>
@@ -281,6 +317,27 @@
       <p>&copy; 2026 Plume de fond. Tous droits reserves.</p>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      document.querySelectorAll('.card-family').forEach(function(card) {
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-pressed', 'false');
+        function toggle() {
+          var on = card.classList.toggle('flipped');
+          card.setAttribute('aria-pressed', on ? 'true' : 'false');
+        }
+        card.addEventListener('click', toggle);
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
+          }
+        });
+      });
+    })();
+  </script>
 
   <script>
     (function() {

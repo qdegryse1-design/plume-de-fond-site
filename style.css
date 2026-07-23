@@ -797,6 +797,103 @@ ul {
 }
 
 /* =============================================
+   FLIP CARDS — recto/verso au clic
+   ============================================= */
+/* le clip passe sur chaque face (sinon la rotation 3D serait coupée) */
+.card-family {
+  overflow: visible;
+  perspective: 1400px;
+}
+
+.card-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.card-family.flipped .card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Verso : page de cahier — crème quadrillé, texte encre */
+.card-face-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 1.5rem;
+  background-color: var(--seq-cream);
+  background-image:
+    linear-gradient(rgba(27, 25, 22, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 25, 22, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: thin solid #aeada9;
+}
+
+.card-family .card-face-back .card-tag {
+  color: var(--seq-black);
+  text-shadow: none;
+}
+
+.card-family .card-face-back .card-tag::before {
+  background: var(--seq-green);
+}
+
+.card-back-text {
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--seq-black);
+  margin: auto 0;
+}
+
+/* Indicateur « + » (devient « × » une fois la carte retournée) */
+.card-flip-hint {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 2;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--seq-cream);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1;
+  pointer-events: none;
+  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1),
+              background 0.3s ease, color 0.3s ease;
+}
+
+.card-family.flipped .card-flip-hint {
+  transform: rotate(225deg);
+  background: rgba(27, 25, 22, 0.08);
+  color: var(--seq-black);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-flip-inner,
+  .card-flip-hint {
+    transition: none;
+  }
+}
+
+/* =============================================
    CARD — social icons (chalk style)
    ============================================= */
 .card-overlay-icons {
