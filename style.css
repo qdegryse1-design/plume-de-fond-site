@@ -1694,8 +1694,8 @@ ul {
 /* chaque rubrique : un bloc bordé de deux filets verticaux (rails) */
 .legal-block {
   position: relative;
-  padding: 2rem 0 2.4rem;
-  margin-bottom: 2.4rem;
+  padding: 1.6rem 0 1.9rem;
+  margin-bottom: 1.5rem;
 }
 
 .legal-block::before {
@@ -1755,16 +1755,6 @@ ul {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-color: var(--seq-green);
-}
-
-/* lettrine sur le premier paragraphe */
-.legal-lettrine::first-letter {
-  font-family: 'Source Serif 4', Georgia, serif;
-  font-size: 3.3em;
-  font-weight: 600;
-  float: left;
-  line-height: 0.8;
-  padding: 0.08em 0.12em 0 0;
 }
 
 @media (max-width: 768px) {
