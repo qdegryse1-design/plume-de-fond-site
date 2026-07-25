@@ -1775,3 +1775,20 @@ ul {
     padding: 0 1.1rem;
   }
 }
+
+/* Statut d'envoi du formulaire de contact */
+.form-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  margin-top: 12px;
+  min-height: 1.3em;
+}
+
+.form-status.ok {
+  color: var(--seq-green);
+}
+
+.form-status.err {
+  color: #b3564d;
+}
