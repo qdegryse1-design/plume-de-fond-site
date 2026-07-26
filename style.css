@@ -112,6 +112,8 @@ ul {
   height: 62px;
   width: auto;
   display: block;
+  /* le SVG a du blanc interne en bas : on recentre l'encre optiquement */
+  transform: translateY(5px);
 }
 
 .nav-links {
