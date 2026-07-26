@@ -1348,6 +1348,7 @@ ul {
    FOOTER — dark, minimal
    ============================================= */
 .footer {
+  position: relative;
   background: var(--seq-black);
   padding: 50px 3rem 28px;
 }
@@ -1786,24 +1787,25 @@ ul {
 }
 
 
-/* Logo blanc en bas de page, à droite */
+/* Logo blanc ancré en bas à droite du footer */
 .footer-col-logo {
-  justify-self: end;
-  align-self: center;
+  position: absolute;
+  right: 3rem;
+  bottom: 28px;
 }
 
 .footer-logo {
-  height: 88px;
+  height: 62px;
   width: auto;
   display: block;
 }
 
 @media (max-width: 768px) {
   .footer-col-logo {
-    grid-column: 1 / -1;
-    justify-self: end;
+    right: 1.5rem;
+    bottom: 1.2rem;
   }
   .footer-logo {
-    height: 64px;
+    height: 52px;
   }
 }
