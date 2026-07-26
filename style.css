@@ -793,7 +793,7 @@ ul {
   letter-spacing: 0.02em;
 }
 
-.card-services li::before {
+.card-services li + li::before {
   content: '—  ';
   opacity: 0.4;
 }
