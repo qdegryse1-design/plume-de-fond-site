@@ -1356,7 +1356,7 @@ ul {
   max-width: 1140px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto 1fr;
   justify-content: start;
   gap: 2rem 8rem;
 }
@@ -1783,4 +1783,27 @@ ul {
 
 .form-status.err {
   color: #b3564d;
+}
+
+
+/* Logo blanc en bas de page, à droite */
+.footer-col-logo {
+  justify-self: end;
+  align-self: center;
+}
+
+.footer-logo {
+  height: 88px;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .footer-col-logo {
+    grid-column: 1 / -1;
+    justify-self: end;
+  }
+  .footer-logo {
+    height: 64px;
+  }
 }
