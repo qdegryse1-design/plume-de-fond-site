@@ -34,6 +34,9 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  /* neutralise le gonflement automatique des textes sur Chrome Android */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
