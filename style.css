@@ -776,6 +776,8 @@ ul {
 }
 
 .card-bottom {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -1649,10 +1651,15 @@ ul {
   .card-postit {
     width: 44%;
     max-width: 150px;
+    top: 36%;
   }
   .recherche-loupe {
     width: 34%;
     max-width: 120px;
+    top: 36%;
+  }
+  .card-eq {
+    top: 40%;
   }
   .edition-clip-top {
     width: 48%;
