@@ -1660,7 +1660,7 @@ ul {
   .card-postit {
     width: 44%;
     max-width: 150px;
-    top: 36%;
+    top: 42%;
   }
   .recherche-loupe {
     width: 34%;
@@ -1668,7 +1668,7 @@ ul {
     top: 36%;
   }
   .card-eq {
-    top: 40%;
+    top: 45%;
   }
   .edition-clip-top {
     width: 48%;
