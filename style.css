@@ -1427,12 +1427,8 @@ ul {
 }
 
 @media (max-width: 768px) {
-  /* mobile : aucune barre verticale (les filets horizontaux restent) */
-  .vision-grid .vision-block::after,
-  .grid-2x2 .line-left,
-  .grid-2x2 .line-right,
-  .manifeste .frame-vleft,
-  .manifeste .frame-vright {
+  /* mobile : pas de barre verticale sur la page vision (la page principale garde son cadre) */
+  .vision-grid .vision-block::after {
     display: none !important;
   }
   .legal-block::before {
