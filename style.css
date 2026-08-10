@@ -1427,6 +1427,19 @@ ul {
 }
 
 @media (max-width: 768px) {
+  /* mobile : aucune barre verticale (les filets horizontaux restent) */
+  .vision-grid .vision-block::after,
+  .grid-2x2 .line-left,
+  .grid-2x2 .line-right,
+  .manifeste .frame-vleft,
+  .manifeste .frame-vright {
+    display: none !important;
+  }
+  .legal-block::before {
+    border-left: none;
+    border-right: none;
+  }
+
   /* mobile épuré (façon Sequoia) : pas de quadrillage, pas de cadre noir principal */
   body {
     background-image: none;
@@ -1817,5 +1830,13 @@ ul {
   }
   .footer-logo {
     height: 52px;
+  }
+}
+
+/* mobile : pas de rails verticaux sur les pages légales non plus */
+@media (max-width: 768px) {
+  .legal-block::before {
+    border-left: none;
+    border-right: none;
   }
 }
