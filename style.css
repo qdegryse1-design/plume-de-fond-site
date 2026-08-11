@@ -531,11 +531,6 @@ ul {
   background-position: bottom center;
   background-size: 100% 10px;
   padding-bottom: 10px;
-  background-size: 0% 10px;
-  transition: background-size 0.3s ease;
-}
-
-.vision-signature a:hover {
   background-size: 100% 10px;
 }
 
