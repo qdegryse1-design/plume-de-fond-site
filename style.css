@@ -1873,3 +1873,32 @@ ul {
     transform: translateX(-50%) rotate(-3deg) translateY(0);
   }
 }
+
+
+/* =============================================
+   CARTES — « LIRE » au survol (façon Sequoia)
+   ============================================= */
+.card-face-front::after {
+  content: 'LIRE';
+  position: absolute;
+  top: 1.4rem;
+  right: 1.5rem;
+  z-index: 3;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--seq-cream);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-family:hover .card-face-front::after {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
