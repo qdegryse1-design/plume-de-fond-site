@@ -1891,7 +1891,7 @@ ul {
   color: var(--seq-cream);
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
   opacity: 0;
-  transform: translateY(4px);
+  transform: translateX(14px);
   transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
 }
@@ -1899,6 +1899,6 @@ ul {
 @media (hover: hover) and (pointer: fine) {
   .card-family:hover .card-face-front::after {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
