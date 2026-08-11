@@ -1836,3 +1836,45 @@ ul {
     border-right: none;
   }
 }
+
+
+/* =============================================
+   SIGNATURE — portrait polaroid au survol (desktop)
+   ============================================= */
+.vision-signature a {
+  position: relative;
+}
+
+.signature-photo {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  width: 170px;
+  padding: 9px 9px 30px;
+  background: #fff;
+  border: 1px solid rgba(27, 25, 22, 0.08);
+  box-shadow: 0 12px 32px rgba(27, 25, 22, 0.28);
+  transform: translateX(-50%) rotate(-3deg) translateY(8px);
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.signature-photo img {
+  display: block;
+  width: 100%;
+  filter: grayscale(1) contrast(1.05);
+}
+
+/* survol : uniquement les appareils à pointeur (pas de version mobile) */
+@media (hover: hover) and (pointer: fine) {
+  .signature-photo {
+    display: block;
+  }
+  .vision-signature a:hover .signature-photo {
+    opacity: 1;
+    transform: translateX(-50%) rotate(-3deg) translateY(0);
+  }
+}
