@@ -534,6 +534,16 @@ ul {
   background-size: 100% 10px;
 }
 
+/* Bloc « Devenez votre propre média » : image à taille fixe, colonne texte
+   élargie via un écart réduit (4 → 3 rem) pour garder le dernier paragraphe
+   sur 4 lignes sans élargir la grille (2026-09-12) */
+@media (min-width: 769px) {
+  .vision-grid .vision-block-reverse .vision-block-inner {
+    grid-template-columns: 1fr calc(50% - 2rem);
+    gap: 3rem;
+  }
+}
+
 /* Vision — Responsive */
 @media (max-width: 768px) {
   .vision-block-inner {
