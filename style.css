@@ -535,12 +535,12 @@ ul {
 }
 
 /* Bloc « Devenez votre propre média » : image à taille fixe, colonne texte
-   élargie via un écart réduit (4 → 3 rem) pour garder le dernier paragraphe
+   élargie via un écart réduit (64 → 50 px, bascule à 54 px) pour garder le dernier paragraphe
    sur 4 lignes sans élargir la grille (2026-09-12) */
 @media (min-width: 769px) {
   .vision-grid .vision-block-reverse .vision-block-inner {
     grid-template-columns: 1fr calc(50% - 2rem);
-    gap: 3rem;
+    gap: 50px;
   }
 }
 
