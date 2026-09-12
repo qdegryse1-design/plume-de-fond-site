@@ -1915,3 +1915,14 @@ ul {
     transform: translateX(0);
   }
 }
+
+/* ============================================================
+   TEST 2026-09-12 — filets de la page Vision masqués.
+   À SUPPRIMER (tout ce bloc) pour rétablir les lignes.
+   ============================================================ */
+.vision-grid .frame-line,
+.vision-grid .vision-block::before,
+.vision-grid .vision-block::after,
+.vision-grid .vision-block-intro::before {
+  display: none !important;
+}
