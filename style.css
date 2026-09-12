@@ -1539,6 +1539,11 @@ ul {
     padding-bottom: 60px;
   }
 
+  /* Vision : même espace au-dessus et en dessous du titre (88 px mesurés) */
+  .hero-vision {
+    padding-bottom: 19px;
+  }
+
   .hero-title {
     font-size: 28px;
   }
