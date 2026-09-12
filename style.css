@@ -279,6 +279,11 @@ ul {
 /* =============================================
    VISION — page texte
    ============================================= */
+/* Hero Vision : même espace au-dessus (ligne navbar → titre) et en dessous
+   (titre → intro), 173 px mesurés (2026-09-12) */
+.hero-vision {
+  padding-bottom: 97px;
+}
 .vision-title {
   font-family: 'JetBrains Mono', monospace !important;
   font-weight: 300 !important;
