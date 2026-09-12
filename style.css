@@ -1917,8 +1917,9 @@ ul {
 }
 
 /* ============================================================
-   TEST 2026-09-12 — filets de la page Vision masqués.
-   À SUPPRIMER (tout ce bloc) pour rétablir les lignes.
+   Page Vision sans filets (choix validé le 2026-09-12 : horizontaux,
+   verticaux gauche/droite, vertical central, haut/bas du cadre).
+   Pour rétablir les lignes : supprimer tout ce bloc.
    ============================================================ */
 .vision-grid .frame-line,
 .vision-grid .vision-block::before,
