@@ -1947,3 +1947,47 @@ ul {
 .vision-grid .vision-block-intro::before {
   display: none !important;
 }
+
+/* ============================================================
+   Espacements d'en-tête harmonisés (2026-09-12) — en fin de fichier
+   pour primer sur .hero / .mailing / .legal-article définis plus haut.
+   ============================================================ */
+/* Pages légales : même logique (2026-09-12). Sans date : titre → filets = 173 px.
+   Avec date : la date se colle sous le titre, puis 173 px jusqu'aux filets. */
+.hero-legal {
+  padding-bottom: 102px;
+}
+.hero-legal-dated {
+  padding-bottom: 0;
+}
+.hero-legal-dated + .legal-date {
+  margin-top: 14px;
+}
+.legal-article {
+  margin-top: 2.5rem;
+}
+.legal-date + .legal-article {
+  margin-top: 151px;
+}
+/* Page Contact : titre du formulaire à 173 px sous la ligne de navbar */
+.mailing-page {
+  padding-top: 175px;
+}
+
+/* Mobile : 88 px de part et d'autre du titre (comme Vision). Les filets
+   sont absents en mobile, la référence est le premier texte du bloc. */
+@media (max-width: 768px) {
+  .hero-legal,
+  .hero-legal-dated {
+    padding-bottom: 0;
+  }
+  .legal-article {
+    margin-top: 33px;
+  }
+  .legal-date + .legal-article {
+    margin-top: 37px;
+  }
+  .mailing-page {
+    padding-top: 89px;
+  }
+}
