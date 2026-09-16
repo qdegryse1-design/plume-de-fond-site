@@ -74,14 +74,14 @@
 
   <!-- HERO -->
   <section class="hero">
-    <h1 class="hero-title"><span class="hero-line1">Votre <span class="typewriter" id="typewriter"></span><span class="cursor">|</span></span><br><span class="hero-line2">mérite une plume à la hauteur.</span></h1>
+    <h1 class="hero-title"><span class="hero-line1">Votre <span class="typewriter" id="typewriter">société de gestion</span><span class="cursor">|</span></span><br><span class="hero-line2">mérite une plume à la hauteur.</span></h1>
     <script>
       (function() {
         const words = ['société de gestion', 'fintech', 'banque privée', 'think tank', 'family office'];
         const el = document.getElementById('typewriter');
         let wordIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
+        let charIndex = words[0].length; // le 1er mot est déjà dans le HTML (SEO, H1 complet sans JS)
+        let isDeleting = true;
         const typeSpeed = 150;
         const deleteSpeed = 90;
         const pauseAfterType = 2500;
@@ -114,7 +114,8 @@
           }
         }
 
-        tick();
+        // Le mot initial reste affiché le temps habituel avant de s'effacer
+        setTimeout(tick, pauseAfterType);
       })();
     </script>
   </section>
