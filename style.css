@@ -2017,3 +2017,16 @@ ul {
 .vision-signature .signature-linkedin:hover {
   opacity: 0.7;
 }
+
+/* Test 2026-10-16 : soulignement manuscrit prolongé sous l'icône LinkedIn */
+.vision-signature .signature-line {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10' preserveAspectRatio='none'%3E%3Cpath d='M 0 6 C 30 4, 60 7, 90 5 C 105 4, 115 6, 120 5' stroke='%231b1916' stroke-width='3.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% 10px;
+  padding-bottom: 10px;
+}
+
+.vision-signature .signature-line a {
+  background-image: none;
+}
