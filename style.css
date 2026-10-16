@@ -2004,7 +2004,7 @@ ul {
   padding: 0;
   background: none;
   color: var(--seq-black);
-  vertical-align: -2px;
+  vertical-align: baseline;
   transition: opacity 0.2s ease;
 }
 
