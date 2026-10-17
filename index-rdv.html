@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plume de fond</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="description" content="Rédaction de contenu économique et financier pour sociétés de gestion, fintechs, banques privées, family offices et think tanks.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Plume de fond">
+  <meta property="og:description" content="Rédaction de contenu économique et financier pour sociétés de gestion, fintechs, banques privées, family offices et think tanks.">
+  <meta property="og:url" content="https://plumedefond.fr/">
+  <meta property="og:image" content="https://plumedefond.fr/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://plumedefond.fr/">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon-512x512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <meta property="og:site_name" content="Plume de fond">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://plumedefond.fr/#organization",
+        "name": "Plume de fond",
+        "url": "https://plumedefond.fr/",
+        "logo": "https://plumedefond.fr/favicon-512x512.png",
+        "sameAs": ["https://lettre.plumedefond.fr/"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://plumedefond.fr/#website",
+        "name": "Plume de fond",
+        "alternateName": "plumedefond.fr",
+        "url": "https://plumedefond.fr/",
+        "inLanguage": "fr",
+        "publisher": {"@id": "https://plumedefond.fr/#organization"}
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="style.css?v=20260912i">
+  <link rel="stylesheet" href="rdv-teaser.css?v=20261017c">
+  <meta name="robots" content="noindex">
+</head>
+<body>
+
+  <div class="page-content">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="Plume de fond — accueil">
+                <img class="logo-svg" src="logo-plume-de-fond.svg" alt="Plume de fond">
+      </a>
+      <ul class="nav-links">
+        <li><a href="vision.html">NOTRE VISION<svg class="pencil-circle" viewBox="0 0 200 70" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 120 5 C 160 3, 193 14, 191 32 C 189 50, 155 64, 100 65 C 45 66, 7 52, 6 34 C 5 16, 45 4, 110 3 C 155 2, 190 14, 188 32" stroke="#1b1916" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></a></li>
+        <li><a href="#produits">NOS PRODUITS<svg class="pencil-circle" viewBox="0 0 200 70" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 120 5 C 160 3, 193 14, 191 32 C 189 50, 155 64, 100 65 C 45 66, 7 52, 6 34 C 5 16, 45 4, 110 3 C 155 2, 190 14, 188 32" stroke="#1b1916" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></a></li>
+        <li><a href="https://lettre.plumedefond.fr">LA LETTRE DE FOND<svg class="pencil-circle" viewBox="0 0 200 70" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 120 5 C 160 3, 193 14, 191 32 C 189 50, 155 64, 100 65 C 45 66, 7 52, 6 34 C 5 16, 45 4, 110 3 C 155 2, 190 14, 188 32" stroke="#1b1916" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></a></li>
+      </ul>
+      <button class="nav-hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1 class="hero-title"><span class="hero-line1">Votre <span class="typewriter" id="typewriter">société de gestion</span><span class="cursor">|</span></span><br><span class="hero-line2">mérite une plume à la hauteur.</span></h1>
+    <script>
+      (function() {
+        const words = ['société de gestion', 'fintech', 'banque privée', 'think tank', 'family office'];
+        const el = document.getElementById('typewriter');
+        let wordIndex = 0;
+        let charIndex = words[0].length; // le 1er mot est déjà dans le HTML (SEO, H1 complet sans JS)
+        let isDeleting = true;
+        const typeSpeed = 150;
+        const deleteSpeed = 90;
+        const pauseAfterType = 2500;
+        const pauseAfterDelete = 600;
+
+        function tick() {
+          const currentWord = words[wordIndex];
+
+          if (!isDeleting) {
+            charIndex++;
+            el.textContent = currentWord.substring(0, charIndex);
+
+            if (charIndex === currentWord.length) {
+              isDeleting = true;
+              setTimeout(tick, pauseAfterType);
+            } else {
+              setTimeout(tick, typeSpeed);
+            }
+          } else {
+            charIndex--;
+            el.textContent = currentWord.substring(0, charIndex);
+
+            if (charIndex === 0) {
+              isDeleting = false;
+              wordIndex = (wordIndex + 1) % words.length;
+              setTimeout(tick, pauseAfterDelete);
+            } else {
+              setTimeout(tick, deleteSpeed);
+            }
+          }
+        }
+
+        // Le mot initial reste affiché le temps habituel avant de s'effacer
+        setTimeout(tick, pauseAfterType);
+      })();
+    </script>
+  </section>
+
+  <!-- GRID DE PRODUITS -->
+  <section class="products" id="produits">
+    <div class="grid grid-2x2">
+      <div class="line-top"></div>
+      <div class="line-bottom"></div>
+      <div class="line-left"></div>
+      <div class="line-right"></div>
+
+      <!-- Famille 1 : Réseaux sociaux & visibilité -->
+      <article class="card card-family card-social">
+        <div class="card-flip-inner">
+        <div class="card-face card-face-front">
+        <div class="card-bg card-bg-grid"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Visibilité</span>
+
+          <!-- Post-it papier déchiré + trombone (image) -->
+          <div class="card-postit">
+            <img class="card-postit-img" src="postit.png" alt="" aria-hidden="true">
+
+            <!-- Icônes réseaux (noir, sur le papier) -->
+            <div class="card-postit-icons">
+              <!-- LinkedIn -->
+              <svg class="card-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 18 17 C 17 17, 17 83, 18 83 L 82 83 C 83 83, 83 17, 82 17 Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <line x1="32" y1="42" x2="32" y2="72" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="32" cy="32" r="4" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.3"/>
+                <path d="M 48 72 L 48 55 C 48 47, 54 43, 60 44 C 66 45, 68 50, 68 55 L 68 72" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <!-- Instagram -->
+              <svg class="card-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 28 18 C 22 18, 17 23, 18 29 L 18 71 C 17 77, 23 83, 29 82 L 71 83 C 77 83, 83 77, 82 71 L 83 29 C 83 23, 77 17, 71 18 Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <circle cx="50" cy="52" r="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="72" cy="28" r="4.5" stroke="currentColor" stroke-width="1.8" fill="currentColor" fill-opacity="0.3"/>
+              </svg>
+              <!-- X / Twitter -->
+              <svg class="card-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 22 20 L 45 52 L 20 82" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 78 18 L 55 50 L 80 80" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="20" y1="18" x2="80" y2="82" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="card-bottom">
+            <h2 class="card-title">Portez votre voix là où elle compte</h2>
+            <ul class="card-services">
+              <li>Posts LinkedIn</li>
+              <li>Threads X</li>
+              <li>Contenus Instagram</li>
+            </ul>
+          </div>
+        </div>
+        </div><!-- fin card-face-front -->
+        <div class="card-face card-face-back">
+          <span class="card-tag">Visibilité</span>
+          <p class="card-back-text">Nous transformons votre expertise en posts et threads qui installent votre voix dans les conversations qui comptent. Avec la pensée d'un économiste et le ton qui vous ressemble.</p>
+        </div>
+        </div><!-- fin card-flip-inner -->
+      </article>
+
+      <div class="card-sep" aria-hidden="true"></div>
+      <!-- Famille 2 : Publications éditoriales -->
+      <article class="card card-family card-edition">
+        <div class="card-flip-inner">
+        <div class="card-face card-face-front">
+        <div class="card-bg card-bg-edition">
+          <div class="edition-clip edition-clip-top">
+            <div class="edition-paper">
+              <img src="journal-oil.jpg" alt="" />
+            </div>
+          </div>
+          <div class="edition-clip edition-clip-bottom">
+            <div class="edition-paper">
+              <img src="journal-dow.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="card-overlay">
+          <span class="card-tag">Édition</span>
+          <div class="card-bottom">
+            <h2 class="card-title">Éduquez et construisez une audience autour de vos idées</h2>
+            <ul class="card-services">
+              <li>Newsletters hebdomadaires</li>
+              <li>Tribunes</li>
+              <li>Articles d'opinion</li>
+            </ul>
+          </div>
+        </div>
+        </div><!-- fin card-face-front -->
+        <div class="card-face card-face-back">
+          <span class="card-tag">Édition</span>
+          <p class="card-back-text">Nous installons le rendez-vous éditorial que vos lecteurs attendent et faisons de votre audience un actif qui compose.</p>
+        </div>
+        </div><!-- fin card-flip-inner -->
+      </article>
+
+      <div class="card-sep" aria-hidden="true"></div>
+      <!-- Famille 3 : Recherche & rapports -->
+      <article class="card card-family card-recherche">
+        <div class="card-flip-inner">
+        <div class="card-face card-face-front">
+        <div class="card-bg card-bg-recherche">
+          <svg class="recherche-line" viewBox="0 0 200 200" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- partie gauche : remonte et s'arrête au bord de la loupe (bout sous le verre) -->
+            <polyline points="0,143 12,130 22,100 32,123 42,113 54,120 66,103 80,87 108,72"
+              stroke="#cdd2dc" stroke-width="2.3" stroke-opacity="0.70" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="10"/>
+            <!-- partie droite : repart du bord de la loupe vers le haut (bout sous le verre) -->
+            <polyline points="114,68 140,50 154,60 168,40 182,50 200,37"
+              stroke="#cdd2dc" stroke-width="2.3" stroke-opacity="0.70" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="10"/>
+          </svg>
+          <img class="recherche-loupe" src="recherche-loupe.png" alt="Loupe tenue à la main" />
+        </div>
+        <div class="card-overlay">
+          <span class="card-tag">Recherche</span>
+          <div class="card-bottom">
+            <h2 class="card-title">La profondeur qui fait autorité</h2>
+            <ul class="card-services">
+              <li>White papers</li>
+              <li>Études sectorielles</li>
+              <li>Rapports thématiques</li>
+            </ul>
+          </div>
+        </div>
+        </div><!-- fin card-face-front -->
+        <div class="card-face card-face-back">
+          <span class="card-tag">Recherche</span>
+          <p class="card-back-text">Nous menons la recherche et construisons la thèse avec une rigueur d'économiste pour des écrits au format long qui font autorité.</p>
+        </div>
+        </div><!-- fin card-flip-inner -->
+      </article>
+
+      <div class="card-sep" aria-hidden="true"></div>
+      <!-- Famille 4 : Supports & médias -->
+      <article class="card card-family card-medias">
+        <div class="card-flip-inner">
+        <div class="card-face card-face-front">
+        <div class="card-bg" style="background: #390E0C"></div>
+        <div class="card-overlay">
+          <span class="card-tag">Studio</span>
+          <!-- Égaliseur audio animé -->
+          <div class="card-eq" aria-hidden="true">
+            <span class="card-eq-bar" style="--h:30px; --dur:1.10s; --d:-0.20s"></span>
+            <span class="card-eq-bar" style="--h:54px; --dur:0.90s; --d:-0.55s"></span>
+            <span class="card-eq-bar" style="--h:42px; --dur:1.30s; --d:-0.10s"></span>
+            <span class="card-eq-bar" style="--h:80px; --dur:1.00s; --d:-0.70s"></span>
+            <span class="card-eq-bar" style="--h:36px; --dur:1.20s; --d:-0.30s"></span>
+            <span class="card-eq-bar" style="--h:94px; --dur:0.85s; --d:-0.60s"></span>
+            <span class="card-eq-bar" style="--h:48px; --dur:1.15s; --d:-0.15s"></span>
+            <span class="card-eq-bar" style="--h:84px; --dur:0.95s; --d:-0.80s"></span>
+            <span class="card-eq-bar" style="--h:32px; --dur:1.25s; --d:-0.40s"></span>
+            <span class="card-eq-bar" style="--h:66px; --dur:1.05s; --d:-0.55s"></span>
+            <span class="card-eq-bar" style="--h:44px; --dur:1.35s; --d:-0.25s"></span>
+            <span class="card-eq-bar" style="--h:58px; --dur:0.90s; --d:-0.65s"></span>
+            <span class="card-eq-bar" style="--h:28px; --dur:1.10s; --d:-0.35s"></span>
+          </div>
+          <div class="card-bottom">
+            <h2 class="card-title">Vos idées de fond, à l'écran et au micro</h2>
+            <ul class="card-services">
+              <li>Scripts vidéo pour YouTube</li>
+              <li>Scripts podcast</li>
+            </ul>
+          </div>
+        </div>
+        </div><!-- fin card-face-front -->
+        <div class="card-face card-face-back">
+          <span class="card-tag">Studio</span>
+          <p class="card-back-text">Nous scénarisons vos vidéos et vos podcasts avec un script pédagogique, qui conserve une grande profondeur d'analyse jusqu'à la dernière minute.</p>
+        </div>
+        </div><!-- fin card-flip-inner -->
+      </article>
+
+    </div>
+
+    <!-- MANIFESTE — sous la grille, même largeur -->
+    <div class="manifeste-sep" aria-hidden="true"></div>
+    <div class="manifeste" id="manifeste">
+      <div class="frame-line frame-bottom"></div>
+      <div class="frame-line frame-vleft"></div>
+      <div class="frame-line frame-vright"></div>
+      <div class="manifeste-inner">
+        <p class="manifeste-line" data-text="Les posts qui font réfléchir."></p>
+        <p class="manifeste-line" data-text="La newsletter qu'on attend."></p>
+        <p class="manifeste-line" data-text="Les analyses qu'on relit."></p>
+        <p class="manifeste-line" data-text="Les rapports qu'on cite en réunion."></p>
+        <p class="manifeste-line" data-text="Les vidéos qu'on recommande."></p>
+        <p class="manifeste-punchline" data-text="C'est pour ça que nous prenons la "><span class="manifeste-circled">plume<svg class="manifeste-circle-svg" viewBox="0 0 220 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 45 52 C 30 48, 18 38, 22 28 C 28 14, 65 6, 110 5 C 160 4, 198 14, 200 32 C 202 50, 170 68, 115 70 C 60 72, 22 60, 18 42 C 14 24, 50 10, 105 8 C 155 6, 196 18, 198 36 C 200 54, 165 72, 110 74 C 58 76, 20 64, 16 46 C 13 32, 35 20, 70 14" stroke="var(--seq-red-margin)" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></span><span class="manifeste-dot">.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RENDEZ-VOUS : prochain créneau, renvoie au calendrier -->
+  <section class="rdv-teaser" id="contact">
+    <h2 class="mailing-title">Parlez-nous de vos enjeux.</h2>
+    <div class="rdv-link">
+      <a class="ephem" href="rendez-vous.html" tabindex="-1" aria-hidden="true">
+        <div class="ephem-top" id="ephem-month">&nbsp;</div>
+        <div class="ephem-body">
+          <span class="ephem-day"><span id="ephem-day">&nbsp;</span><svg viewBox="0 0 100 100" preserveAspectRatio="none" fill="none"><path d="M 60 7 C 84 9, 95 29, 93 52 C 91 77, 71 93, 47 92 C 23 91, 6 73, 7 48 C 8 24, 28 6, 54 7 C 75 8, 90 20, 93 37" stroke="#1b1916" stroke-width="2.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span>
+          <span class="ephem-weekday" id="ephem-weekday">&nbsp;</span>
+        </div>
+      </a>
+      <div class="rdv-text">
+        <p class="rdv-kicker">Prochain créneau libre</p>
+        <p class="rdv-when" id="rdv-when">Cette semaine</p>
+        <p class="rdv-desc">30 minutes en visio pour parler de vos enjeux éditoriaux.</p>
+        <a class="rdv-cta" href="rendez-vous.html">Choisir un créneau <span>&rarr;</span></a>
+      </div>
+    </div>
+    <p class="booking-alt">Vous préférez écrire&nbsp;? <a href="mailto:contact@plumedefond.fr">contact@plumedefond.fr</a></p>
+  </section>
+
+  </div><!-- fin .page-content -->
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <p class="footer-heading">L'ENTREPRISE</p>
+        <ul>
+          <li><a href="vision.html">Notre vision</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">LÉGAL</p>
+        <ul>
+          <li><a href="confidentialite.html">Politique de confidentialité</a></li>
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-col-logo">
+        <img class="footer-logo" src="logo-plume-de-fond-blanc.svg" alt="Plume de fond">
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Plume de fond. Tous droits reserves.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      document.querySelectorAll('.card-family').forEach(function(card) {
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-pressed', 'false');
+        function toggle() {
+          var on = card.classList.toggle('flipped');
+          card.setAttribute('aria-pressed', on ? 'true' : 'false');
+        }
+        card.addEventListener('click', toggle);
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
+          }
+        });
+        // la carte revient au recto quand le curseur (ou le focus clavier) la quitte
+        function unflip() {
+          if (card.classList.contains('flipped')) {
+            card.classList.remove('flipped');
+            card.setAttribute('aria-pressed', 'false');
+          }
+        }
+        card.addEventListener('mouseleave', unflip);
+        card.addEventListener('blur', unflip);
+      });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var navInner = document.querySelector('.nav-inner');
+      var burger = document.querySelector('.nav-hamburger');
+      if (burger && navInner) {
+        burger.addEventListener('click', function() {
+          var open = navInner.classList.toggle('open');
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        // referme le menu après un clic sur un lien
+        navInner.querySelectorAll('.nav-links a').forEach(function(a) {
+          a.addEventListener('click', function() {
+            navInner.classList.remove('open');
+            burger.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+  </script>
+
+  <script>
+    (function() {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      function updateActive() {
+        let currentId = '';
+        sections.forEach(function(section) {
+          const top = section.offsetTop - 120;
+          if (window.scrollY >= top) {
+            currentId = section.id;
+          }
+        });
+        navLinks.forEach(function(link) {
+          const href = link.getAttribute('href');
+          if (href === '#' + currentId) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActive);
+      updateActive();
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var manifeste = document.getElementById('manifeste');
+      var lines = manifeste.querySelectorAll('.manifeste-line');
+      var punchline = manifeste.querySelector('.manifeste-punchline');
+      var circled = manifeste.querySelector('.manifeste-circled');
+      var dot = manifeste.querySelector('.manifeste-dot');
+      var circleSvg = manifeste.querySelector('.manifeste-circle-svg');
+      var punchSpan = document.createElement('span');
+      punchline.insertBefore(punchSpan, circled);
+      var started = false;
+
+      var charSpeed = 50;
+      var lineDelay = 300;
+      var pauseEnd = 3000;
+
+      function typeLine(el, text, callback) {
+        var i = 0;
+        function tick() {
+          i++;
+          el.textContent = text.substring(0, i);
+          if (i < text.length) {
+            setTimeout(tick, charSpeed);
+          } else if (callback) {
+            setTimeout(callback, lineDelay);
+          }
+        }
+        tick();
+      }
+
+      function typeAllLines(index) {
+        if (index < lines.length) {
+          var line = lines[index];
+          var text = line.getAttribute('data-text');
+          typeLine(line, text, function() {
+            typeAllLines(index + 1);
+          });
+        } else {
+          typePunchline();
+        }
+      }
+
+      function typePunchline() {
+        var text = punchline.getAttribute('data-text');
+        var i = 0;
+        function tick() {
+          i++;
+          punchSpan.textContent = text.substring(0, i);
+          if (i < text.length) {
+            setTimeout(tick, charSpeed);
+          } else {
+            circled.style.opacity = '1';
+            dot.style.opacity = '1';
+            setTimeout(function() {
+              circleSvg.classList.add('manifeste-draw');
+            }, 400);
+          }
+        }
+        tick();
+      }
+
+      circled.style.opacity = '0';
+      dot.style.opacity = '0';
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !started) {
+            started = true;
+            typeAllLines(0);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(manifeste);
+    })();
+  </script>
+
+  <script>
+    (function() {
+      document.querySelectorAll('.contact-form').forEach(function(form) {
+        var status = form.querySelector('.form-status');
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var btn = form.querySelector('button[type="submit"]');
+          btn.disabled = true;
+          var label = btn.textContent;
+          btn.textContent = 'Envoi\u2026';
+          status.textContent = '';
+          status.classList.remove('ok', 'err');
+          fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          }).then(function(r) {
+            if (!r.ok) throw new Error();
+            form.reset();
+            status.textContent = 'Message bien envoy\u00e9 \u2014 nous vous r\u00e9pondrons rapidement.';
+            status.classList.add('ok');
+          }).catch(function() {
+            status.textContent = "L'envoi a \u00e9chou\u00e9 \u2014 \u00e9crivez-nous directement \u00e0 contact@plumedefond.fr";
+            status.classList.add('err');
+          }).finally(function() {
+            btn.disabled = false;
+            btn.textContent = label;
+          });
+        });
+      });
+    })();
+  </script>
+  <script>
+    /* Encart rendez-vous : prochain créneau libre (maquette — même règle que booking.js,
+       à remplacer par l'appel au script Google) */
+    (function () {
+      var TZ = 'Europe/Paris', PLAGES = { 2: [[14, 18]], 3: [[10, 12]], 4: [[14, 18]] };
+      function off(d) {
+        var o = {};
+        new Intl.DateTimeFormat('en-US', { timeZone: TZ, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })
+          .formatToParts(d).forEach(function (p) { o[p.type] = p.value; });
+        return (Date.UTC(+o.year, o.month - 1, +o.day, o.hour % 24, +o.minute, +o.second) - d.getTime()) / 60000;
+      }
+      var today = new Date(new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(new Date()) + 'T00:00:00Z');
+      var found = null;
+      for (var i = 0; i <= 42 && !found; i++) {
+        var d = new Date(today.getTime() + i * 86400000);
+        (PLAGES[d.getUTCDay()] || []).forEach(function (r) {
+          for (var min = r[0] * 60; min + 30 <= r[1] * 60 && !found; min += 30) {
+            var g = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), Math.floor(min / 60), min % 60);
+            var start = new Date(g - off(new Date(g)) * 60000);
+            if (start - Date.now() < 24 * 3600000) continue;
+            if ((d.getUTCDate() * 7 + min / 30) % 3 === 0) continue;
+            found = { day: d, min: min };
+          }
+        });
+      }
+      if (!found) return;
+      var f = function (o) { return new Intl.DateTimeFormat('fr-FR', Object.assign({ timeZone: 'UTC' }, o)).format(found.day); };
+      var h = Math.floor(found.min / 60) + '\u00a0h\u00a0' + String(found.min % 60).padStart(2, '0');
+      document.getElementById('ephem-month').textContent = f({ month: 'long' });
+      document.getElementById('ephem-day').textContent = found.day.getUTCDate();
+      document.getElementById('ephem-weekday').textContent = f({ weekday: 'long' });
+      var w = f({ weekday: 'long', day: 'numeric', month: 'long' });
+      document.getElementById('rdv-when').textContent = w.charAt(0).toUpperCase() + w.slice(1) + ', ' + h;
+      var url = 'rendez-vous.html?jour=' + found.day.toISOString().slice(0, 10);
+      document.querySelectorAll('.rdv-link a').forEach(function (a) { a.href = url; });
+    })();
+  </script>
+  <!-- Cloudflare Web Analytics — mesure d'audience sans cookies -->
+  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "644f7a3778624fafaa6b0a6ad2f11ed3"}'></script>
+</body>
+</html>

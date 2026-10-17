@@ -1,0 +1,519 @@
+/* =============================================
+   RENDEZ-VOUS — page de réservation (prototype 2026-10-17)
+   Structure inspirée de Cal.com : trois panneaux (qui / mois /
+   créneaux) séparés par des filets, dans la DA cahier du site.
+   ============================================= */
+
+.booking-page {
+  padding: 120px 3rem 90px;
+}
+
+.booking-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- La carte ---------- */
+.booking-card {
+  display: grid;
+  grid-template-columns: 290px 1fr 250px;
+  min-height: 470px;
+  background: #fffdf9;
+  border: thin solid #aeada9;
+  box-shadow: 0 1px 0 rgba(27, 25, 22, 0.04), 0 12px 32px -18px rgba(27, 25, 22, 0.18);
+}
+
+.booking-card > * {
+  padding: 28px 26px;
+}
+
+.booking-card > * + * {
+  border-left: thin solid #d9d5ce;
+}
+
+/* une étape à la fois */
+.booking-card [data-pane] { display: none; }
+.booking-card[data-step="pick"] [data-pane="pick"] { display: block; }
+.booking-card[data-step="form"] [data-pane="form"] { display: block; grid-column: 2 / 4; }
+.booking-card[data-step="done"] [data-pane="done"] { display: flex; grid-column: 1 / 4; }
+.booking-card[data-step="done"] .bk-info { display: none; }
+
+.booking-card [data-pane] {
+  animation: booking-fade 0.3s ease;
+}
+
+@keyframes booking-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---------- Panneau gauche ---------- */
+.bk-avatar {
+  display: block;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 22%;
+  filter: grayscale(1);
+  border: 2px solid #fffdf9;
+  box-shadow: 0 0 0 thin #aeada9;
+  margin-bottom: 16px;
+}
+
+.bk-host {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #6f6c66;
+  margin-bottom: 6px;
+}
+
+.bk-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.bk-desc {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #3d3a35;
+  margin-bottom: 24px;
+}
+
+.bk-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bk-meta li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+}
+
+.bk-meta svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: var(--seq-black);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bk-meta li[hidden] { display: none; }
+
+.bk-recap {
+  font-weight: 500;
+  color: var(--seq-black);
+}
+
+.bk-recap svg {
+  stroke: var(--seq-green);
+}
+
+.bk-tz select {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%231b1916' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 2px center / 9px 6px;
+  padding: 0 18px 0 0;
+  font: inherit;
+  color: var(--seq-black);
+  cursor: pointer;
+  max-width: 220px;
+}
+
+.bk-tz select:focus-visible {
+  outline: 1px dashed var(--seq-black);
+  outline-offset: 3px;
+}
+
+/* ---------- Centre : le mois ---------- */
+.cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  min-height: 32px;
+}
+
+.cal-month {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cal-month span {
+  font-weight: 400;
+  color: #8a867f;
+}
+
+.cal-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.cal-nav button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  color: var(--seq-black);
+  cursor: pointer;
+}
+
+.cal-nav button:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.cal-weekdays,
+.cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  text-align: center;
+}
+
+.cal-weekdays span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #8a867f;
+  padding-bottom: 8px;
+}
+
+.cal-day {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  max-height: 58px;
+  border: 1px solid transparent;
+  background: none;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 16px;
+  color: #b4b0a8;
+  cursor: default;
+}
+
+/* jours ouverts : pavé papier, comme une case de cahier remplie */
+.cal-day.is-open {
+  background: #efe9de;
+  color: var(--seq-black);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.cal-day.is-open:focus-visible {
+  border-color: var(--seq-black);
+}
+
+/* jour choisi : entouré au crayon, comme les liens de la navbar */
+.cal-day .day-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 48px;
+  margin: -24px 0 0 -32px;
+  pointer-events: none;
+  opacity: 0;
+  overflow: visible;
+}
+
+.cal-day .day-circle path {
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cal-day.is-open:not(.is-selected):hover .day-circle {
+    opacity: 0.3;
+  }
+  .cal-day.is-open:not(.is-selected):hover .day-circle path {
+    animation: draw 0.6s ease-out forwards;
+  }
+}
+
+.cal-day.is-selected {
+  background: transparent;
+  z-index: 1;
+}
+
+.cal-day.is-selected .day-circle {
+  opacity: 1;
+}
+
+.cal-day.is-selected .day-circle path {
+  animation: draw 0.6s ease-out forwards;
+}
+
+/* aujourd'hui : point vert, comme les tags des cartes */
+.cal-day.is-today::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--seq-green);
+}
+
+.cal-day:focus-visible {
+  outline: 1px dashed var(--seq-black);
+  outline-offset: 2px;
+}
+
+/* ---------- Droite : créneaux ---------- */
+.slots-day {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  min-height: 32px;
+  line-height: 32px;
+  margin-bottom: 20px;
+}
+
+.slots-day span {
+  font-weight: 400;
+  color: #8a867f;
+}
+
+.slots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 372px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.slot {
+  width: 100%;
+  padding: 11px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--seq-black);
+  background: var(--seq-white);
+  border: 1px solid #d6d1c8;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.slot:hover,
+.slot:focus-visible {
+  border-color: var(--seq-black);
+  outline: none;
+}
+
+.slots-empty {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  color: #6f6c66;
+  line-height: 1.6;
+}
+
+/* ---------- Étape 2 : formulaire ---------- */
+.booking-form.contact-form {
+  max-width: none;
+  margin: 0;
+  gap: 14px;
+}
+
+.booking-form .field-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6f6c66;
+  margin-bottom: 6px;
+}
+
+.booking-form .optional {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.booking-form .form-row .field {
+  flex: 1;
+}
+
+.booking-form .form-note {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 13px;
+  color: #8a867f;
+  line-height: 1.5;
+}
+
+.booking-form .form-note a {
+  border-bottom: 1px solid currentColor;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.contact-form .form-actions button {
+  align-self: auto;
+}
+
+.contact-form .booking-back {
+  background: none;
+  color: var(--seq-black);
+  border: 1px solid transparent;
+}
+
+.contact-form .booking-back:hover {
+  background: none;
+  border-color: #d6d1c8;
+}
+
+/* ---------- Étape 3 : confirmation ---------- */
+.bk-done {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 26px;
+}
+
+.done-check {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 16px;
+}
+
+.done-check path {
+  stroke-dasharray: 140;
+  stroke-dashoffset: 140;
+  animation: draw 0.9s 0.15s ease-out forwards;
+}
+
+.bk-done-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 23px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 14px;
+}
+
+.bk-done-text {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+.bk-done-text strong {
+  font-weight: 600;
+}
+
+/* ---------- Pied : alternative écrite ---------- */
+.booking-alt {
+  margin-top: 28px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #6f6c66;
+}
+
+.booking-alt a {
+  color: var(--seq-black);
+  border-bottom: 1px solid currentColor;
+}
+
+/* Bandeau prototype — à retirer une fois le script Google branché */
+.proto-flag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #b3564d;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+/* ---------- Tablette : créneaux sous le mois ---------- */
+@media (max-width: 1024px) {
+  .booking-card {
+    grid-template-columns: 260px 1fr;
+  }
+  .bk-slots[data-pane] {
+    grid-column: 2;
+    border-left: thin solid #d9d5ce;
+    border-top: thin solid #d9d5ce;
+  }
+  .slots-list {
+    max-height: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  }
+  .booking-card[data-step="form"] [data-pane="form"] { grid-column: 2; }
+  .booking-card[data-step="done"] [data-pane="done"] { grid-column: 1 / 3; }
+}
+
+/* ---------- Mobile : tout empilé ---------- */
+@media (max-width: 768px) {
+  .booking-page {
+    padding: 48px 1.1rem 60px;
+  }
+  .booking-card {
+    grid-template-columns: 1fr;
+  }
+  .booking-card > * {
+    padding: 22px 18px;
+  }
+  .booking-card > * + *,
+  .bk-slots[data-pane] {
+    grid-column: 1;
+    border-left: none;
+    border-top: thin solid #d9d5ce;
+  }
+  .booking-card[data-step="form"] [data-pane="form"],
+  .booking-card[data-step="done"] [data-pane="done"] { grid-column: 1; }
+  .bk-desc { margin-bottom: 18px; }
+  .cal-weekdays, .cal-days { gap: 4px; }
+  .booking-form .form-row { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking-card [data-pane] { animation: none; }
+  .done-check path,
+  .cal-day .day-circle path {
+    animation: none !important;
+    stroke-dashoffset: 0;
+  }
+}

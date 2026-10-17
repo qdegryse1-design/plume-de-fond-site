@@ -1,0 +1,253 @@
+/* =============================================
+   ACCUEIL — encart « prochain créneau » (prototype 2026-10-17)
+   Une page d'éphéméride qui renvoie au calendrier de réservation.
+   ============================================= */
+
+.rdv-teaser {
+  padding: 70px 3rem 80px;
+  text-align: center;
+}
+
+.rdv-teaser .mailing-title {
+  margin-bottom: 44px;
+}
+
+.rdv-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 56px;
+  text-align: left;
+  color: var(--seq-black);
+}
+
+/* ---------- La page d'éphéméride ---------- */
+.ephem {
+  position: relative;
+  flex: none;
+  width: 168px;
+  transform: rotate(-3deg);
+  transition: transform 0.45s cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+
+/* les pages du dessous, pour l'épaisseur du bloc */
+.ephem::before,
+.ephem::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #f4efe6;
+  border: thin solid #c9c4bb;
+  z-index: -1;
+}
+
+.ephem::before { transform: translate(4px, 4px) rotate(1.5deg); }
+.ephem::after  { transform: translate(8px, 8px) rotate(3deg); background: #eee8dd; }
+
+.ephem-top {
+  position: relative;
+  height: 40px;
+  background: var(--seq-black);
+  color: var(--seq-cream);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* deux œillets de reliure */
+.ephem-top::before,
+.ephem-top::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--seq-cream);
+}
+
+.ephem-top::before { left: 18px; }
+.ephem-top::after  { right: 18px; }
+
+.ephem-body {
+  position: relative;
+  background: #fffdf9;
+  border: thin solid #aeada9;
+  border-top: none;
+  padding: 18px 0 26px;
+  text-align: center;
+  box-shadow: 0 14px 28px -18px rgba(27, 25, 22, 0.35);
+  /* bord bas prédécoupé */
+  -webkit-mask: radial-gradient(circle 3px at 50% 100%, transparent 98%, #000) bottom / 10px 100% repeat-x;
+          mask: radial-gradient(circle 3px at 50% 100%, transparent 98%, #000) bottom / 10px 100% repeat-x;
+}
+
+.ephem-day {
+  position: relative;
+  display: inline-block;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 84px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  padding: 0 8px;
+}
+
+.ephem-day svg {
+  position: absolute;
+  left: -14px;
+  top: -6px;
+  width: calc(100% + 28px);
+  height: calc(100% + 12px);
+  pointer-events: none;
+  overflow: visible;
+}
+
+.ephem-day svg path {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+  transition: stroke-dashoffset 0.7s ease-out;
+}
+
+.ephem-weekday {
+  display: block;
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6f6c66;
+}
+
+/* ---------- Le texte ---------- */
+.rdv-text {
+  max-width: 330px;
+}
+
+.rdv-kicker {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6f6c66;
+  margin-bottom: 10px;
+}
+
+.rdv-kicker::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--seq-green);
+}
+
+.rdv-when {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.rdv-desc {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #3d3a35;
+  margin-bottom: 22px;
+}
+
+.rdv-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  background: var(--seq-black);
+  color: var(--seq-cream);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  transition: background 0.2s;
+}
+
+.rdv-cta span {
+  transition: transform 0.3s ease;
+}
+
+/* ---------- Survol / focus ----------
+   L'éphéméride ne bouge que si l'on survole l'éphéméride elle-même
+   ou le bouton ; le texte entre les deux reste inerte. */
+.ephem {
+  display: block;
+  color: var(--seq-black);
+}
+
+.rdv-link:has(.ephem:hover, .rdv-cta:hover, .rdv-cta:focus-visible) .ephem {
+  transform: rotate(0deg) translateY(-4px);
+}
+
+.rdv-link:has(.ephem:hover, .rdv-cta:hover, .rdv-cta:focus-visible) .ephem-day svg path {
+  stroke-dashoffset: 0;
+}
+
+.rdv-link:has(.ephem:hover, .rdv-cta:hover, .rdv-cta:focus-visible) .rdv-cta span {
+  transform: translateX(4px);
+}
+
+.rdv-cta:hover {
+  background: #32373c;
+}
+
+.rdv-cta:focus-visible {
+  outline: 1px dashed var(--seq-black);
+  outline-offset: 4px;
+}
+
+.rdv-teaser .booking-alt {
+  margin-top: 48px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #6f6c66;
+}
+
+.rdv-teaser .booking-alt a {
+  color: var(--seq-black);
+  border-bottom: 1px solid currentColor;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 768px) {
+  .rdv-teaser {
+    padding: 50px 1.1rem 60px;
+  }
+  .rdv-link {
+    flex-direction: column;
+    gap: 36px;
+    text-align: center;
+  }
+  .rdv-kicker {
+    justify-content: center;
+  }
+  /* pas de survol sur mobile : la date est entourée d'emblée */
+  .ephem-day svg path {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ephem,
+  .ephem-day svg path,
+  .rdv-cta span {
+    transition: none;
+  }
+}

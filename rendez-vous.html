@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prendre rendez-vous — Plume de fond</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="description" content="Réservez un premier échange de 30 minutes en visio.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Prendre rendez-vous — Plume de fond">
+  <meta property="og:description" content="Réservez un premier échange de 30 minutes en visio.">
+  <meta property="og:url" content="https://plumedefond.fr/rendez-vous.html">
+  <meta property="og:image" content="https://plumedefond.fr/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://plumedefond.fr/rendez-vous.html">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon-512x512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css?v=20260912i">
+  <link rel="stylesheet" href="booking.css?v=20261017e">
+  <meta name="robots" content="noindex, follow">
+</head>
+<body>
+
+  <div class="page-content">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Plume de fond — accueil">
+                <img class="logo-svg" src="logo-plume-de-fond.svg" alt="Plume de fond">
+      </a>
+      <ul class="nav-links">
+        <li><a href="vision.html">NOTRE VISION<svg class="pencil-circle" viewBox="0 0 200 70" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 120 5 C 160 3, 193 14, 191 32 C 189 50, 155 64, 100 65 C 45 66, 7 52, 6 34 C 5 16, 45 4, 110 3 C 155 2, 190 14, 188 32" stroke="#1b1916" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></a></li>
+        <li><a href="index.html#produits">NOS PRODUITS<svg class="pencil-circle" viewBox="0 0 200 70" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 120 5 C 160 3, 193 14, 191 32 C 189 50, 155 64, 100 65 C 45 66, 7 52, 6 34 C 5 16, 45 4, 110 3 C 155 2, 190 14, 188 32" stroke="#1b1916" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></a></li>
+        <li><a href="https://lettre.plumedefond.fr">LA LETTRE DE FOND<svg class="pencil-circle" viewBox="0 0 200 70" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 120 5 C 160 3, 193 14, 191 32 C 189 50, 155 64, 100 65 C 45 66, 7 52, 6 34 C 5 16, 45 4, 110 3 C 155 2, 190 14, 188 32" stroke="#1b1916" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- RENDEZ-VOUS -->
+  <section class="booking-page" id="rendez-vous">
+    <div class="booking-inner">
+
+      <p class="proto-flag">Maquette — créneaux fictifs</p>
+
+      <div class="booking-card" id="booking-card" data-step="pick">
+
+        <!-- Panneau gauche : qui, quoi, comment -->
+        <aside class="bk-info">
+          <img class="bk-avatar" src="portrait-quentin.jpg" alt="Quentin de Gryse" width="56" height="56">
+          <p class="bk-host">Quentin de Gryse</p>
+          <h1 class="bk-title">Premier échange</h1>
+          <p class="bk-desc">30 minutes pour parler de vos enjeux éditoriaux et voir comment Plume de fond peut porter votre voix.</p>
+          <ul class="bk-meta">
+            <li class="bk-recap" id="bk-recap" hidden>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="1"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>
+              <span id="bk-recap-text"></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.6V8l2.4 1.6"/></svg>
+              <span>30 min</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="4" width="9" height="8" rx="1"/><path d="M10.5 7l4-2.2v6.4l-4-2.2"/></svg>
+              <span>Google Meet</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4M8 1.8c1.8 1.8 2.6 3.9 2.6 6.2S9.8 12.4 8 14.2C6.2 12.4 5.4 10.3 5.4 8S6.2 3.6 8 1.8z"/></svg>
+              <label class="bk-tz">
+                <span class="visually-hidden">Fuseau horaire</span>
+                <select id="bk-tz"></select>
+              </label>
+            </li>
+          </ul>
+        </aside>
+
+        <!-- Centre : le mois -->
+        <div class="bk-cal" data-pane="pick">
+          <div class="cal-head">
+            <p class="cal-month" id="cal-month"></p>
+            <div class="cal-nav">
+              <button type="button" id="cal-prev" aria-label="Mois précédent">&lsaquo;</button>
+              <button type="button" id="cal-next" aria-label="Mois suivant">&rsaquo;</button>
+            </div>
+          </div>
+          <div class="cal-weekdays" aria-hidden="true">
+            <span>LUN</span><span>MAR</span><span>MER</span><span>JEU</span><span>VEN</span><span>SAM</span><span>DIM</span>
+          </div>
+          <div class="cal-days" id="cal-days"></div>
+        </div>
+
+        <!-- Droite : les créneaux du jour -->
+        <div class="bk-slots" data-pane="pick">
+          <p class="slots-day" id="slots-day"></p>
+          <div class="slots-list" id="slots-list"></div>
+        </div>
+
+        <!-- Étape 2 : coordonnées (remplace mois + créneaux) -->
+        <div class="bk-form" data-pane="form">
+          <form class="contact-form booking-form" id="booking-form" novalidate>
+            <div class="field">
+              <label class="field-label" for="f-nom">Nom complet</label>
+              <input type="text" id="f-nom" name="nom" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-email">Email professionnel</label>
+              <input type="email" id="f-email" name="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-societe">Société</label>
+              <input type="text" id="f-societe" name="societe" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-message">Ce dont vous aimeriez parler <span class="optional">(facultatif)</span></label>
+              <textarea id="f-message" name="message" rows="3"></textarea>
+            </div>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="form-note">Ces informations servent uniquement à préparer notre échange. <a href="confidentialite.html">Politique de confidentialité</a>.</p>
+            <div class="form-actions">
+              <button type="button" class="booking-back" id="back-to-pick">Retour</button>
+              <button type="submit" id="booking-submit">Confirmer</button>
+            </div>
+            <p class="form-status" id="booking-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <!-- Étape 3 : confirmation -->
+        <div class="bk-done" data-pane="done">
+          <svg class="done-check" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M 12 34 C 17 38, 22 44, 27 51 C 33 37, 43 22, 55 11" stroke="#00a071" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h2 class="bk-done-title">C'est noté.</h2>
+          <p class="bk-done-text" id="done-text"></p>
+        </div>
+
+      </div>
+
+      <p class="booking-alt">Vous préférez écrire&nbsp;? <a href="mailto:contact@plumedefond.fr">contact@plumedefond.fr</a></p>
+
+    </div>
+  </section>
+
+  </div><!-- fin .page-content -->
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <p class="footer-heading">L'ENTREPRISE</p>
+        <ul>
+          <li><a href="vision.html">Notre vision</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">LÉGAL</p>
+        <ul>
+          <li><a href="confidentialite.html">Politique de confidentialité</a></li>
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-col-logo">
+        <img class="footer-logo" src="logo-plume-de-fond-blanc.svg" alt="Plume de fond">
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Plume de fond. Tous droits reserves.</p>
+    </div>
+  </footer>
+
+
+  <script src="booking.js?v=20261017g"></script>
+  <!-- Cloudflare Web Analytics — mesure d'audience sans cookies -->
+  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "644f7a3778624fafaa6b0a6ad2f11ed3"}'></script>
+</body>
+</html>
