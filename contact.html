@@ -25,6 +25,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="stylesheet" href="style.css?v=20260912i">
+  <link rel="stylesheet" href="booking.css?v=20261017g">
 </head>
 <body>
 
@@ -44,22 +45,139 @@
     </div>
   </nav>
 
-  <!-- CONTACT -->
-  <section class="mailing mailing-page" id="contact">
-    <div class="mailing-inner">
-      <h2 class="mailing-title">Parlez-nous de vos enjeux.</h2>
-      <form class="contact-form" action="https://formspree.io/f/xlgqozzr" method="POST">
-        <div class="form-row">
-          <input type="text" name="prenom" placeholder="Prénom" required>
-          <input type="text" name="nom" placeholder="Nom" required>
+
+  <!-- RENDEZ-VOUS -->
+  <section class="booking-page" id="rendez-vous">
+    <div class="booking-inner">
+
+      <div class="booking-card" id="booking-card" data-step="pick">
+
+        <!-- Panneau gauche : qui, quoi, comment -->
+        <aside class="bk-info">
+          <img class="bk-avatar" src="portrait-quentin.jpg" alt="Quentin de Gryse" width="56" height="56">
+          <p class="bk-host">Quentin de Gryse</p>
+          <h1 class="bk-title">Premier échange</h1>
+          <p class="bk-desc">30 minutes pour parler de vos enjeux éditoriaux et voir comment Plume de fond peut porter votre voix.</p>
+          <ul class="bk-meta">
+            <li class="bk-recap" id="bk-recap" hidden>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="1"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>
+              <span id="bk-recap-text"></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.6V8l2.4 1.6"/></svg>
+              <span>30 min</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="4" width="9" height="8" rx="1"/><path d="M10.5 7l4-2.2v6.4l-4-2.2"/></svg>
+              <span>Google Meet</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4M8 1.8c1.8 1.8 2.6 3.9 2.6 6.2S9.8 12.4 8 14.2C6.2 12.4 5.4 10.3 5.4 8S6.2 3.6 8 1.8z"/></svg>
+              <label class="bk-tz">
+                <span class="visually-hidden">Fuseau horaire</span>
+                <select id="bk-tz"></select>
+              </label>
+            </li>
+          </ul>
+          <button type="button" class="bk-back" id="bk-back-manage" hidden>&larr; Retour à mon rendez-vous</button>
+        </aside>
+
+        <!-- Centre : le mois -->
+        <div class="bk-cal" data-pane="pick">
+          <div class="cal-head">
+            <p class="cal-month" id="cal-month"></p>
+            <div class="cal-nav">
+              <button type="button" id="cal-prev" aria-label="Mois précédent">&lsaquo;</button>
+              <button type="button" id="cal-next" aria-label="Mois suivant">&rsaquo;</button>
+            </div>
+          </div>
+          <div class="cal-weekdays" aria-hidden="true">
+            <span>LUN</span><span>MAR</span><span>MER</span><span>JEU</span><span>VEN</span><span>SAM</span><span>DIM</span>
+          </div>
+          <div class="cal-days" id="cal-days"></div>
         </div>
-        <input type="email" name="email" placeholder="Email" required>
-        <textarea name="message" placeholder="Votre message" rows="4" required></textarea>
-        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input type="hidden" name="_subject" value="Nouveau message via plumedefond.fr">
-        <button type="submit">Envoyer</button>
-        <p class="form-status" role="status" aria-live="polite"></p>
-      </form>
+
+        <!-- Droite : les créneaux du jour -->
+        <div class="bk-slots" data-pane="pick">
+          <p class="slots-day" id="slots-day"></p>
+          <div class="slots-list" id="slots-list"></div>
+        </div>
+
+        <!-- Étape 2 : coordonnées (remplace mois + créneaux) -->
+        <div class="bk-form" data-pane="form">
+          <form class="contact-form booking-form" id="booking-form" novalidate>
+            <div class="field">
+              <label class="field-label" for="f-nom">Nom complet</label>
+              <input type="text" id="f-nom" name="nom" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-email">Email professionnel</label>
+              <input type="email" id="f-email" name="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-societe">Société</label>
+              <input type="text" id="f-societe" name="societe" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-message">Ce dont vous aimeriez parler <span class="optional">(facultatif)</span></label>
+              <textarea id="f-message" name="message" rows="3"></textarea>
+            </div>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="form-note">Ces informations servent uniquement à préparer notre échange. <a href="confidentialite.html">Politique de confidentialité</a>.</p>
+            <div class="form-actions">
+              <button type="button" class="booking-back" id="back-to-pick">Retour</button>
+              <button type="submit" id="booking-submit">Confirmer</button>
+            </div>
+            <p class="form-status" id="booking-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <!-- Gérer un rendez-vous (lien ?gerer=… de l'invitation) -->
+        <div class="bk-manage" data-pane="manage">
+          <p class="bk-kicker" id="mg-kicker">Votre rendez-vous</p>
+          <p class="bk-manage-when" id="mg-when">Chargement…</p>
+          <p class="bk-manage-sub" id="mg-sub"></p>
+          <div class="bk-actions" id="mg-actions" hidden>
+            <button type="button" class="bk-btn bk-btn-ghost" id="mg-cancel">Annuler le rendez-vous</button>
+            <button type="button" class="bk-btn" id="mg-move">Choisir un autre créneau</button>
+          </div>
+          <div class="bk-confirm" id="mg-confirm" hidden>
+            <p>Annuler ce rendez-vous&nbsp;? Le créneau sera libéré.</p>
+            <div class="bk-actions">
+              <button type="button" class="bk-btn bk-btn-ghost" id="mg-keep">Garder le rendez-vous</button>
+              <button type="button" class="bk-btn" id="mg-cancel-ok">Confirmer l'annulation</button>
+            </div>
+          </div>
+          <div class="bk-actions" id="mg-new" hidden>
+            <button type="button" class="bk-btn" id="mg-book">Réserver un créneau</button>
+          </div>
+          <p class="form-status" id="mg-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <!-- Confirmer le déplacement -->
+        <div class="bk-manage" data-pane="move">
+          <p class="bk-kicker">Nouveau créneau</p>
+          <p class="bk-manage-when" id="mv-when"></p>
+          <p class="bk-manage-sub" id="mv-old"></p>
+          <div class="bk-actions">
+            <button type="button" class="bk-btn bk-btn-ghost" id="mv-back">Retour</button>
+            <button type="button" class="bk-btn" id="mv-ok">Confirmer le déplacement</button>
+          </div>
+          <p class="form-status" id="mv-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <!-- Étape 3 : confirmation -->
+        <div class="bk-done" data-pane="done">
+          <svg class="done-check" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M 12 34 C 17 38, 22 44, 27 51 C 33 37, 43 22, 55 11" stroke="#00a071" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h2 class="bk-done-title" id="done-title">C'est noté.</h2>
+          <p class="bk-done-text" id="done-text"></p>
+          <a class="bk-done-link" id="done-link" href="#" hidden></a>
+        </div>
+
+      </div>
+
+      <p class="booking-alt">Vous préférez écrire&nbsp;? <a href="mailto:contact@plumedefond.fr">contact@plumedefond.fr</a></p>
+
     </div>
   </section>
 
@@ -92,38 +210,7 @@
   </footer>
 
 
-  <script>
-    (function() {
-      document.querySelectorAll('.contact-form').forEach(function(form) {
-        var status = form.querySelector('.form-status');
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          var btn = form.querySelector('button[type="submit"]');
-          btn.disabled = true;
-          var label = btn.textContent;
-          btn.textContent = 'Envoi\u2026';
-          status.textContent = '';
-          status.classList.remove('ok', 'err');
-          fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
-          }).then(function(r) {
-            if (!r.ok) throw new Error();
-            form.reset();
-            status.textContent = 'Message bien envoy\u00e9, nous vous r\u00e9pondrons rapidement.';
-            status.classList.add('ok');
-          }).catch(function() {
-            status.textContent = "L'envoi a \u00e9chou\u00e9 : \u00e9crivez-nous directement \u00e0 contact@plumedefond.fr";
-            status.classList.add('err');
-          }).finally(function() {
-            btn.disabled = false;
-            btn.textContent = label;
-          });
-        });
-      });
-    })();
-  </script>
+  <script src="booking.js?v=20261017l"></script>
   <!-- Cloudflare Web Analytics — mesure d'audience sans cookies -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "644f7a3778624fafaa6b0a6ad2f11ed3"}'></script>
 </body>

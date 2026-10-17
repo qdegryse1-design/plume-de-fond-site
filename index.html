@@ -50,6 +50,7 @@
   }
   </script>
   <link rel="stylesheet" href="style.css?v=20260912i">
+  <link rel="stylesheet" href="rdv-teaser.css?v=20261017c">
 </head>
 <body>
 
@@ -311,23 +312,25 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section class="mailing" id="contact">
-    <div class="mailing-inner">
-      <h2 class="mailing-title">Parlez-nous de vos enjeux.</h2>
-      <form class="contact-form" action="https://formspree.io/f/xlgqozzr" method="POST">
-        <div class="form-row">
-          <input type="text" name="prenom" placeholder="Prénom" required>
-          <input type="text" name="nom" placeholder="Nom" required>
+  <!-- RENDEZ-VOUS : prochain créneau, renvoie au calendrier -->
+  <section class="rdv-teaser" id="contact">
+    <h2 class="mailing-title">Parlez-nous de vos enjeux.</h2>
+    <div class="rdv-link">
+      <a class="ephem" href="contact.html" tabindex="-1" aria-hidden="true">
+        <div class="ephem-top" id="ephem-month">&nbsp;</div>
+        <div class="ephem-body">
+          <span class="ephem-day"><span id="ephem-day">&nbsp;</span><svg viewBox="0 0 100 100" preserveAspectRatio="none" fill="none"><path d="M 60 7 C 84 9, 95 29, 93 52 C 91 77, 71 93, 47 92 C 23 91, 6 73, 7 48 C 8 24, 28 6, 54 7 C 75 8, 90 20, 93 37" stroke="#1b1916" stroke-width="2.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span>
+          <span class="ephem-weekday" id="ephem-weekday">&nbsp;</span>
         </div>
-        <input type="email" name="email" placeholder="Email" required>
-        <textarea name="message" placeholder="Votre message" rows="4" required></textarea>
-        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input type="hidden" name="_subject" value="Nouveau message via plumedefond.fr">
-        <button type="submit">Envoyer</button>
-        <p class="form-status" role="status" aria-live="polite"></p>
-      </form>
+      </a>
+      <div class="rdv-text">
+        <p class="rdv-kicker">Prochain créneau libre</p>
+        <p class="rdv-when" id="rdv-when">Cette semaine</p>
+        <p class="rdv-desc">30 minutes en visio pour parler de vos enjeux éditoriaux.</p>
+        <a class="rdv-cta" href="contact.html">Choisir un créneau <span>&rarr;</span></a>
+      </div>
     </div>
+    <p class="booking-alt">Vous préférez écrire&nbsp;? <a href="mailto:contact@plumedefond.fr">contact@plumedefond.fr</a></p>
   </section>
 
   </div><!-- fin .page-content -->
@@ -515,35 +518,23 @@
   </script>
 
   <script>
-    (function() {
-      document.querySelectorAll('.contact-form').forEach(function(form) {
-        var status = form.querySelector('.form-status');
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          var btn = form.querySelector('button[type="submit"]');
-          btn.disabled = true;
-          var label = btn.textContent;
-          btn.textContent = 'Envoi\u2026';
-          status.textContent = '';
-          status.classList.remove('ok', 'err');
-          fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
-          }).then(function(r) {
-            if (!r.ok) throw new Error();
-            form.reset();
-            status.textContent = 'Message bien envoy\u00e9, nous vous r\u00e9pondrons rapidement.';
-            status.classList.add('ok');
-          }).catch(function() {
-            status.textContent = "L'envoi a \u00e9chou\u00e9 : \u00e9crivez-nous directement \u00e0 contact@plumedefond.fr";
-            status.classList.add('err');
-          }).finally(function() {
-            btn.disabled = false;
-            btn.textContent = label;
-          });
-        });
-      });
+    /* Encart rendez-vous : prochain créneau libre, lu dans l'agenda via le script Google */
+    (function () {
+      var API = 'https://script.google.com/macros/s/AKfycbwfMoLPtZhw1kXOJY0xhHMCHxvwxjo75_sG-w1Y0-yUzWbkKQZiazSJHcHFJKQj6PdSKg/exec';
+      var TZ = 'Europe/Paris';
+      fetch(API + '?action=slots').then(function (r) { return r.json(); }).then(function (d) {
+        if (!d.slots || !d.slots.length) return;
+        var next = new Date(d.slots[0]);
+        var f = function (o) { return new Intl.DateTimeFormat('fr-FR', Object.assign({ timeZone: TZ }, o)).format(next); };
+        var hm = f({ hour: 'numeric', minute: '2-digit', hour12: false }).split(':');
+        document.getElementById('ephem-month').textContent = f({ month: 'long' });
+        document.getElementById('ephem-day').textContent = f({ day: 'numeric' });
+        document.getElementById('ephem-weekday').textContent = f({ weekday: 'long' });
+        var w = f({ weekday: 'long', day: 'numeric', month: 'long' });
+        document.getElementById('rdv-when').textContent = w.charAt(0).toUpperCase() + w.slice(1) + ', ' + (+hm[0]) + 'h' + hm[1];
+        var url = 'contact.html?jour=' + new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(next);
+        document.querySelectorAll('.rdv-link a').forEach(function (a) { a.href = url; });
+      }).catch(function () { /* l'encart garde son texte par défaut et renvoie au calendrier */ });
     })();
   </script>
   <!-- Cloudflare Web Analytics — mesure d'audience sans cookies -->

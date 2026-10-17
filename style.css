@@ -2030,3 +2030,32 @@ ul {
 .vision-signature .signature-line a {
   background-image: none;
 }
+
+
+/* =============================================
+   VISION — lien « Prendre rendez-vous » sous la signature (2026-10-17)
+   ============================================= */
+.vision-rdv {
+  margin-top: 34px;
+}
+
+.vision-rdv a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--seq-black);
+  padding-bottom: 4px;
+  border-bottom: 1px solid currentColor;
+}
+
+.vision-rdv a span {
+  transition: transform 0.3s ease;
+}
+
+.vision-rdv a:hover span {
+  transform: translateX(4px);
+}
