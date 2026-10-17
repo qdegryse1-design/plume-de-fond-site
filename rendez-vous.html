@@ -25,7 +25,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="stylesheet" href="style.css?v=20260912i">
-  <link rel="stylesheet" href="booking.css?v=20261017e">
+  <link rel="stylesheet" href="booking.css?v=20261017f">
   <meta name="robots" content="noindex, follow">
 </head>
 <body>
@@ -50,8 +50,6 @@
   <!-- RENDEZ-VOUS -->
   <section class="booking-page" id="rendez-vous">
     <div class="booking-inner">
-
-      <p class="proto-flag">Maquette — créneaux fictifs</p>
 
       <div class="booking-card" id="booking-card" data-step="pick">
 
@@ -134,11 +132,46 @@
           </form>
         </div>
 
+        <!-- Gérer un rendez-vous (lien ?gerer=… de l'invitation) -->
+        <div class="bk-manage" data-pane="manage">
+          <p class="bk-kicker" id="mg-kicker">Votre rendez-vous</p>
+          <p class="bk-manage-when" id="mg-when">Chargement…</p>
+          <p class="bk-manage-sub" id="mg-sub"></p>
+          <div class="bk-actions" id="mg-actions" hidden>
+            <button type="button" class="bk-btn bk-btn-ghost" id="mg-cancel">Annuler le rendez-vous</button>
+            <button type="button" class="bk-btn" id="mg-move">Choisir un autre créneau</button>
+          </div>
+          <div class="bk-confirm" id="mg-confirm" hidden>
+            <p>Annuler ce rendez-vous&nbsp;? Le créneau sera libéré.</p>
+            <div class="bk-actions">
+              <button type="button" class="bk-btn bk-btn-ghost" id="mg-keep">Garder le rendez-vous</button>
+              <button type="button" class="bk-btn" id="mg-cancel-ok">Confirmer l'annulation</button>
+            </div>
+          </div>
+          <div class="bk-actions" id="mg-new" hidden>
+            <button type="button" class="bk-btn" id="mg-book">Réserver un créneau</button>
+          </div>
+          <p class="form-status" id="mg-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <!-- Confirmer le déplacement -->
+        <div class="bk-manage" data-pane="move">
+          <p class="bk-kicker">Nouveau créneau</p>
+          <p class="bk-manage-when" id="mv-when"></p>
+          <p class="bk-manage-sub" id="mv-old"></p>
+          <div class="bk-actions">
+            <button type="button" class="bk-btn bk-btn-ghost" id="mv-back">Retour</button>
+            <button type="button" class="bk-btn" id="mv-ok">Confirmer le déplacement</button>
+          </div>
+          <p class="form-status" id="mv-status" role="status" aria-live="polite"></p>
+        </div>
+
         <!-- Étape 3 : confirmation -->
         <div class="bk-done" data-pane="done">
           <svg class="done-check" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M 12 34 C 17 38, 22 44, 27 51 C 33 37, 43 22, 55 11" stroke="#00a071" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <h2 class="bk-done-title">C'est noté.</h2>
+          <h2 class="bk-done-title" id="done-title">C'est noté.</h2>
           <p class="bk-done-text" id="done-text"></p>
+          <a class="bk-done-link" id="done-link" href="#" hidden></a>
         </div>
 
       </div>
@@ -177,7 +210,7 @@
   </footer>
 
 
-  <script src="booking.js?v=20261017g"></script>
+  <script src="booking.js?v=20261017i"></script>
   <!-- Cloudflare Web Analytics — mesure d'audience sans cookies -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "644f7a3778624fafaa6b0a6ad2f11ed3"}'></script>
 </body>

@@ -551,40 +551,23 @@
     })();
   </script>
   <script>
-    /* Encart rendez-vous : prochain créneau libre (maquette — même règle que booking.js,
-       à remplacer par l'appel au script Google) */
+    /* Encart rendez-vous : prochain créneau libre, lu dans l'agenda via le script Google */
     (function () {
-      var TZ = 'Europe/Paris', PLAGES = { 2: [[14, 18]], 3: [[10, 12]], 4: [[14, 18]] };
-      function off(d) {
-        var o = {};
-        new Intl.DateTimeFormat('en-US', { timeZone: TZ, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })
-          .formatToParts(d).forEach(function (p) { o[p.type] = p.value; });
-        return (Date.UTC(+o.year, o.month - 1, +o.day, o.hour % 24, +o.minute, +o.second) - d.getTime()) / 60000;
-      }
-      var today = new Date(new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(new Date()) + 'T00:00:00Z');
-      var found = null;
-      for (var i = 0; i <= 42 && !found; i++) {
-        var d = new Date(today.getTime() + i * 86400000);
-        (PLAGES[d.getUTCDay()] || []).forEach(function (r) {
-          for (var min = r[0] * 60; min + 30 <= r[1] * 60 && !found; min += 30) {
-            var g = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), Math.floor(min / 60), min % 60);
-            var start = new Date(g - off(new Date(g)) * 60000);
-            if (start - Date.now() < 24 * 3600000) continue;
-            if ((d.getUTCDate() * 7 + min / 30) % 3 === 0) continue;
-            found = { day: d, min: min };
-          }
-        });
-      }
-      if (!found) return;
-      var f = function (o) { return new Intl.DateTimeFormat('fr-FR', Object.assign({ timeZone: 'UTC' }, o)).format(found.day); };
-      var h = Math.floor(found.min / 60) + '\u00a0h\u00a0' + String(found.min % 60).padStart(2, '0');
-      document.getElementById('ephem-month').textContent = f({ month: 'long' });
-      document.getElementById('ephem-day').textContent = found.day.getUTCDate();
-      document.getElementById('ephem-weekday').textContent = f({ weekday: 'long' });
-      var w = f({ weekday: 'long', day: 'numeric', month: 'long' });
-      document.getElementById('rdv-when').textContent = w.charAt(0).toUpperCase() + w.slice(1) + ', ' + h;
-      var url = 'rendez-vous.html?jour=' + found.day.toISOString().slice(0, 10);
-      document.querySelectorAll('.rdv-link a').forEach(function (a) { a.href = url; });
+      var API = 'https://script.google.com/macros/s/AKfycbwfMoLPtZhw1kXOJY0xhHMCHxvwxjo75_sG-w1Y0-yUzWbkKQZiazSJHcHFJKQj6PdSKg/exec';
+      var TZ = 'Europe/Paris';
+      fetch(API + '?action=slots').then(function (r) { return r.json(); }).then(function (d) {
+        if (!d.slots || !d.slots.length) return;
+        var next = new Date(d.slots[0]);
+        var f = function (o) { return new Intl.DateTimeFormat('fr-FR', Object.assign({ timeZone: TZ }, o)).format(next); };
+        var hm = f({ hour: 'numeric', minute: '2-digit', hour12: false }).split(':');
+        document.getElementById('ephem-month').textContent = f({ month: 'long' });
+        document.getElementById('ephem-day').textContent = f({ day: 'numeric' });
+        document.getElementById('ephem-weekday').textContent = f({ weekday: 'long' });
+        var w = f({ weekday: 'long', day: 'numeric', month: 'long' });
+        document.getElementById('rdv-when').textContent = w.charAt(0).toUpperCase() + w.slice(1) + ', ' + (+hm[0]) + '\u00a0h\u00a0' + hm[1];
+        var url = 'rendez-vous.html?jour=' + new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(next);
+        document.querySelectorAll('.rdv-link a').forEach(function (a) { a.href = url; });
+      }).catch(function () { /* l'encart garde son texte par défaut et renvoie au calendrier */ });
     })();
   </script>
   <!-- Cloudflare Web Analytics — mesure d'audience sans cookies -->

@@ -1,13 +1,14 @@
 /* =============================================
-   RENDEZ-VOUS — logique de réservation (prototype 2026-10-17)
-   Les créneaux viennent de fetchSlots() / bookSlot() : pour l'instant
-   une maquette locale, à remplacer par l'appel au script Google.
+   RENDEZ-VOUS — logique de réservation
+   Les créneaux et la réservation passent par le script Google Apps Script
+   du compte quentin@plumedefond.fr (dossier ~/plume-de-fond-rdv) :
+   il lit l'agenda Google pro + les agendas iCloud publiés.
    ============================================= */
 (function () {
   var HOST_TZ = 'Europe/Paris'; // fuseau de l'agenda
   var DURATION = 30;            // minutes
-  var DAYS_AHEAD = 42;          // horizon de réservation
-  var MIN_NOTICE_H = 24;        // délai minimum avant un créneau
+  var DAYS_AHEAD = 42;          // horizon de réservation (le script fait foi)
+  var API = 'https://script.google.com/macros/s/AKfycbwfMoLPtZhw1kXOJY0xhHMCHxvwxjo75_sG-w1Y0-yUzWbkKQZiazSJHcHFJKQj6PdSKg/exec';
 
   var ZONES = [
     ['Europe/Paris', 'Paris'],
@@ -21,21 +22,6 @@
   ];
 
   /* ---------- Fuseaux ---------- */
-  function tzOffsetMin(date, tz) {
-    var o = {};
-    new Intl.DateTimeFormat('en-US', {
-      timeZone: tz, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit',
-      hour: '2-digit', minute: '2-digit', second: '2-digit'
-    }).formatToParts(date).forEach(function (p) { o[p.type] = p.value; });
-    var asUTC = Date.UTC(+o.year, o.month - 1, +o.day, o.hour % 24, +o.minute, +o.second);
-    return (asUTC - date.getTime()) / 60000;
-  }
-
-  function wallTime(tz, y, m, d, h, mi) {
-    var guess = Date.UTC(y, m, d, h, mi);
-    return new Date(guess - tzOffsetMin(new Date(guess), tz) * 60000);
-  }
-
   function dayKey(date, tz) {
     return new Intl.DateTimeFormat('en-CA', { timeZone: tz }).format(date);
   }
@@ -59,30 +45,31 @@
 
   function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
-  /* ---------- Source des créneaux (maquette) ---------- */
-  // Plages fictives, heure de Paris : mardi et jeudi 14 h–18 h, mercredi 10 h–12 h.
-  var PLAGES = { 2: [[14, 18]], 3: [[10, 12]], 4: [[14, 18]] };
-
+  /* ---------- Script Google ---------- */
   function fetchSlots() {
-    var now = Date.now();
-    var today = keyToUTC(dayKey(new Date(), HOST_TZ));
-    var slots = [];
-    for (var i = 0; i <= DAYS_AHEAD; i++) {
-      var d = new Date(today.getTime() + i * 86400000);
-      (PLAGES[d.getUTCDay()] || []).forEach(function (r) {
-        for (var min = r[0] * 60; min + DURATION <= r[1] * 60; min += DURATION) {
-          var start = wallTime(HOST_TZ, d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), Math.floor(min / 60), min % 60);
-          if (start.getTime() - now < MIN_NOTICE_H * 3600000) continue;
-          if ((d.getUTCDate() * 7 + min / 30) % 3 === 0) continue; // agenda fictif : un créneau sur trois pris
-          slots.push(start);
-        }
-      });
-    }
-    return new Promise(function (resolve) { setTimeout(function () { resolve(slots); }, 250); });
+    return fetch(API + '?action=slots' + (token ? '&token=' + token : ''))
+      .then(function (r) { return r.json(); })
+      .then(function (d) { return (d.slots || []).map(function (x) { return new Date(x); }); });
+  }
+
+  // text/plain : évite la requête préalable CORS, que le script Google ne gère pas
+  function post(body) {
+    return fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(body)
+    }).then(function (r) { return r.json(); }).then(function (res) {
+      if (!res.ok) { var err = new Error(res.error || 'erreur'); err.code = res.error; throw err; }
+      return res;
+    });
   }
 
   function bookSlot(slot, data) {
-    return new Promise(function (resolve) { setTimeout(resolve, 700); });
+    return post(Object.assign({}, data, { action: 'book', start: slot.toISOString() }));
+  }
+
+  function fetchBooking() {
+    return fetch(API + '?action=booking&token=' + token).then(function (r) { return r.json(); });
   }
 
   /* ---------- État ---------- */
@@ -92,6 +79,11 @@
   var selectedDay = null;
   var selectedSlot = null;
   var viewY, viewM, minYM, maxYM;
+  // ?gerer=<jeton> : lien « déplacer ou annuler » de l'invitation
+  var token = (new URLSearchParams(location.search).get('gerer') || '').toLowerCase();
+  if (!/^[a-f0-9]{32}$/.test(token)) token = '';
+  var mode = token ? 'move' : 'book';
+  var booking = null;      // { start: Date, end: Date } du rendez-vous géré
 
   var $ = function (id) { return document.getElementById(id); };
   var card = $('booking-card');
@@ -105,7 +97,12 @@
 
   function show(step) {
     card.dataset.step = step;
-    $('bk-recap').hidden = (step === 'pick');
+    if (mode === 'move') {
+      $('bk-recap').hidden = !booking || step === 'done';
+      if (booking) $('bk-recap-text').textContent = rangeText(booking.start);
+    } else {
+      $('bk-recap').hidden = (step === 'pick' || step === 'manage');
+    }
   }
 
   function ym(y, m) { return y * 12 + m; }
@@ -182,16 +179,36 @@
     });
   }
 
-  function recapText() {
-    var end = new Date(selectedSlot.getTime() + DURATION * 60000);
-    return cap(fmtDayLong.format(keyToUTC(selectedDay))) + ', ' + fmtTime(selectedSlot, tz) + ' – ' + fmtTime(end, tz);
+  function rangeText(start) {
+    var end = new Date(start.getTime() + DURATION * 60000);
+    return cap(fmtDayLong.format(keyToUTC(dayKey(start, tz)))) + ', ' + fmtTime(start, tz) + ' – ' + fmtTime(end, tz);
   }
+
+  function recapText() { return rangeText(selectedSlot); }
 
   function pickSlot(s) {
     selectedSlot = s;
+    if (mode === 'move') {
+      $('mv-when').textContent = rangeText(s);
+      $('mv-old').textContent = 'Au lieu du ' + rangeText(booking.start).replace(/^./, function (c) { return c.toLowerCase(); }) + '.';
+      $('mv-status').textContent = '';
+      show('move');
+      return;
+    }
     $('bk-recap-text').textContent = recapText();
     show('form');
     $('f-nom').focus({ preventScroll: true });
+  }
+
+  function done(title, text, link) {
+    $('done-title').textContent = title;
+    var t = $('done-text');
+    t.textContent = '';
+    t.append.apply(t, text);
+    var a = $('done-link');
+    a.hidden = !link;
+    if (link) { a.href = link.href; a.textContent = link.label; }
+    show('done');
   }
 
   elDays.addEventListener('click', function (e) {
@@ -217,20 +234,99 @@
     btn.disabled = true;
     btn.textContent = 'Réservation…';
     status.textContent = '';
-    bookSlot(selectedSlot, data).then(function () {
-      var t = $('done-text');
-      t.textContent = '';
+    bookSlot(selectedSlot, data).then(function (res) {
       var strong = document.createElement('strong');
       strong.textContent = data.email;
-      t.append(recapText() + '. L’invitation Google Meet arrive à ', strong, '.');
-      show('done');
-    }).catch(function () {
-      status.textContent = 'Ce créneau vient d’être pris — choisissez-en un autre.';
+      done('C’est noté.', [recapText() + '. L’invitation Google Meet arrive à ', strong, '.'],
+        res.token ? { href: '?gerer=' + res.token, label: 'Déplacer ou annuler ce rendez-vous' } : null);
+    }).catch(function (err) {
+      if (err.code === 'creneau pris') {
+        status.textContent = 'Ce créneau vient d’être pris — choisissez-en un autre.';
+        loadSlots(); // on rafraîchit les disponibilités
+      } else {
+        status.textContent = 'La réservation n’a pas abouti. Réessayez, ou écrivez-nous à contact@plumedefond.fr';
+      }
       status.classList.add('err');
     }).finally(function () {
       btn.disabled = false;
       btn.textContent = 'Confirmer';
     });
+  });
+
+  /* ---------- Gérer un rendez-vous ---------- */
+  function manageMessage(kicker, when, sub) {
+    $('mg-kicker').textContent = kicker;
+    $('mg-when').textContent = when;
+    $('mg-sub').textContent = sub;
+    $('mg-actions').hidden = true;
+    $('mg-confirm').hidden = true;
+    $('mg-new').hidden = false;
+  }
+
+  function loadBooking() {
+    show('manage');
+    fetchBooking().then(function (b) {
+      if (!b.ok) return manageMessage('Lien invalide', 'Ce rendez-vous est introuvable.', 'Le lien a peut-être expiré. Vous pouvez réserver un nouveau créneau.');
+      if (b.status === 'cancelled') return manageMessage('Rendez-vous annulé', 'Ce rendez-vous a été annulé.', 'Vous pouvez réserver un nouveau créneau quand vous le souhaitez.');
+      booking = { start: new Date(b.start), end: new Date(b.end) };
+      if (b.status === 'past') return manageMessage('Rendez-vous passé', rangeText(booking.start), 'Ce rendez-vous a déjà eu lieu. Vous pouvez en réserver un nouveau.');
+      $('mg-when').textContent = rangeText(booking.start);
+      $('mg-sub').textContent = 'Visio Google Meet' + (b.nom ? ' — ' + b.nom + (b.societe ? ', ' + b.societe : '') : '') + '. Le lien de la visio figure dans votre invitation.';
+      $('mg-actions').hidden = false;
+      show('manage');
+    }).catch(function () {
+      manageMessage('Erreur', 'Le rendez-vous n’a pas pu être chargé.', 'Rechargez la page, ou écrivez-nous à contact@plumedefond.fr.');
+    });
+  }
+
+  function newBooking() {
+    mode = 'book';
+    token = '';
+    booking = null;
+    history.replaceState(null, '', location.pathname);
+    show('pick');
+    loadSlots();
+  }
+
+  function busy(btn, label) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = label; }
+  function idle(btn) { btn.disabled = false; btn.textContent = btn.dataset.label; }
+
+  $('mg-move').addEventListener('click', function () { show('pick'); });
+  $('mg-cancel').addEventListener('click', function () { $('mg-actions').hidden = true; $('mg-confirm').hidden = false; });
+  $('mg-keep').addEventListener('click', function () { $('mg-confirm').hidden = true; $('mg-actions').hidden = false; });
+  $('mg-book').addEventListener('click', newBooking);
+  $('mv-back').addEventListener('click', function () { show('pick'); });
+
+  $('mg-cancel-ok').addEventListener('click', function () {
+    var btn = this, status = $('mg-status');
+    busy(btn, 'Annulation…');
+    status.textContent = '';
+    post({ action: 'cancel', token: token }).then(function () {
+      done('Rendez-vous annulé.', ['Le créneau du ' + rangeText(booking.start).replace(/^./, function (c) { return c.toLowerCase(); }) + ' est libéré. Au plaisir d’échanger une prochaine fois.'],
+        { href: location.pathname, label: 'Réserver un autre créneau' });
+    }).catch(function () {
+      status.textContent = 'L’annulation n’a pas abouti. Réessayez, ou écrivez-nous à contact@plumedefond.fr';
+      status.classList.add('err');
+    }).finally(function () { idle(btn); });
+  });
+
+  $('mv-ok').addEventListener('click', function () {
+    var btn = this, status = $('mv-status');
+    busy(btn, 'Déplacement…');
+    status.textContent = '';
+    status.classList.remove('err');
+    post({ action: 'move', token: token, start: selectedSlot.toISOString() }).then(function () {
+      booking = { start: selectedSlot, end: new Date(selectedSlot.getTime() + DURATION * 60000) };
+      done('Rendez-vous déplacé.', [rangeText(selectedSlot) + '. L’invitation mise à jour arrive dans votre boîte mail ; le lien de la visio ne change pas.'],
+        { href: '?gerer=' + token, label: 'Déplacer ou annuler ce rendez-vous' });
+      loadSlots();
+    }).catch(function (err) {
+      status.textContent = err.code === 'creneau pris'
+        ? 'Ce créneau vient d’être pris — choisissez-en un autre.'
+        : 'Le déplacement n’a pas abouti. Réessayez, ou écrivez-nous à contact@plumedefond.fr';
+      status.classList.add('err');
+      if (err.code === 'creneau pris') loadSlots();
+    }).finally(function () { idle(btn); });
   });
 
   /* ---------- Démarrage ---------- */
@@ -242,11 +338,18 @@
   renderMonth();
   elSlotsDay.textContent = 'Chargement…';
 
-  fetchSlots().then(function (list) {
-    slots = list;
-    groupSlots();
-    // ?jour=AAAA-MM-JJ : jour présélectionné depuis l'encart de l'accueil
-    var asked = new URLSearchParams(location.search).get('jour');
-    selectDay(byDay[asked] ? asked : Object.keys(byDay).sort()[0]);
-  });
+  function loadSlots() {
+    return fetchSlots().then(function (list) {
+      slots = list;
+      groupSlots();
+      // ?jour=AAAA-MM-JJ : jour présélectionné depuis l'encart de l'accueil
+      var asked = selectedDay || new URLSearchParams(location.search).get('jour');
+      selectDay(byDay[asked] ? asked : Object.keys(byDay).sort()[0]);
+    }).catch(function () {
+      elSlotsDay.textContent = '';
+      elSlots.innerHTML = '<p class="slots-empty">Les disponibilités n’ont pas pu être chargées. Rechargez la page, ou écrivez-nous à <a href="mailto:contact@plumedefond.fr">contact@plumedefond.fr</a>.</p>';
+    });
+  }
+  if (token) loadBooking();
+  loadSlots();
 })();

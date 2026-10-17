@@ -43,7 +43,9 @@
 /* une étape à la fois */
 .booking-card [data-pane] { display: none; }
 .booking-card[data-step="pick"] [data-pane="pick"] { display: block; }
-.booking-card[data-step="form"] [data-pane="form"] { display: block; grid-column: 2 / 4; }
+.booking-card[data-step="form"] [data-pane="form"],
+.booking-card[data-step="manage"] [data-pane="manage"],
+.booking-card[data-step="move"] [data-pane="move"] { display: block; grid-column: 2 / 4; }
 .booking-card[data-step="done"] [data-pane="done"] { display: flex; grid-column: 1 / 4; }
 .booking-card[data-step="done"] .bk-info { display: none; }
 
@@ -400,6 +402,103 @@
   border-color: #d6d1c8;
 }
 
+/* ---------- Gérer / déplacer un rendez-vous ---------- */
+.bk-manage {
+  padding-top: 40px !important;
+}
+
+.bk-kicker {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6f6c66;
+  margin-bottom: 12px;
+}
+
+.bk-kicker::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--seq-green);
+}
+
+.bk-manage-when {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.bk-manage-when::first-letter {
+  text-transform: uppercase;
+}
+
+.bk-manage-sub {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #6f6c66;
+  margin-bottom: 30px;
+  max-width: 460px;
+}
+
+.bk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bk-actions[hidden],
+.bk-confirm[hidden] { display: none; }
+
+.bk-confirm p {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+.bk-btn {
+  padding: 12px 22px;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  background: var(--seq-black);
+  color: var(--seq-cream);
+  border: 1px solid var(--seq-black);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.bk-btn:hover {
+  background: #32373c;
+}
+
+.bk-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.bk-btn-ghost {
+  background: none;
+  color: var(--seq-black);
+  border-color: #d6d1c8;
+}
+
+.bk-btn-ghost:hover {
+  background: none;
+  border-color: var(--seq-black);
+}
+
+.bk-manage .form-status {
+  margin-top: 16px;
+}
+
 /* ---------- Étape 3 : confirmation ---------- */
 .bk-done {
   flex-direction: column;
@@ -439,6 +538,17 @@
 .bk-done-text strong {
   font-weight: 600;
 }
+
+.bk-done-link {
+  margin-top: 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #6f6c66;
+  border-bottom: 1px solid currentColor;
+}
+
+.bk-done-link[hidden] { display: none; }
 
 /* ---------- Pied : alternative écrite ---------- */
 .booking-alt {
@@ -481,7 +591,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
   }
-  .booking-card[data-step="form"] [data-pane="form"] { grid-column: 2; }
+  .booking-card[data-step="form"] [data-pane="form"],
+  .booking-card[data-step="manage"] [data-pane="manage"],
+  .booking-card[data-step="move"] [data-pane="move"] { grid-column: 2; }
   .booking-card[data-step="done"] [data-pane="done"] { grid-column: 1 / 3; }
 }
 
@@ -503,6 +615,8 @@
     border-top: thin solid #d9d5ce;
   }
   .booking-card[data-step="form"] [data-pane="form"],
+  .booking-card[data-step="manage"] [data-pane="manage"],
+  .booking-card[data-step="move"] [data-pane="move"],
   .booking-card[data-step="done"] [data-pane="done"] { grid-column: 1; }
   .bk-desc { margin-bottom: 18px; }
   .cal-weekdays, .cal-days { gap: 4px; }
