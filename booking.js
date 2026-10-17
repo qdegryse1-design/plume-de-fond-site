@@ -35,7 +35,7 @@
     var o = {};
     new Intl.DateTimeFormat('fr-FR', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false })
       .formatToParts(date).forEach(function (p) { o[p.type] = p.value; });
-    return (+o.hour) + ' h ' + o.minute;
+    return (+o.hour) + 'h' + o.minute;
   }
 
   var fmtDayLong = new Intl.DateTimeFormat('fr-FR', { timeZone: 'UTC', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });

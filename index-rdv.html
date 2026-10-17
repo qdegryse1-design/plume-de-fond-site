@@ -564,7 +564,7 @@
         document.getElementById('ephem-day').textContent = f({ day: 'numeric' });
         document.getElementById('ephem-weekday').textContent = f({ weekday: 'long' });
         var w = f({ weekday: 'long', day: 'numeric', month: 'long' });
-        document.getElementById('rdv-when').textContent = w.charAt(0).toUpperCase() + w.slice(1) + ', ' + (+hm[0]) + '\u00a0h\u00a0' + hm[1];
+        document.getElementById('rdv-when').textContent = w.charAt(0).toUpperCase() + w.slice(1) + ', ' + (+hm[0]) + 'h' + hm[1];
         var url = 'rendez-vous.html?jour=' + new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(next);
         document.querySelectorAll('.rdv-link a').forEach(function (a) { a.href = url; });
       }).catch(function () { /* l'encart garde son texte par défaut et renvoie au calendrier */ });
