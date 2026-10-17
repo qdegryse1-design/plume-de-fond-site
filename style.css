@@ -2115,3 +2115,120 @@ ul {
     padding: 10px 0;
   }
 }
+
+
+/* =============================================
+   BANDEAU COOKIES — PostHog (2026-10-17)
+   « Refuser » et « Accepter » identiques : même taille, même style (CNIL).
+   ============================================= */
+.cookie-banner {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 2000;
+  width: min(420px, calc(100vw - 32px));
+  padding: 20px 22px 18px;
+  background: #fffdf9;
+  border: thin solid #aeada9;
+  box-shadow: 0 18px 40px -20px rgba(27, 25, 22, 0.35);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cookie-banner.is-open {
+  opacity: 1;
+  transform: none;
+}
+
+.cookie-banner[hidden] { display: none; }
+
+.cookie-kicker {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6f6c66;
+  margin-bottom: 10px;
+}
+
+.cookie-kicker::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--seq-green);
+}
+
+.cookie-text {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #3d3a35;
+  margin-bottom: 16px;
+}
+
+.cookie-text a {
+  white-space: nowrap;
+  color: var(--seq-black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.cookie-btn {
+  flex: 1;
+  min-height: 44px;
+  padding: 10px 16px;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--seq-black);
+  background: none;
+  border: 1px solid var(--seq-black);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cookie-btn:hover {
+  background: var(--seq-black);
+  color: var(--seq-cream);
+}
+
+.cookie-btn:focus-visible {
+  outline: 1px dashed var(--seq-black);
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .cookie-banner {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cookie-banner { transition: none; }
+}
+
+/* lien « Gérer les cookies » du pied de page : un bouton habillé en lien */
+.footer-col .cookie-manage {
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: inherit;
+  color: var(--seq-cream);
+  cursor: pointer;
+  text-align: left;
+}

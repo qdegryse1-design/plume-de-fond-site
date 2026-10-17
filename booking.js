@@ -97,6 +97,9 @@
 
   var mobile = window.matchMedia('(max-width: 768px)');
 
+  // mesure d'audience (analytics.js) : jamais de donnée personnelle dans les événements
+  function track(event, props) { if (window.pdfTrack) window.pdfTrack(event, props); }
+
   function show(step) {
     card.dataset.step = step;
     // sur téléphone, la carte change de hauteur : on remonte à son début si on l'a dépassé
@@ -127,6 +130,7 @@
   elTz.value = tz;
   elTz.addEventListener('change', function () {
     tz = elTz.value;
+    track('rdv_fuseau_change', { fuseau: tz });
     groupSlots();
     var days = Object.keys(byDay).sort();
     selectDay(byDay[selectedDay] ? selectedDay : days[0]);
@@ -195,6 +199,7 @@
 
   function pickSlot(s) {
     selectedSlot = s;
+    track('rdv_creneau_choisi', { creneau: s.toISOString(), mode: mode });
     if (mode === 'move') {
       $('mv-when').textContent = rangeText(s);
       $('mv-old').textContent = 'Au lieu du ' + rangeText(booking.start).replace(/^./, function (c) { return c.toLowerCase(); }) + '.';
@@ -222,6 +227,7 @@
     var b = e.target.closest('.cal-day.is-open');
     if (!b) return;
     selectDay(b.dataset.day);
+    track('rdv_jour_choisi', { jour: b.dataset.day, mode: mode });
     // sur téléphone, les créneaux sont sous le mois : on les montre s'ils sont hors écran
     if (mobile.matches && elSlotsDay.getBoundingClientRect().top > window.innerHeight - 140) {
       elSlotsDay.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -247,6 +253,9 @@
     btn.textContent = 'Réservation…';
     status.textContent = '';
     bookSlot(selectedSlot, data).then(function (res) {
+      // la navigation est rattachée à la personne seulement si elle a accepté les cookies
+      if (window.pdfIdentify) window.pdfIdentify(data.email, { name: data.nom, email: data.email, societe: data.societe });
+      track('rdv_reserve', { creneau: selectedSlot.toISOString(), fuseau: tz, message: data.message ? 'oui' : 'non' });
       var strong = document.createElement('strong');
       strong.textContent = data.email;
       done('C’est noté.', [recapText() + '. L’invitation Google Meet arrive à ', strong, '.'],
@@ -286,6 +295,7 @@
       $('mg-sub').textContent = 'Visio Google Meet' + (b.nom ? ' - ' + b.nom + (b.societe ? ', ' + b.societe : '') : '') + '. Le lien de la visio figure dans votre invitation.';
       $('mg-actions').hidden = false;
       show('manage');
+      track('rdv_gestion_ouverte');
     }).catch(function () {
       manageMessage('Erreur', 'Le rendez-vous n’a pas pu être chargé.', 'Rechargez la page, ou écrivez-nous à contact@plumedefond.fr.');
     });
@@ -315,6 +325,7 @@
     busy(btn, 'Annulation…');
     status.textContent = '';
     post({ action: 'cancel', token: token }).then(function () {
+      track('rdv_annule');
       done('Rendez-vous annulé.', ['Le créneau du ' + rangeText(booking.start).replace(/^./, function (c) { return c.toLowerCase(); }) + ' est libéré. Au plaisir d’échanger une prochaine fois.'],
         { href: location.pathname, label: 'Réserver un autre créneau' });
     }).catch(function () {
@@ -329,6 +340,7 @@
     status.textContent = '';
     status.classList.remove('err');
     post({ action: 'move', token: token, start: selectedSlot.toISOString() }).then(function () {
+      track('rdv_deplace', { creneau: selectedSlot.toISOString() });
       booking = { start: selectedSlot, end: new Date(selectedSlot.getTime() + DURATION * 60000) };
       done('Rendez-vous déplacé.', [rangeText(selectedSlot) + '. L’invitation mise à jour arrive dans votre boîte mail ; le lien de la visio ne change pas.'],
         { href: '?gerer=' + token, label: 'Déplacer ou annuler ce rendez-vous' });

@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="style.css?v=20261017c">
+  <link rel="stylesheet" href="style.css?v=20261017e">
 </head>
 <body>
 
@@ -61,7 +61,8 @@
     <section class="legal-block">
       <div class="legal-inner">
         <h2>Données collectées</h2>
-        <p>Ce site ne collecte des données personnelles que lorsque vous réservez un rendez-vous : nom, adresse e-mail, société et, si vous le souhaitez, le message que vous ajoutez. Aucune donnée n'est collectée lors de la simple consultation du site.</p>
+        <p>Lorsque vous réservez un rendez-vous : nom, adresse e-mail, société et, si vous le souhaitez, le message que vous ajoutez.</p>
+        <p>Lorsque vous consultez le site et uniquement si vous l'acceptez : des données de navigation (pages consultées et leur ordre, site d'origine, clics, défilement, type d'appareil et de navigateur, pays et ville approximatifs) ainsi que des enregistrements de votre navigation, dans lesquels les champs de saisie sont masqués. Tant que vous n'avez pas accepté, ou si vous refusez, seule une mesure anonyme de fréquentation est réalisée, sans cookie.</p>
       </div>
     </section>
 
@@ -69,13 +70,14 @@
       <div class="legal-inner">
         <h2>Finalité et base légale</h2>
         <p>Ces données servent uniquement à organiser le rendez-vous (invitation, lien de visioconférence, déplacement ou annulation), à le préparer et à échanger avec vous dans la perspective d'une éventuelle collaboration. Le traitement repose sur l'exécution de mesures précontractuelles prises à votre demande (article 6.1.b du RGPD).</p>
+        <p>Les données de navigation servent à comprendre comment le site est lu afin de l'améliorer et, si vous réservez un rendez-vous après avoir accepté les cookies, à préparer notre échange en tenant compte des pages qui vous ont intéressé : votre navigation sur le site est alors rattachée à votre nom, votre adresse e-mail et votre société. Ce traitement repose sur votre consentement (article 6.1.a du RGPD), que vous pouvez retirer à tout moment.</p>
       </div>
     </section>
 
     <section class="legal-block">
       <div class="legal-inner">
         <h2>Destinataires et hébergement</h2>
-        <p>Les réservations sont gérées avec les services de Google (Google Agenda, Google Meet et Google Apps Script), dont les serveurs peuvent être situés aux États-Unis : le rendez-vous est enregistré dans l'agenda professionnel de Quentin de Gryse et l'invitation vous est envoyée par Google. Les e-mails que vous adressez à contact@plumedefond.fr sont hébergés par OVH en France. Vos données sont traitées exclusivement par Quentin de Gryse ; elles ne sont ni vendues, ni partagées, ni utilisées à des fins de prospection non sollicitée.</p>
+        <p>Les réservations sont gérées avec les services de Google (Google Agenda, Google Meet et Google Apps Script), dont les serveurs peuvent être situés aux États-Unis : le rendez-vous est enregistré dans l'agenda professionnel de Quentin de Gryse et l'invitation vous est envoyée par Google. La mesure d'audience est assurée par PostHog Inc., dont les données sont hébergées à Francfort, dans l'Union européenne. Les e-mails que vous adressez à contact@plumedefond.fr sont hébergés par OVH en France. Vos données sont traitées exclusivement par Quentin de Gryse ; elles ne sont ni vendues, ni partagées, ni utilisées à des fins de prospection non sollicitée.</p>
         <p>Le site est hébergé par GitHub, Inc. (GitHub Pages), dont les serveurs peuvent enregistrer des données techniques de connexion (adresse IP) dans leurs journaux, conformément à leur propre politique de confidentialité. Les polices de caractères sont servies par Google Fonts, et l'affichage des disponibilités interroge un service Google : cela peut entraîner la transmission de votre adresse IP à Google lors du chargement de la page. La fréquentation du site est mesurée par Cloudflare, Inc., dont l'outil fonctionne sans cookie et reçoit uniquement des données techniques de connexion, sans identifier les visiteurs.</p>
       </div>
     </section>
@@ -83,14 +85,15 @@
     <section class="legal-block">
       <div class="legal-inner">
         <h2>Durée de conservation</h2>
-        <p>Les informations liées à un rendez-vous et les messages reçus sont conservés au maximum trois ans après notre dernier échange, puis supprimés.</p>
+        <p>Les informations liées à un rendez-vous et les messages reçus sont conservés au maximum trois ans après notre dernier échange, puis supprimés. Les données de navigation sont conservées un an, et les enregistrements de navigation un mois.</p>
       </div>
     </section>
 
-    <section class="legal-block">
+    <section class="legal-block" id="cookies">
       <div class="legal-inner">
         <h2>Cookies</h2>
-        <p>Ce site n'utilise aucun cookie et aucun traceur publicitaire.</p>
+        <p>Avec votre accord, ce site dépose des cookies de mesure d'audience de PostHog. Ils sont conservés au maximum treize mois, et votre choix vous est redemandé tous les six mois. Tant que vous n'avez pas accepté, ou si vous refusez, aucun cookie n'est déposé : PostHog mesure seulement la fréquentation de façon anonyme (pages vues, provenance, enchaînement des pages), à partir d'une empreinte technique calculée sur ses serveurs, sans rien enregistrer dans votre navigateur. Seul votre choix est mémorisé, pour ne pas vous le redemander à chaque page.</p>
+        <p>Vous pouvez modifier votre choix à tout moment avec le lien « Gérer les cookies » en bas de chaque page. Ce site n'utilise aucun cookie ni traceur publicitaire.</p>
       </div>
     </section>
 
@@ -119,6 +122,7 @@
         <ul>
           <li><a href="confidentialite.html">Politique de confidentialité</a></li>
           <li><a href="mentions-legales.html">Mentions légales</a></li>
+          <li><button type="button" class="cookie-manage">Gérer les cookies</button></li>
         </ul>
       </div>
       <div class="footer-col footer-col-logo">
@@ -149,6 +153,7 @@
       }
     })();
   </script>
+  <script src="analytics.js?v=20261017c"></script>
   <!-- Cloudflare Web Analytics — mesure d'audience sans cookies -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "644f7a3778624fafaa6b0a6ad2f11ed3"}'></script>
 </body>
