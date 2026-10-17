@@ -241,7 +241,7 @@
         res.token ? { href: '?gerer=' + res.token, label: 'Déplacer ou annuler ce rendez-vous' } : null);
     }).catch(function (err) {
       if (err.code === 'creneau pris') {
-        status.textContent = 'Ce créneau vient d’être pris — choisissez-en un autre.';
+        status.textContent = 'Ce créneau vient d’être pris, choisissez-en un autre.';
         loadSlots(); // on rafraîchit les disponibilités
       } else {
         status.textContent = 'La réservation n’a pas abouti. Réessayez, ou écrivez-nous à contact@plumedefond.fr';
@@ -271,7 +271,7 @@
       booking = { start: new Date(b.start), end: new Date(b.end) };
       if (b.status === 'past') return manageMessage('Rendez-vous passé', rangeText(booking.start), 'Ce rendez-vous a déjà eu lieu. Vous pouvez en réserver un nouveau.');
       $('mg-when').textContent = rangeText(booking.start);
-      $('mg-sub').textContent = 'Visio Google Meet' + (b.nom ? ' — ' + b.nom + (b.societe ? ', ' + b.societe : '') : '') + '. Le lien de la visio figure dans votre invitation.';
+      $('mg-sub').textContent = 'Visio Google Meet' + (b.nom ? ' - ' + b.nom + (b.societe ? ', ' + b.societe : '') : '') + '. Le lien de la visio figure dans votre invitation.';
       $('mg-actions').hidden = false;
       show('manage');
     }).catch(function () {
@@ -322,7 +322,7 @@
       loadSlots();
     }).catch(function (err) {
       status.textContent = err.code === 'creneau pris'
-        ? 'Ce créneau vient d’être pris — choisissez-en un autre.'
+        ? 'Ce créneau vient d’être pris, choisissez-en un autre.'
         : 'Le déplacement n’a pas abouti. Réessayez, ou écrivez-nous à contact@plumedefond.fr';
       status.classList.add('err');
       if (err.code === 'creneau pris') loadSlots();
