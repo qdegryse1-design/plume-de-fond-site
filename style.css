@@ -2059,3 +2059,59 @@ ul {
 .vision-rdv a:hover span {
   transform: translateX(4px);
 }
+
+
+/* =============================================
+   MOBILE — retours de la vérification du 2026-10-17
+   ============================================= */
+/* lien « Prendre rendez-vous » : seulement dans le menu mobile */
+.nav-links .nav-mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-inner.open .nav-links .nav-mobile-only {
+    display: block;
+  }
+}
+
+/* burger : zone tactile de 44 px, barres toujours calées à droite */
+.nav-hamburger {
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  align-items: center;
+  margin-right: -7px;
+}
+
+/* Vision : zones tactiles élargies sans bouger le dessin */
+.vision-signature .signature-linkedin,
+.vision-rdv a {
+  position: relative;
+}
+
+.vision-signature .signature-linkedin::after,
+.vision-rdv a::after {
+  content: '';
+  position: absolute;
+  inset: -12px;
+}
+
+/* pages légales : une seule marge latérale sur petit écran */
+@media (max-width: 400px) {
+  .legal-article {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+  }
+}
+
+/* menu mobile : liens plus faciles à toucher */
+@media (max-width: 768px) {
+  .nav-inner.open .nav-links {
+    gap: 0.4rem;
+  }
+  .nav-inner.open .nav-links a {
+    display: block;
+    padding: 10px 0;
+  }
+}

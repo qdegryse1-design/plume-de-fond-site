@@ -95,8 +95,12 @@
     '<path d="M 60 7 C 84 9, 95 29, 93 52 C 91 77, 71 93, 47 92 C 23 91, 6 73, 7 48 C 8 24, 28 6, 54 7 C 75 8, 90 20, 93 37" ' +
     'stroke="#1b1916" stroke-width="2.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
 
+  var mobile = window.matchMedia('(max-width: 768px)');
+
   function show(step) {
     card.dataset.step = step;
+    // sur téléphone, la carte change de hauteur : on remonte à son début si on l'a dépassé
+    if (mobile.matches && card.getBoundingClientRect().top < 0) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
     $('bk-back-manage').hidden = !(mode === 'move' && booking && step === 'pick');
     if (mode === 'move') {
       $('bk-recap').hidden = !booking || step === 'done';
@@ -182,7 +186,9 @@
 
   function rangeText(start) {
     var end = new Date(start.getTime() + DURATION * 60000);
-    return cap(fmtDayLong.format(keyToUTC(dayKey(start, tz)))) + ', ' + fmtTime(start, tz) + ' – ' + fmtTime(end, tz);
+    // espaces insécables + « word joiner » après le tiret (Unicode autorise sinon
+    // une coupure juste après « – ») : « 17h30 – 18h00 » ne se coupe jamais
+    return cap(fmtDayLong.format(keyToUTC(dayKey(start, tz)))) + ', ' + fmtTime(start, tz) + '\u00a0–\u2060\u00a0' + fmtTime(end, tz);
   }
 
   function recapText() { return rangeText(selectedSlot); }
@@ -214,7 +220,12 @@
 
   elDays.addEventListener('click', function (e) {
     var b = e.target.closest('.cal-day.is-open');
-    if (b) selectDay(b.dataset.day);
+    if (!b) return;
+    selectDay(b.dataset.day);
+    // sur téléphone, les créneaux sont sous le mois : on les montre s'ils sont hors écran
+    if (mobile.matches && elSlotsDay.getBoundingClientRect().top > window.innerHeight - 140) {
+      elSlotsDay.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
   elPrev.addEventListener('click', function () { viewM--; if (viewM < 0) { viewM = 11; viewY--; } renderMonth(); });
   elNext.addEventListener('click', function () { viewM++; if (viewM > 11) { viewM = 0; viewY++; } renderMonth(); });

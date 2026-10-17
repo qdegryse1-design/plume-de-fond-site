@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="style.css?v=20260912i">
+  <link rel="stylesheet" href="style.css?v=20261017c">
 </head>
 <body>
 
@@ -34,7 +34,11 @@
         <li><a href="vision.html">NOTRE VISION<svg class="pencil-circle" viewBox="0 0 200 70" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 120 5 C 160 3, 193 14, 191 32 C 189 50, 155 64, 100 65 C 45 66, 7 52, 6 34 C 5 16, 45 4, 110 3 C 155 2, 190 14, 188 32" stroke="#1b1916" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></a></li>
         <li><a href="index.html#produits">NOS PRODUITS<svg class="pencil-circle" viewBox="0 0 200 70" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 120 5 C 160 3, 193 14, 191 32 C 189 50, 155 64, 100 65 C 45 66, 7 52, 6 34 C 5 16, 45 4, 110 3 C 155 2, 190 14, 188 32" stroke="#1b1916" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></a></li>
         <li><a href="https://lettre.plumedefond.fr">LA LETTRE DE FOND<svg class="pencil-circle" viewBox="0 0 200 70" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 120 5 C 160 3, 193 14, 191 32 C 189 50, 155 64, 100 65 C 45 66, 7 52, 6 34 C 5 16, 45 4, 110 3 C 155 2, 190 14, 188 32" stroke="#1b1916" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></a></li>
+        <li class="nav-mobile-only"><a href="contact.html">PRENDRE RENDEZ-VOUS</a></li>
       </ul>
+      <button class="nav-hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
@@ -114,10 +118,29 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Plume de fond. Tous droits reserves.</p>
+      <p>&copy; 2026 Plume de fond. Tous droits réservés.</p>
     </div>
   </footer>
 
+  <script>
+    (function() {
+      var navInner = document.querySelector('.nav-inner');
+      var burger = document.querySelector('.nav-hamburger');
+      if (burger && navInner) {
+        burger.addEventListener('click', function() {
+          var open = navInner.classList.toggle('open');
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        // referme le menu après un clic sur un lien
+        navInner.querySelectorAll('.nav-links a').forEach(function(a) {
+          a.addEventListener('click', function() {
+            navInner.classList.remove('open');
+            burger.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+  </script>
   <!-- Cloudflare Web Analytics — mesure d'audience sans cookies -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "644f7a3778624fafaa6b0a6ad2f11ed3"}'></script>
 </body>

@@ -24,6 +24,7 @@
 
 /* ---------- La carte ---------- */
 .booking-card {
+  scroll-margin-top: 100px;
   display: grid;
   grid-template-columns: 290px 1fr 250px;
   min-height: 470px;
@@ -144,6 +145,10 @@
   color: var(--seq-black);
   cursor: pointer;
   max-width: 220px;
+  /* zone tactile plus haute, sans changer la mise en page */
+  padding: 12px 18px 12px 0;
+  margin: -12px 0;
+  field-sizing: content;
 }
 
 .bk-tz select:focus-visible {
@@ -153,11 +158,12 @@
 
 /* retour au rendez-vous, en mode « déplacer » */
 .bk-back {
-  margin-top: 26px;
-  padding: 0;
+  margin-top: 14px;
+  padding: 12px 0;
   background: none;
   border: none;
-  border-bottom: 1px solid currentColor;
+  text-decoration: underline;
+  text-underline-offset: 4px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   letter-spacing: 0.02em;
@@ -230,8 +236,11 @@
 
 .cal-day {
   position: relative;
+  justify-self: center;
+  width: 100%;
   aspect-ratio: 1 / 1;
   max-height: 58px;
+  max-width: 58px;
   border: 1px solid transparent;
   background: none;
   font-family: 'Source Serif 4', Georgia, serif;
@@ -258,9 +267,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 64px;
-  height: 48px;
-  margin: -24px 0 0 -32px;
+  /* ovale de 64 × 48, réduit sur les petits écrans pour ne pas mordre sur les voisins */
+  width: min(64px, 128%);
+  height: min(48px, 118%);
+  transform: translate(-50%, -50%);
   pointer-events: none;
   opacity: 0;
   overflow: visible;
@@ -313,6 +323,7 @@
 
 /* ---------- Droite : créneaux ---------- */
 .slots-day {
+  scroll-margin-top: 100px;
   font-family: 'Source Serif 4', Georgia, serif;
   font-size: 18px;
   font-weight: 600;
@@ -448,6 +459,7 @@
 }
 
 .bk-manage-when {
+  text-wrap: balance;
   font-family: 'Source Serif 4', Georgia, serif;
   font-size: 26px;
   font-weight: 600;
@@ -641,6 +653,18 @@
   .bk-desc { margin-bottom: 18px; }
   .cal-weekdays, .cal-days { gap: 4px; }
   .booking-form .form-row { flex-direction: column; }
+  /* 16 px minimum : sinon Safari iOS zoome au toucher d'un champ */
+  .booking-form input,
+  .booking-form textarea { font-size: 16px; }
+  .cal-nav button { width: 40px; height: 40px; }
+}
+
+@media (max-width: 480px) {
+  .bk-actions .bk-btn { flex: 1 1 100%; }
+}
+
+@media (max-width: 380px) {
+  .cal-weekdays, .cal-days { gap: 2px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

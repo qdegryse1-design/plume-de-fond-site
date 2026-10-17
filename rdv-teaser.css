@@ -10,6 +10,7 @@
 
 .rdv-teaser .mailing-title {
   margin-bottom: 44px;
+  text-wrap: balance;
 }
 
 .rdv-link {
