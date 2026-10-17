@@ -97,6 +97,7 @@
 
   function show(step) {
     card.dataset.step = step;
+    $('bk-back-manage').hidden = !(mode === 'move' && booking && step === 'pick');
     if (mode === 'move') {
       $('bk-recap').hidden = !booking || step === 'done';
       if (booking) $('bk-recap-text').textContent = rangeText(booking.start);
@@ -296,6 +297,7 @@
   $('mg-keep').addEventListener('click', function () { $('mg-confirm').hidden = true; $('mg-actions').hidden = false; });
   $('mg-book').addEventListener('click', newBooking);
   $('mv-back').addEventListener('click', function () { show('pick'); });
+  $('bk-back-manage').addEventListener('click', function () { show('manage'); });
 
   $('mg-cancel-ok').addEventListener('click', function () {
     var btn = this, status = $('mg-status');

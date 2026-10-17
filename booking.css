@@ -151,6 +151,26 @@
   outline-offset: 3px;
 }
 
+/* retour au rendez-vous, en mode « déplacer » */
+.bk-back {
+  margin-top: 26px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid currentColor;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #6f6c66;
+  cursor: pointer;
+}
+
+.bk-back:hover {
+  color: var(--seq-black);
+}
+
+.bk-back[hidden] { display: none; }
+
 /* ---------- Centre : le mois ---------- */
 .cal-head {
   display: flex;
