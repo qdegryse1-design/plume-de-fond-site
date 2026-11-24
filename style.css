@@ -2232,3 +2232,57 @@ ul {
   cursor: pointer;
   text-align: left;
 }
+
+/* =============================================
+   Tablette (769-1100 px) : les cartes passent en 2 colonnes de 270 à 430 px,
+   aussi étroites que sur téléphone. Décors réduits comme en mobile pour que
+   titres et services ne passent pas dessus (iPad portrait, iPhone paysage).
+   Audit du 24/11/2026.
+   ============================================= */
+@media (min-width: 769px) and (max-width: 1100px) {
+  /* cartes un peu plus hautes que larges : la place manque sous le décor */
+  .card-family {
+    aspect-ratio: 4 / 5;
+  }
+  .card-postit {
+    width: 44%;
+    max-width: 150px;
+    top: 38%;
+  }
+  .card-postit-icons {
+    gap: 0.7rem;
+  }
+  .card-postit-icons .card-icon {
+    width: 26px;
+  }
+  .recherche-loupe {
+    width: 34%;
+    max-width: 120px;
+    top: 34%;
+  }
+  .card-eq {
+    top: 38%;
+  }
+  .edition-clip-top {
+    width: 48%;
+    height: 16%;
+  }
+  .edition-clip-bottom {
+    width: 46%;
+    height: 17%;
+  }
+}
+
+/* Ancres (« NOS PRODUITS », #contact) : la cible s'arrête sous la barre de navigation
+   collante (84 px) au lieu de passer dessous. Audit du 24/11/2026. */
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+/* Très petits écrans : le logo du pied de page (ancré en bas à droite) ne recouvre
+   plus « Tous droits réservés ». Audit du 24/11/2026. */
+@media (max-width: 400px) {
+  .footer-bottom p {
+    padding-right: 92px;
+  }
+}

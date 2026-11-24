@@ -252,3 +252,34 @@
     transition: none;
   }
 }
+
+/* ---------- Chargement et indisponibilité (audit du 24/11/2026) ----------
+   Le script Google met ~3 s : l'éphéméride apparaît en fondu une fois la date connue,
+   au lieu d'une page blanche (et, en mobile, d'un ovale vide qui se lit comme un « 0 »).
+   Si le script échoue, tarde ou n'a aucun créneau : pas d'éphéméride, pas de « Prochain
+   créneau libre », seulement « Prendre rendez-vous » et le bouton. */
+.rdv-link .ephem {
+  transition: transform 0.45s cubic-bezier(0.3, 0.7, 0.3, 1), opacity 0.5s ease;
+}
+.rdv-loading .ephem {
+  opacity: 0;
+}
+.rdv-loading .rdv-when {
+  visibility: hidden;
+}
+.rdv-unavailable .ephem,
+.rdv-unavailable .rdv-kicker {
+  display: none;
+}
+
+/* fuseau précisé hors de l'heure de Paris : « (heure de Martinique) » */
+.rdv-when .rdv-tz {
+  font-size: 16px;
+  font-weight: 400;
+  color: #6f6c66;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rdv-link .ephem { transition: none; }
+}

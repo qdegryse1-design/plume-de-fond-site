@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="style.css?v=20261017e">
+  <link rel="stylesheet" href="style.css?v=20261124a">
 </head>
 <body>
 
@@ -140,17 +140,42 @@
       var navInner = document.querySelector('.nav-inner');
       var burger = document.querySelector('.nav-hamburger');
       if (burger && navInner) {
-        burger.addEventListener('click', function() {
-          var open = navInner.classList.toggle('open');
+        function setOpen(open) {
+          navInner.classList.toggle('open', open);
           burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+        }
+        burger.addEventListener('click', function() {
+          setOpen(!navInner.classList.contains('open'));
         });
         // referme le menu après un clic sur un lien
         navInner.querySelectorAll('.nav-links a').forEach(function(a) {
-          a.addEventListener('click', function() {
-            navInner.classList.remove('open');
-            burger.setAttribute('aria-expanded', 'false');
-          });
+          a.addEventListener('click', function() { setOpen(false); });
         });
+        // Échap referme le menu
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && navInner.classList.contains('open')) {
+            setOpen(false);
+            burger.focus();
+          }
+        });
+        // un toucher à côté referme le menu, sans activer ce qui est dessous
+        // (pointerdown : reçu même sur un bouton désactivé, qui n'émet pas de clic)
+        var closedAt = 0;
+        document.addEventListener('pointerdown', function(e) {
+          closedAt = 0;
+          if (navInner.classList.contains('open') && !navInner.contains(e.target)) {
+            setOpen(false);
+            closedAt = Date.now();
+          }
+        }, true);
+        document.addEventListener('click', function(e) {
+          if (closedAt && Date.now() - closedAt < 700 && !navInner.contains(e.target)) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          closedAt = 0;
+        }, true);
       }
     })();
   </script>

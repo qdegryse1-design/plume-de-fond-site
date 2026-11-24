@@ -46,9 +46,19 @@
   function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
   /* ---------- Script Google ---------- */
-  function fetchSlots() {
-    return fetch(API + '?action=slots' + (token ? '&token=' + token : ''))
+  // lecture avec délai maximum : si le script Google ne répond pas, on affiche l'erreur
+  // au lieu de laisser « Chargement… » indéfiniment
+  var TIMEOUT_MS = 15000;
+  function getJSON(url) {
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, TIMEOUT_MS) : null;
+    return fetch(url, ctrl ? { signal: ctrl.signal } : {})
       .then(function (r) { return r.json(); })
+      .finally(function () { if (timer) clearTimeout(timer); });
+  }
+
+  function fetchSlots() {
+    return getJSON(API + '?action=slots' + (token ? '&token=' + token : ''))
       .then(function (d) { return (d.slots || []).map(function (x) { return new Date(x); }); });
   }
 
@@ -69,7 +79,7 @@
   }
 
   function fetchBooking() {
-    return fetch(API + '?action=booking&token=' + token).then(function (r) { return r.json(); });
+    return getJSON(API + '?action=booking&token=' + token);
   }
 
   /* ---------- État ---------- */
@@ -134,7 +144,20 @@
     groupSlots();
     var days = Object.keys(byDay).sort();
     selectDay(byDay[selectedDay] ? selectedDay : days[0]);
+    refreshRecaps();
   });
+
+  // heures déjà affichées (récapitulatif, rendez-vous géré, déplacement) : remises dans le fuseau choisi
+  function refreshRecaps() {
+    if (mode === 'book' && selectedSlot) $('bk-recap-text').textContent = recapText();
+    if (!booking) return;
+    if (mode === 'move') $('bk-recap-text').textContent = rangeText(booking.start);
+    $('mg-when').textContent = rangeText(booking.start);
+    if (mode === 'move' && selectedSlot) {
+      $('mv-when').textContent = rangeText(selectedSlot);
+      $('mv-old').textContent = 'Au lieu du ' + rangeText(booking.start).replace(/^./, function (c) { return c.toLowerCase(); }) + '.';
+    }
+  }
 
   function groupSlots() {
     byDay = {};
@@ -240,36 +263,51 @@
   /* ---------- Formulaire ---------- */
   $('booking-form').addEventListener('submit', function (e) {
     e.preventDefault();
-    var form = e.target, status = $('booking-status'), btn = $('booking-submit');
+    var form = e.target, status = $('booking-status'), btn = $('booking-submit'), back = $('back-to-pick');
     status.classList.remove('ok', 'err');
-    if (!form.checkValidity()) {
-      status.textContent = 'Merci de compléter les champs requis (email valide).';
+    var data = Object.fromEntries(new FormData(form));
+    ['nom', 'email', 'societe', 'message'].forEach(function (k) { if (typeof data[k] === 'string') data[k] = data[k].trim(); });
+    // mêmes règles que le script Google, pour ne jamais envoyer une demande qu'il refusera
+    var problem = !data.nom || !data.societe ? 'Merci d’indiquer votre nom et votre société.'
+      : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || '') ? 'Merci d’indiquer une adresse e-mail valide.'
+      : !form.checkValidity() ? 'Merci de compléter les champs requis.' : '';
+    if (problem) {
+      status.textContent = problem;
       status.classList.add('err');
       return;
     }
-    var data = Object.fromEntries(new FormData(form));
     if (data._gotcha) return;
+    // le créneau est figé pendant l'envoi : « Retour » est désactivé et la confirmation
+    // affiche toujours l'heure réellement réservée
+    var slot = selectedSlot;
     btn.disabled = true;
+    back.disabled = true;
     btn.textContent = 'Réservation…';
     status.textContent = '';
-    bookSlot(selectedSlot, data).then(function (res) {
+    bookSlot(slot, data).then(function (res) {
       // la navigation est rattachée à la personne seulement si elle a accepté les cookies
       if (window.pdfIdentify) window.pdfIdentify(data.email, { name: data.nom, email: data.email, societe: data.societe });
-      track('rdv_reserve', { creneau: selectedSlot.toISOString(), fuseau: tz, message: data.message ? 'oui' : 'non' });
+      track('rdv_reserve', { creneau: slot.toISOString(), fuseau: tz, message: data.message ? 'oui' : 'non' });
       var strong = document.createElement('strong');
       strong.textContent = data.email;
+      selectedSlot = slot;
       done('C’est noté.', [recapText() + '. L’invitation Google Meet arrive à ', strong, '.'],
         res.token ? { href: '?gerer=' + res.token, label: 'Déplacer ou annuler ce rendez-vous' } : null);
     }).catch(function (err) {
       if (err.code === 'creneau pris') {
         status.textContent = 'Ce créneau vient d’être pris, choisissez-en un autre.';
         loadSlots(); // on rafraîchit les disponibilités
+      } else if (err.code === 'champs manquants') {
+        status.textContent = 'Merci de vérifier votre nom, votre société et votre adresse e-mail.';
+      } else if (err.code === 'trop de demandes') {
+        status.textContent = 'Un rendez-vous vient déjà d’être réservé avec cette adresse : l’invitation est dans votre boîte mail. Pour un autre créneau, réessayez dans 10 minutes ou écrivez-nous à contact@plumedefond.fr';
       } else {
         status.textContent = 'La réservation n’a pas abouti. Réessayez, ou écrivez-nous à contact@plumedefond.fr';
       }
       status.classList.add('err');
     }).finally(function () {
       btn.disabled = false;
+      back.disabled = false;
       btn.textContent = 'Confirmer';
     });
   });

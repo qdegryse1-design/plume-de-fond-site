@@ -49,8 +49,9 @@
     ]
   }
   </script>
-  <link rel="stylesheet" href="style.css?v=20261017e">
-  <link rel="stylesheet" href="rdv-teaser.css?v=20261017d">
+  <link rel="stylesheet" href="style.css?v=20261124a">
+  <link rel="stylesheet" href="rdv-teaser.css?v=20261124a">
+  <noscript><style>.rdv-link .ephem, .rdv-link .rdv-kicker { display: none; } .rdv-link .rdv-when { visibility: visible; }</style></noscript>
 </head>
 <body>
 
@@ -316,7 +317,7 @@
   <!-- RENDEZ-VOUS : prochain créneau, renvoie au calendrier -->
   <section class="rdv-teaser" id="contact">
     <h2 class="mailing-title">Parlez-nous de vos enjeux.</h2>
-    <div class="rdv-link">
+    <div class="rdv-link rdv-loading" id="rdv-link">
       <a class="ephem" href="contact.html" tabindex="-1" aria-hidden="true">
         <div class="ephem-top" id="ephem-month">&nbsp;</div>
         <div class="ephem-body">
@@ -326,7 +327,7 @@
       </a>
       <div class="rdv-text">
         <p class="rdv-kicker">Prochain créneau libre</p>
-        <p class="rdv-when" id="rdv-when">Cette semaine</p>
+        <p class="rdv-when" id="rdv-when">Prendre rendez-vous</p>
         <p class="rdv-desc">30 minutes en visio pour parler de vos enjeux éditoriaux.</p>
         <a class="rdv-cta" href="contact.html">Choisir un créneau <span>&rarr;</span></a>
       </div>
@@ -398,17 +399,42 @@
       var navInner = document.querySelector('.nav-inner');
       var burger = document.querySelector('.nav-hamburger');
       if (burger && navInner) {
-        burger.addEventListener('click', function() {
-          var open = navInner.classList.toggle('open');
+        function setOpen(open) {
+          navInner.classList.toggle('open', open);
           burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+        }
+        burger.addEventListener('click', function() {
+          setOpen(!navInner.classList.contains('open'));
         });
         // referme le menu après un clic sur un lien
         navInner.querySelectorAll('.nav-links a').forEach(function(a) {
-          a.addEventListener('click', function() {
-            navInner.classList.remove('open');
-            burger.setAttribute('aria-expanded', 'false');
-          });
+          a.addEventListener('click', function() { setOpen(false); });
         });
+        // Échap referme le menu
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && navInner.classList.contains('open')) {
+            setOpen(false);
+            burger.focus();
+          }
+        });
+        // un toucher à côté referme le menu, sans activer ce qui est dessous
+        // (pointerdown : reçu même sur un bouton désactivé, qui n'émet pas de clic)
+        var closedAt = 0;
+        document.addEventListener('pointerdown', function(e) {
+          closedAt = 0;
+          if (navInner.classList.contains('open') && !navInner.contains(e.target)) {
+            setOpen(false);
+            closedAt = Date.now();
+          }
+        }, true);
+        document.addEventListener('click', function(e) {
+          if (closedAt && Date.now() - closedAt < 700 && !navInner.contains(e.target)) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          closedAt = 0;
+        }, true);
       }
     })();
   </script>
@@ -520,23 +546,51 @@
   </script>
 
   <script>
-    /* Encart rendez-vous : prochain créneau libre, lu dans l'agenda via le script Google */
+    /* Encart rendez-vous : prochain créneau libre, lu dans l'agenda via le script Google.
+       Date et heure dans le fuseau du visiteur (comme la page de réservation) ;
+       si le script échoue, tarde ou n'a aucun créneau : encart neutre, sans date. */
     (function () {
       var API = 'https://script.google.com/macros/s/AKfycbwfMoLPtZhw1kXOJY0xhHMCHxvwxjo75_sG-w1Y0-yUzWbkKQZiazSJHcHFJKQj6PdSKg/exec';
-      var TZ = 'Europe/Paris';
+      var HOST_TZ = 'Europe/Paris';
+      var LABELS = { 'America/Martinique': 'de Martinique', 'America/Guadeloupe': 'de Guadeloupe', 'America/Cayenne': 'de Guyane',
+        'Indian/Reunion': 'de La Réunion', 'Indian/Mayotte': 'de Mayotte', 'Europe/London': 'de Londres', 'America/Montreal': 'de Montréal',
+        'America/Toronto': 'de Montréal', 'America/New_York': 'de New York' };
+      var TZ = HOST_TZ;
+      try { TZ = Intl.DateTimeFormat().resolvedOptions().timeZone || HOST_TZ; } catch (e) {}
+      var box = document.getElementById('rdv-link');
+      var ended = false;
+      function unavailable() {
+        if (ended) return; ended = true;
+        box.classList.remove('rdv-loading');
+        box.classList.add('rdv-unavailable');
+      }
+      var timer = setTimeout(unavailable, 12000);
       fetch(API + '?action=slots').then(function (r) { return r.json(); }).then(function (d) {
-        if (!d.slots || !d.slots.length) return;
+        if (ended) return;
+        if (!d.slots || !d.slots.length) return unavailable();
         var next = new Date(d.slots[0]);
-        var f = function (o) { return new Intl.DateTimeFormat('fr-FR', Object.assign({ timeZone: TZ }, o)).format(next); };
+        var f = function (o, tz) { return new Intl.DateTimeFormat('fr-FR', Object.assign({ timeZone: tz || TZ }, o)).format(next); };
         var hm = f({ hour: 'numeric', minute: '2-digit', hour12: false }).split(':');
         document.getElementById('ephem-month').textContent = f({ month: 'long' });
         document.getElementById('ephem-day').textContent = f({ day: 'numeric' });
         document.getElementById('ephem-weekday').textContent = f({ weekday: 'long' });
         var w = f({ weekday: 'long', day: 'numeric', month: 'long' });
-        document.getElementById('rdv-when').textContent = w.charAt(0).toUpperCase() + w.slice(1) + ', ' + (+hm[0]) + 'h' + hm[1];
+        var when = document.getElementById('rdv-when');
+        when.textContent = w.charAt(0).toUpperCase() + w.slice(1) + ', ' + (+hm[0]) + 'h' + hm[1];
+        // hors de l'heure de Paris, on précise de quelle heure il s'agit
+        var o = { hour: 'numeric', minute: '2-digit', day: 'numeric', hour12: false };
+        if (f(o) !== f(o, HOST_TZ)) {
+          var tzs = document.createElement('span');
+          tzs.className = 'rdv-tz';
+          tzs.textContent = ' (heure ' + (LABELS[TZ] || 'locale') + ')';
+          when.appendChild(tzs);
+        }
         var url = 'contact.html?jour=' + new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(next);
         document.querySelectorAll('.rdv-link a').forEach(function (a) { a.href = url; });
-      }).catch(function () { /* l'encart garde son texte par défaut et renvoie au calendrier */ });
+        ended = true;
+        clearTimeout(timer);
+        box.classList.remove('rdv-loading');
+      }).catch(unavailable);
     })();
   </script>
   <script src="analytics.js?v=20261017c"></script>
